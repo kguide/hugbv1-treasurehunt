@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<Button 
+	android:id="@+id/play"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="100px"
+	android:text="Play"
+	/>	
+<Button 
+	android:id="@+id/findAGame"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Find a Game"
+	/>
+<Button 
+	android:id="@+id/yourScore"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Your Score"
+	/>
+<Button 
+	android:id="@+id/logOut"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Log Out"
+	/>	
+</LinearLayout>
