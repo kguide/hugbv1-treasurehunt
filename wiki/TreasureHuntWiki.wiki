@@ -1,3 +1,7 @@
+  * [Introduction]
+
+
+
 =Introduction=
 This page is for documentation and notes regarding project Treasure Hunt which is being worked on as a part of Hugbúnaðarverkefni 1, a course in Computer Science at the University of Iceland.
 
