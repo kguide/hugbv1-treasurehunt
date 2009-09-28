@@ -17,6 +17,7 @@ This is a list of what each team member is doing at the moment.
 Each of needs to get up to speed on the following subjects 
   * Test Driven Development using the Android platform. Klaus gave us a few pages regarding this subject as well as showing us an example in class. Seeing as we are planing on using TDD, this needs to be done asap.
   * Getting used to Subversion and checking out/adding some code in the googlecode repository. This also needs to be done asap. 
+  * Deciding on an architecture for the project. This means defining classes and packages on a high-level basis.
 
 ==Time Management==
 
