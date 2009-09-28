@@ -1,0 +1,38 @@
+=Introduction=
+This page is for documentation and notes regarding project Treasure Hunt which is being worked on as a part of Hugbúnaðarverkefni 1, a course in Computer Science at the University of Iceland.
+
+=Individual To-Do list=
+
+This is a list of what each team member is doing at the moment.
+
+  * *Agnar* is working on making the splash screen appear for 5 seconds and then having the Log In screen appear.
+  * *Hörður* is working on a background image as well as creating a simple database scheme for our project.
+  * *Mannsi* is working on the google code side of things. 
+  * *Ragnar* is working on a paper mock-up of playing a game on the Android.
+
+=Group To-Do list=
+
+Each of needs to get up to speed on the following subjects 
+  * Test Driven Development using the Android platform. Klaus gave us a few pages regarding this subject as well as showing us an example in class. Seeing as we are planing on using TDD, this needs to be done asap.
+  * Getting used to Subversion and checking out/adding some code in the googlecode repository. This also needs to be done asap. 
+
+==Time Management==
+
+We each need to figure out how much time we can spend on this project and how long each part of the project is taking. This needs to be done on a daily basis and needs to be as accurate as possible. Please not that all time spent reading about material regarding your project should be included as well as all the coding work .
+
+=Coding Conventions=
+
+The following are suggestions regarding our projects coding conventions.
+
+  * All methods and variables should use Camel-writing unless they are constants
+  * Constants should be written in all caps (THIS_IS_A_CONSTANT_NAME)
+  * The Android 'global variables start with m' should be avoided. 
+  * All code should include Java Doc commenting style. This will a lot of time
+
+=User Stories=
+
+==Create a Game 1==
+I want to create a game for a group of my friends. They should start at Hallgrímskirkja and there they should receive a hint that will take them to Hlöllabátar on Ingólfstorg. I will provide 3 hints for them to get to Hlöllabátar. When they get there they will receive a hint that should take them to my place. They will only receive two hints that will take them to me. If it is possible I would not like my friends to know that I made the game, but it is fine if that is impossible. When I have finished making the game my selected friends should receive an invite to the game and they will need to solve the puzzle as a team.
+
+==More User stories==
+More user stories will be added here later.
