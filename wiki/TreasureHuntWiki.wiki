@@ -7,8 +7,8 @@ This page is for documentation and notes regarding project Treasure Hunt which i
 
 This is a list of what each team member is doing at the moment.
 
-  * *Agnar* is working on making the splash screen appear for 5 seconds and then having the Log In screen appear.
-  * *Hörður* is working on a background image as well as creating a simple database scheme for our project.
+  * *Agnar* is working on making the splash screen appear for a few seconds and then having the Log In screen appear.
+  * *Hörður* is working on a background image as well as creating a paper mock-up of playing a game on the Android.
   * *Mannsi* is working on the google code side of things. 
   * *Ragnar* is working on a paper mock-up of playing a game on the Android.
 
@@ -30,7 +30,7 @@ The following are suggestions regarding our projects coding conventions.
   * All methods and variables should use Camel-writing unless they are constants
   * Constants should be written in all caps (THIS_IS_A_CONSTANT_NAME)
   * The Android 'global variables start with m' should be avoided. 
-  * All code should include Java Doc commenting style. This will a lot of time
+  * All code should include Java Doc commenting style. This will save a lot of time
 
 =User Stories=
 
