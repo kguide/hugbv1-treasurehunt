@@ -32,10 +32,42 @@ The following are suggestions regarding our projects coding conventions.
   * The Android 'global variables start with m' should be avoided. 
   * All code should include Java Doc commenting style. This will save a lot of time
 
+=Architecture=
+The following are classes/interfaces that we expect will be implemented.
+
+==GUI==
+  *Splash-Screen-class
+  * Log-In-class
+  * Welcome-Screen-class
+  * Game-Play-Gui-class (This needs the be split up)
+  * Advanced-Menu-class
+  * Help-Menu-class
+  * Settings-Menu-class
+  * Find-a-Game-class
+  * Select-a-Game-class
+  * Your-Score-class
+  * High-Score-class
+ 
+==Control==
+  * Player-class
+  * Game-interface
+  * Game-classes
+
+==DataAccessLayer==
+  * DataBase-class
+
+==Networking==
+  * Networking-class
+
+==GPS==
+  * GPS-communication-class
+
+
 =User Stories=
 
-==Create a Game 1==
-I want to create a game for a group of my friends. They should start at Hallgrímskirkja and there they should receive a hint that will take them to Hlöllabátar on Ingólfstorg. I will provide 3 hints for them to get to Hlöllabátar. When they get there they will receive a hint that should take them to my place. They will only receive two hints that will take them to me. If it is possible I would not like my friends to know that I made the game, but it is fine if that is impossible. When I have finished making the game my selected friends should receive an invite to the game and they will need to solve the puzzle as a team.
+==Create a Game - Simple game==
+A player logs on to our website and wants to create a game. He selects the 'Create Game' button and starts by choosing Hallgrímskirkja as the starting position. He wants the players to start within the church so he assigns a small radius for the starting position. He then selects Hlöllabátar near Ingólfstorg as his next location and then he puts three clues that the players can use to get to that location. He would like for the radius of this location to be 50 meters. The next location is in Kópavogur (just pick some house in Kópavogur) and he adds two clues that should help the players get there. This is the final destination.
+
 
 ==More User stories==
 More user stories will be added here later.
