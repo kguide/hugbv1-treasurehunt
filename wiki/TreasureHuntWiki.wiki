@@ -65,8 +65,12 @@ The following are classes/interfaces that we expect will be implemented.
 
 =User Stories=
 
-==Create a Game - Simple game==
+==Create a Game - Simple Game==
 A player logs on to our website and wants to create a game. He selects the 'Create Game' button and starts by choosing Hallgrímskirkja as the starting position. He wants the players to start within the church so he assigns a small radius for the starting position. He then selects Hlöllabátar near Ingólfstorg as his next location and then he puts three clues that the players can use to get to that location. He would like for the radius of this location to be 50 meters. The next location is in Kópavogur (just pick some house in Kópavogur) and he adds two clues that should help the players get there. This is the final destination.
+
+==Play a Game - Simple Game==
+A player logs on using his HTC Magic Android Phone. He selects 'Play' and from a list of games he is playing he selects 'Simple Game'. He is now informed that he has finished reached 0 of a total of 3 locations in this game. He is also informed that the starting position is Hallgrímskirkja (this is revealed to him on a map). The player then goes to Hallgrímskirkja where he receives confirmation that he has reached the first location and then he receives clue A1. He doesn't understand this clue so he requests another clue, A2. He understands this clue and goes to Hlöllabátar near Ingólfstorg. There he gets a confirmation that he has reached the second location and he then receives clue B1. He understands this clue and goes to some place in Kópavogur where he is informed that he has finished the game. 
+
 
 
 ==More User stories==
