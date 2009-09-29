@@ -53,8 +53,8 @@ The following are classes/interfaces that we expect will be implemented.
   * Game-interface
   * Game-classes
 
-==DataAccessLayer==
-  * DataBase-class
+==DAL==
+  * DB-class
 
 ==Networking==
   * Networking-class
