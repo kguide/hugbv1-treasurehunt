@@ -31,6 +31,10 @@ The following are suggestions regarding our projects coding conventions.
   * Constants should be written in all caps (THIS_IS_A_CONSTANT_NAME)
   * The Android 'global variables start with m' should be avoided. 
   * All code should include Java Doc commenting style. This will save a lot of time
+  * Curly braces example
+      for(i=0;i<200;i++) {
+          code block
+      }
 
 =Architecture=
 The following are classes/interfaces that we expect will be implemented.
