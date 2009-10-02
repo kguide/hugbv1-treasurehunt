@@ -79,3 +79,9 @@ A player logs on using his HTC Magic Android Phone. He selects 'Play' and from a
 
 ==More User stories==
 More user stories will be added here later.
+
+
+=Questions for Klaus=
+  * Should the test code be in another folder within the trunk folder ?
+  * Should we have a special package (namespace) for testing in each other namespace ? 
+    For example, if we have hi.android.bravo and hi.android.bravo.gui should we then have hi.android.bravo.test AND hi.android.bravo.gui.test or should we just have the former.
