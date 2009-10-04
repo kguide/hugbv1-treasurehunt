@@ -8,5 +8,8 @@
 <string name="play">Play</string>
 
 <string name="statistics">Statistics</string>
-<string name="log_out">Log Out</string>
+<string name="logOut">Log Out</string>
+<string name="myGames">My Games</string>
+
+<string name="findGame">Find a Game</string>
 </resources>

@@ -9,7 +9,7 @@
 	android:id="@+id/playButtonWelcomeScreen"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:layout_marginTop="100px"
+	android:layout_marginTop="140px"
 	android:text="@string/play"
 	/>	
 <Button 
@@ -22,6 +22,6 @@
 	android:id="@+id/logOutButtonWelcomeScreen"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:text="@string/log_out"
+	android:text="@string/logOut"
 	/>	
 </LinearLayout>
