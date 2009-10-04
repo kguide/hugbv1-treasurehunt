@@ -6,28 +6,22 @@
     android:background="@drawable/plainbackground"
     >
 <Button 
-	android:id="@+id/play"
+	android:id="@+id/playButtonWelcomeScreen"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginTop="100px"
-	android:text="Play"
+	android:text="@string/play"
 	/>	
 <Button 
-	android:id="@+id/findAGame"
+	android:id="@+id/statisticButtonWelcomeScreen"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:text="Find a Game"
+	android:text="@string/statistics"
 	/>
 <Button 
-	android:id="@+id/yourScore"
+	android:id="@+id/logOutButtonWelcomeScreen"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:text="Your Score"
-	/>
-<Button 
-	android:id="@+id/logOut"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:text="Log Out"
+	android:text="@string/log_out"
 	/>	
 </LinearLayout>
