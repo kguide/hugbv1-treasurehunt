@@ -1,13 +1,12 @@
 package hi.android.treasureHunt;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-public class PlayScreen extends Activity {
+public class FindAGameScreen extends Activity {
     
 	private static final int ADVANCED_ID = Menu.FIRST;
 	private static final int HELP_ID = Menu.FIRST + 1;
@@ -17,19 +16,13 @@ public class PlayScreen extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.play_screen);
+        setContentView(R.layout.find_a_game_screen);
         
-        Button findButton = (Button) findViewById(R.id.findAGamePlayScreen);
-        findButton.setOnClickListener(new Button.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent openFindAGameIntent = new Intent(PlayScreen.this,FindAGameScreen.class);
-				startActivity(openFindAGameIntent);
-			}
-		});
-        
-        
+        Spinner spinner = (Spinner) findViewById(R.id.searchSpinnerFindAGame);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(
+                this, R.array.selectableSearchByItems, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
     
     @Override 

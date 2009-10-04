@@ -13,4 +13,11 @@
 <string name="login">Login</string>
 <string name="username">Username:</string>
 <string name="password">Password:</string>
+<string name="select">Select:</string>
+<string name="top10">10 most popular</string>
+<string name="criteria">Search by criteria:</string>
+<string name="or">Or</string>
+<string name="searchBy">Search By:</string>
+<string name="search">Search</string>
+
 </resources>

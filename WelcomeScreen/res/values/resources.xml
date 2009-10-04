@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="selectableSearchByItems">
+        <item>Name</item>
+        <item>Creator</item>
+        <item>Distance from you</item>
+    </string-array>
+    
+</resources>

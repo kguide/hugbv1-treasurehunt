@@ -15,7 +15,7 @@
     </Button>
     
     <Button 
-    	android:id="@+id/myGamesButtonPlayScreen"
+    	android:id="@+id/findAGamePlayScreen"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:text="@string/findGame"	
