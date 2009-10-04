@@ -18,17 +18,18 @@
      		android:layout_height="wrap_content"
      		>
 	          <TextView 
-	          		android:layout_width="70px"
+	          		android:layout_width="130px"
+	          		android:textSize="18px"
 	          		android:text="@string/name"
 	          />
 	          <TextView 
-	          		android:layout_marginLeft="20px"
-	          		android:layout_width="70px"
+	          		android:layout_width="80px"
+	          		android:textSize="18px"
 	          		android:text="@string/score"
 	          />
 	          <TextView 
-	          		android:layout_marginLeft="20px"
-	          		android:layout_width="70px"
+	          		android:layout_width="80px"
+	          		android:textSize="18px"
 	          		android:text="@string/ranking"
 	          />
      	</TableRow>
