@@ -30,7 +30,6 @@ public class StatsScreen extends Activity {
                 LayoutParams.WRAP_CONTENT));
         
         
-        
         TextView twName = new TextView(this);
         twName.setText("Player Name");
         twName.setLayoutParams(new LayoutParams(
@@ -49,8 +48,7 @@ public class StatsScreen extends Activity {
         		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
         
-        
-        
+           
         /* Add TextViews to row. */
         tr.addView(twName);
         tr.addView(twScore);
