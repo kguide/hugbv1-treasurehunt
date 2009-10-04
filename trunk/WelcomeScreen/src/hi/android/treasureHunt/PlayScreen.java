@@ -14,7 +14,7 @@ public class PlayScreen extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcomescreen);
+        setContentView(R.layout.play_screen);
         
         
     }
