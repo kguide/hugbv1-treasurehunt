@@ -23,7 +23,31 @@ public class StatsScreen extends Activity {
         
         TableLayout tl = (TableLayout) findViewById(R.id.tableLayoutStatisticsScreen);
         
-        TableRow tr = new TableRow(this);
+        addUserToTableLayout(tl, "Player name", 50000, 1200);
+    }
+    
+    @Override 
+    public boolean onCreateOptionsMenu(Menu menu){
+    	super.onCreateOptionsMenu(menu);
+    	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
+    	menu.add(0,HELP_ID,0,R.string.menuHelp);
+    	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
+    	return true;
+    }
+    
+    /**
+     * Adds a user to the tableLayout.
+     * 
+     * Note: This method should be transfered to the Control part of this project once it is established.
+     * 
+     * @param tableLayout : TableLayout. The table layout that the user is going to be added to
+     * @param name        : String. Name of user
+     * @param score		  : Integer. Users score
+     * @param ranking     : Integer. Users ranking
+     */
+    public void addUserToTableLayout(TableLayout tableLayout, String name, int score, int ranking){
+        
+    	TableRow tr = new TableRow(this);
         
         tr.setLayoutParams(new LayoutParams(
                 LayoutParams.FILL_PARENT,
@@ -31,19 +55,19 @@ public class StatsScreen extends Activity {
         
         
         TextView twName = new TextView(this);
-        twName.setText("Player Name");
+        twName.setText(name);
         twName.setLayoutParams(new LayoutParams(
         		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
 
         TextView twScore = new TextView(this);
-        twScore.setText("50.000");
+        twScore.setText(Integer.toString(score));
         twScore.setLayoutParams(new LayoutParams(
         		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
         
         TextView twRanking = new TextView(this);
-        twRanking.setText("1.200");
+        twRanking.setText(Integer.toString(ranking));
         twRanking.setLayoutParams(new LayoutParams(
         		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
@@ -55,17 +79,8 @@ public class StatsScreen extends Activity {
         tr.addView(twRanking);
         
         /* Add row to TableLayout. */
-        tl.addView(tr,new TableLayout.LayoutParams(
+        tableLayout.addView(tr,new TableLayout.LayoutParams(
         LayoutParams.FILL_PARENT,
         LayoutParams.WRAP_CONTENT));
-    }
-    
-    @Override 
-    public boolean onCreateOptionsMenu(Menu menu){
-    	super.onCreateOptionsMenu(menu);
-    	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
-    	menu.add(0,HELP_ID,0,R.string.menuHelp);
-    	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
-    	return true;
     }
 }
