@@ -19,5 +19,8 @@
 <string name="or">Or</string>
 <string name="searchBy">Search By:</string>
 <string name="search">Search</string>
-
+<string name="allPlayers">Show all players</string>
+<string name="name">Name</string>
+<string name="score">Score</string>
+<string name="ranking">Ranking</string>
 </resources>

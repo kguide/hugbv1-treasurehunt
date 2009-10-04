@@ -27,7 +27,18 @@ public class WelcomeScreen extends Activity {
 				Intent startPlayScreen = new Intent(WelcomeScreen.this,PlayScreen.class);
 				startActivity(startPlayScreen);
 			}
-		});   
+		});  
+        
+        Button statsButton = (Button) findViewById(R.id.statisticButtonWelcomeScreen);
+        statsButton.setOnClickListener(new Button.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent startStatsScreen = new Intent(WelcomeScreen.this,StatsScreen.class);
+				startActivity(startStatsScreen);
+			}
+		}); 
+        
         
     }
     
