@@ -18,7 +18,7 @@ public class PlayScreen extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_screen);
-        
+
         Button findButton = (Button) findViewById(R.id.findGameButtonPlayScreen);
         findButton.setOnClickListener(new Button.OnClickListener() {
 			
@@ -28,8 +28,7 @@ public class PlayScreen extends Activity {
 				startActivity(openFindAGameIntent);
 			}
 		});
-        
-        
+     
     }
     
     @Override 
