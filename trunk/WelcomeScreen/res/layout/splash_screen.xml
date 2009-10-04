@@ -20,7 +20,7 @@
 	    />
 	    	    
 	    <Button 
-	    	android:id="@+id/findGameButtonPlayScreen"
+	    	android:id="@+id/myGamesButtonFindGame"
 	    	android:layout_width="170px"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/findGame"	
