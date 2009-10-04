@@ -12,7 +12,7 @@
 		</intent-filter>							
 	</activity>			
 
-<!-- 
+<!-- to bypass splash & login screen 
         <activity android:name=".WelcomeScreen"
                   android:label="@string/app_name">
             <intent-filter>
