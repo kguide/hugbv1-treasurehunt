@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/plainbackground"
+    >
+    
+    <LinearLayout
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:layout_marginTop="100px"
+    	android:layout_marginLeft="40px">
+    	    	
+  	    <TextView
+	    	android:text="@string/username"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"	 
+	    	android:textColor="#FFF"
+	    	android:textSize="18px"
+	   
+	    >    </TextView>
+	    
+	    
+	    <EditText
+	    	android:id="@+id/usernameLoginScreen"
+	    	android:layout_width="235px"
+	    	android:layout_height="wrap_content"
+	    	android:maxLines="1"
+	    	android:maxLength="45"     
+	    >    </EditText>
+	
+	
+	    <TextView
+	    	android:text="@string/password"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:textColor="#FFF"
+	    	android:textSize="18px"
+	    >     </TextView>
+	    
+	    <EditText
+	    	android:id="@+id/passwordLoginScreen"
+	    	android:layout_width="235px"
+	    	android:layout_height="wrap_content"
+	    	android:maxLines="1"
+	    	android:maxLength="35"
+	    >    </EditText>
+	    
+	    
+	    <Button 
+	    	android:id="@+id/loginButtonPlayScreen"
+	    	android:layout_width="100px"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/login"
+	    	android:textColorHighlight="#d6dd0f"
+	    >	</Button>
+	</LinearLayout>
+ </LinearLayout>
