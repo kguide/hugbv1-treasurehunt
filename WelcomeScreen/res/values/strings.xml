@@ -6,10 +6,11 @@
     <string name="menuAdvanced">Advanced</string>
       
 <string name="play">Play</string>
-
 <string name="statistics">Statistics</string>
 <string name="logOut">Log Out</string>
 <string name="myGames">My Games</string>
-
 <string name="findGame">Find a Game</string>
+<string name="login">Login</string>
+<string name="username">Username:</string>
+<string name="password">Password:</string>
 </resources>
