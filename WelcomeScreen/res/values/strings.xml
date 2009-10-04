@@ -5,4 +5,8 @@
     <string name="menuHelp">Help</string>
     <string name="menuAdvanced">Advanced</string>
       
+<string name="play">Play</string>
+
+<string name="statistics">Statistics</string>
+<string name="log_out">Log Out</string>
 </resources>
