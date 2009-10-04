@@ -5,23 +5,31 @@
     android:layout_height="fill_parent"
     android:background="@drawable/plainbackground"
     >
-<Button 
-	android:id="@+id/playButtonWelcomeScreen"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:layout_marginTop="140px"
-	android:text="@string/play"
-	/>	
-<Button 
-	android:id="@+id/statisticButtonWelcomeScreen"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:text="@string/statistics"
-	/>
-<Button 
-	android:id="@+id/logOutButtonWelcomeScreen"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:text="@string/logOut"
-	/>	
+    
+    <LinearLayout
+	  	android:orientation="vertical"
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="fill_parent"
+	  	android:layout_marginTop="150px"
+	  	android:layout_marginLeft="73px">
+    
+		<Button 
+			android:id="@+id/playButtonWelcomeScreen"
+			android:layout_width="170px"
+			android:layout_height="wrap_content"
+			android:text="@string/play"
+			/>	
+		<Button 
+			android:id="@+id/statisticButtonWelcomeScreen"
+			android:layout_width="170px"
+			android:layout_height="wrap_content"
+			android:text="@string/statistics"
+			/>
+		<Button 
+			android:id="@+id/logOutButtonWelcomeScreen"
+		   	android:layout_width="170px"
+			android:layout_height="wrap_content"
+			android:text="@string/logOut"
+			/>	
+	</LinearLayout>						
 </LinearLayout>

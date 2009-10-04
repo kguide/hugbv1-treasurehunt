@@ -18,11 +18,9 @@
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"	 
 	    	android:textColor="#FFF"
-	    	android:textSize="18px"
-	   >   
-	   </TextView>
-	    
-	    
+	    	android:textSize="18px"	   
+	    >    </TextView>
+
 	    <EditText
 	    	android:id="@+id/usernameLoginScreen"
 	    	android:layout_width="235px"
@@ -50,7 +48,7 @@
 	    
 	    
 	    <Button 
-	    	android:id="@+id/loginButtonPlayScreen"
+	    	android:id="@+id/logInButtonLogInScreen"
 	    	android:layout_width="100px"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/login"
