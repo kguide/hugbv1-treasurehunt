@@ -17,7 +17,7 @@ public class WelcomeScreen extends Activity {
         setContentView(R.layout.welcomescreen);
     }
     
-    @Override
+    @Override 
     public boolean onCreateOptionsMenu(Menu menu){
     	super.onCreateOptionsMenu(menu);
     	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
