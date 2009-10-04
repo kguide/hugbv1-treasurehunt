@@ -1,8 +1,11 @@
 package hi.android.treasureHunt;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 public class WelcomeScreen extends Activity {
     
@@ -15,6 +18,17 @@ public class WelcomeScreen extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcomescreen);
+        
+        Button playButton = (Button) findViewById(R.id.playButtonWelcomeScreen);
+        playButton.setOnClickListener(new Button.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent startPlayScreen = new Intent(WelcomeScreen.this,PlayScreen.class);
+				startActivity(startPlayScreen);
+			}
+		});   
+        
     }
     
     @Override 
