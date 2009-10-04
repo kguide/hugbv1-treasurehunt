@@ -19,8 +19,8 @@
 	    	android:layout_height="wrap_content"	 
 	    	android:textColor="#FFF"
 	    	android:textSize="18px"
-	   
-	    >    </TextView>
+	   >   
+	   </TextView>
 	    
 	    
 	    <EditText
