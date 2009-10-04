@@ -32,19 +32,19 @@ public class StatsScreen extends Activity {
         
         
         TextView twName = new TextView(this);
-        twName.setText("A");
+        twName.setText("Player Name");
         twName.setLayoutParams(new LayoutParams(
-                  LayoutParams.WRAP_CONTENT,
+        		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
 
         TextView twScore = new TextView(this);
-        twScore.setText("B");
+        twScore.setText("50.000");
         twScore.setLayoutParams(new LayoutParams(
         		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
         
         TextView twRanking = new TextView(this);
-        twRanking.setText("C");
+        twRanking.setText("1.200");
         twRanking.setLayoutParams(new LayoutParams(
         		LayoutParams.WRAP_CONTENT,
                   LayoutParams.WRAP_CONTENT));
