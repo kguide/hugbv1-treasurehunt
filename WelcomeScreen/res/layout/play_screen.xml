@@ -5,14 +5,28 @@
     android:layout_height="fill_parent"
     android:background="@drawable/plainbackground"
     >
-    <Button 
-    	android:id="@+id/myGamesButtonPlayScreen"
+    <LinearLayout
+    	android:orientation="vertical"
     	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_marginTop="150px"
-    	android:text="@string/myGames"
-    >    
-    </Button>
+    	android:layout_height="fill_parent"
+    	android:layout_marginTop="165px"
+    	android:layout_marginLeft="73px">
+
+	    <Button 
+	    	android:id="@+id/myGamesButtonPlayScreen"
+	    	android:layout_width="170px"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/myGames"
+	    />
+	    	    
+	    <Button 
+	    	android:id="@+id/myGamesButtonFindGame"
+	    	android:layout_width="170px"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/findGame"	
+	    />
+	    
+    </LinearLayout>
     
     <Button 
     	android:id="@+id/findAGamePlayScreen"
@@ -22,5 +36,4 @@
     >
     </Button>
     
-    
- </LinearLayout>
+</LinearLayout>
