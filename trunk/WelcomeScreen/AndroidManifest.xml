@@ -4,13 +4,14 @@
       android:versionCode="1"
       android:versionName="1.0">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-	<activity	android:name="LoginScreen"
+	<activity	android:name="SplashScreen"
 				android:label="@string/app_name">
 		<intent-filter>
 			<action android:name="android.intent.action.MAIN" />
 			<category android:name="android.intent.category.LAUNCHER" />
 		</intent-filter>							
 	</activity>			
+
 
 <!-- to bypass splash & login screen 
         <activity android:name=".WelcomeScreen"
@@ -20,13 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
- -->
- 
+-->
+ 		<activity android:name=".LoginScreen"
+ 				  android:label="@string/app_name">
+ 		</activity>
  		<activity android:name=".WelcomeScreen"
  				  android:label="@string/app_name">	
-  		</activity>
-  		
+  		</activity>  		
         <activity android:name=".PlayScreen"
         		android:label="@string/app_name">
         </activity>
