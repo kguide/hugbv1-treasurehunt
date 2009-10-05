@@ -3,37 +3,13 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/plainbackground"
     >
-    <LinearLayout
-    	android:orientation="vertical"
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:layout_marginTop="165px"
-    	android:layout_marginLeft="73px">
-
-	    <Button 
-	    	android:id="@+id/myGamesButtonPlayScreen"
-	    	android:layout_width="170px"
-	    	android:layout_height="wrap_content"
-	    	android:text="@string/myGames"
-	    />
-	    	    
-	    <Button 
-	    	android:id="@+id/myGamesButtonFindGame"
-	    	android:layout_width="170px"
-	    	android:layout_height="wrap_content"
-	    	android:text="@string/findGame"	
-	    />
-	    
-    </LinearLayout>
-    
-    <Button 
-    	android:id="@+id/findAGamePlayScreen"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/findGame"	
-    >
-    </Button>
-    
+	<ImageView
+		android:id="@+id/splashScreenImage"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_gravity="center"
+		android:src="@drawable/splash_bg"
+		android:scaleType="fitXY"	
+	/>	
 </LinearLayout>
