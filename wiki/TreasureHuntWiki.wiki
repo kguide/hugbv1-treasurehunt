@@ -7,21 +7,17 @@ This page is for documentation and notes regarding project Treasure Hunt which i
 
 This is a list of what each team member is doing at the moment.
 
-  * *Agnar* is working on making the splash screen appear for a few seconds and then having the Log In screen appear.
-  * *Hörður* is working on a background image as well as creating a paper mock-up of playing a game on the Android.
-  * *Mannsi* is working on the google code side of things. 
+  * *Agnar* ?
+  * *Hörður* is working on implementing a database to store information about our users.
+  * *Mannsi* is reading about TDD.
   * *Ragnar* is working on a paper mock-up of playing a game on the Android.
 
 =Group To-Do list=
 
 Each of needs to get up to speed on the following subjects 
   * Test Driven Development using the Android platform. Klaus gave us a few pages regarding this subject as well as showing us an example in class. Seeing as we are planing on using TDD, this needs to be done asap.
-  * Getting used to Subversion and checking out/adding some code in the googlecode repository. This also needs to be done asap. 
-  * Deciding on an architecture for the project. This means defining classes and packages on a high-level basis.
+  * Getting used to Subversion and checking out/adding some code in the googlecode repository. Subclipse is working like a charm so everyone should be using it. 
 
-==Time Management==
-
-We each need to figure out how much time we can spend on this project and how long each part of the project is taking. This needs to be done on a daily basis and needs to be as accurate as possible. Please not that all time spent reading about material regarding your project should be included as well as all the coding work .
 
 =Coding Conventions=
 
