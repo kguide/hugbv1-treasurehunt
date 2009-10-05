@@ -7,10 +7,7 @@ import android.os.Handler;
 
 public class SplashScreen extends Activity {
 	
-	private static final long SPLASHDELAY = 5000; // duration of splash
-
-
-		
+	private static final long SPLASHDELAY = 5000; // duration of splash	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		// Display splashScreen for n milliseconds set in SPLASHDELAY variable
