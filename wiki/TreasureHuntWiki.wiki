@@ -7,8 +7,8 @@ This page is for documentation and notes regarding project Treasure Hunt which i
 
 This is a list of what each team member is doing at the moment.
 
-  * *Agnar* ?
-  * *Hörður* is working on implementing a database to store information about our users.
+  * *Agnar* is working on creating the google-maps features we need.
+  * *Hörður* is working on the server database and helping with the google-maps thing.
   * *Mannsi* is reading about TDD.
   * *Ragnar* is working on a paper mock-up of playing a game on the Android.
 
