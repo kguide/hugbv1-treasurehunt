@@ -22,7 +22,7 @@
 	    >    </TextView>
 
 	    <EditText
-	    	android:id="@+id/usernameLoginScreen"
+	    	android:id="@+id/EditTextLoginScreenUsername"
 	    	android:layout_width="235px"
 	    	android:layout_height="wrap_content"
 	    	android:maxLines="1"
@@ -39,7 +39,7 @@
 	    >     </TextView>
 	    
 	    <EditText
-	    	android:id="@+id/passwordLoginScreen"
+	    	android:id="@+id/EditTextLoginScreenPassword"
 	    	android:layout_width="235px"
 	    	android:layout_height="wrap_content"
 	    	android:maxLines="1"
@@ -48,7 +48,7 @@
 	    
 	    
 	    <Button 
-	    	android:id="@+id/logInButtonLogInScreen"
+	    	android:id="@+id/ButtonLogInScreenLogIn"
 	    	android:layout_width="100px"
 	    	android:layout_height="wrap_content"
 	    	android:text="@string/login"

@@ -14,19 +14,19 @@
 	  	android:layout_marginLeft="73px">
     
 		<Button 
-			android:id="@+id/playButtonWelcomeScreen"
+			android:id="@+id/ButtonWelcomeScreenPlay"
 			android:layout_width="170px"
 			android:layout_height="wrap_content"
 			android:text="@string/play"
 			/>	
 		<Button 
-			android:id="@+id/statisticButtonWelcomeScreen"
+			android:id="@+id/ButtonWelcomeScreenStatistics"
 			android:layout_width="170px"
 			android:layout_height="wrap_content"
 			android:text="@string/statistics"
 			/>
 		<Button 
-			android:id="@+id/logOutButtonWelcomeScreen"
+			android:id="@+id/ButtonWelcomeScreenLogOut"
 		   	android:layout_width="170px"
 			android:layout_height="wrap_content"
 			android:text="@string/logOut"

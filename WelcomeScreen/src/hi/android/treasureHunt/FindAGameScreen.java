@@ -18,7 +18,7 @@ public class FindAGameScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_a_game_screen);
         
-        Spinner spinner = (Spinner) findViewById(R.id.searchSpinnerFindAGame);
+        Spinner spinner = (Spinner) findViewById(R.id.SpinnerFindAGameScreenCategories);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(
                 this, R.array.selectableSearchByItems, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

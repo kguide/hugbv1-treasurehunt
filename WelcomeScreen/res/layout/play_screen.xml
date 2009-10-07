@@ -13,14 +13,14 @@
 	  	android:layout_marginLeft="73px"
 	  	>
 		    <Button 
-		    	android:id="@+id/myGamesButtonPlayScreen"
+		    	android:id="@+id/ButtonPlayScreenMyGames"
 		    	android:layout_width="170px"
 		    	android:layout_height="wrap_content"
 		    	android:text="@string/myGames"
 		    />
 		    	    
 		    <Button 
-		    	android:id="@+id/findGameButtonPlayScreen"
+		    	android:id="@+id/ButtonPlayScreenFindGame"
 		    	android:layout_width="170px"
 		    	android:layout_height="wrap_content"
 		    	android:text="@string/findGame"	

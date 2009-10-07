@@ -16,7 +16,7 @@
     />
     
     <Button 
-    	android:id="@+id/searchMostPopularButtonFindAGame" 
+    	android:id="@+id/ButtonFindAGameScreenSearchMostPopular" 
     	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content" 
     	android:layout_marginTop="20px"
@@ -54,7 +54,7 @@
 	        android:text="@string/searchBy"
 	    />  
 	    <Spinner
-	    	android:id="@+id/searchSpinnerFindAGame"
+	    	android:id="@+id/SpinnerFindAGameScreenCategories"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"   
 	    	android:layout_marginLeft="10px"
@@ -63,7 +63,7 @@
 	    </Spinner>
 	    
 	    <EditText
-	    	android:id="@+id/searchfieldEditTextFindAGames"
+	    	android:id="@+id/EditTextFindAGameScreenSearchfield"
 	    	android:layout_width="120sp"
     		android:layout_height="wrap_content"
 	    >
@@ -71,7 +71,7 @@
     </LinearLayout> 
     
     <Button 
-    	android:id="@+id/searchCriteriaButtonFindAGame" 
+    	android:id="@+id/ButtonFindAGameScreenSearchCriteria" 
     	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content" 
     	android:layout_marginTop="5px"
