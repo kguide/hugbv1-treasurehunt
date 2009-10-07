@@ -20,11 +20,11 @@ public class DAL {
 			
 			line = reader.readLine();
 			
-			System.out.print(line);
-			
 		} catch (MalformedURLException e) {
+			System.out.print("MalformedURLException: " + e.getMessage());
 			return false;
 		} catch (IOException e) {
+			System.out.print("IOException: " + e.getMessage());
 			return false;
 		}
 		

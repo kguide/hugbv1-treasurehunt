@@ -19,6 +19,7 @@ public class LoginScreen extends Activity {
 		loginButton.setOnClickListener(new Button.OnClickListener() {												
 			@Override
 			public void onClick(View v) {
+				
 				Intent startWelcomeScreen = new Intent(LoginScreen.this,WelcomeScreen.class);
 				startActivity(startWelcomeScreen);
 				// TODO Connect login method and validate input				
