@@ -19,9 +19,8 @@ public class WelcomeScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcomescreen);
         
-        Button playButton = (Button) findViewById(R.id.playButtonWelcomeScreen);
+        Button playButton = (Button) findViewById(R.id.ButtonWelcomeScreenPlay);
         playButton.setOnClickListener(new Button.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				Intent startPlayScreen = new Intent(WelcomeScreen.this,PlayScreen.class);
@@ -29,12 +28,20 @@ public class WelcomeScreen extends Activity {
 			}
 		});  
         
-        Button statsButton = (Button) findViewById(R.id.statisticButtonWelcomeScreen);
+        Button statsButton = (Button) findViewById(R.id.ButtonWelcomeScreenStatistics);
         statsButton.setOnClickListener(new Button.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				Intent startStatsScreen = new Intent(WelcomeScreen.this,StatsScreen.class);
+				startActivity(startStatsScreen);
+			}
+		}); 
+        
+        Button logOutButton = (Button) findViewById(R.id.ButtonWelcomeScreenLogOut);
+        logOutButton.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent startStatsScreen = new Intent(WelcomeScreen.this,LoginScreen.class);
 				startActivity(startStatsScreen);
 			}
 		}); 

@@ -19,7 +19,7 @@ public class PlayScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_screen);
 
-        Button findButton = (Button) findViewById(R.id.findGameButtonPlayScreen);
+        Button findButton = (Button) findViewById(R.id.ButtonPlayScreenFindGame);
         findButton.setOnClickListener(new Button.OnClickListener() {
 			
 			@Override
