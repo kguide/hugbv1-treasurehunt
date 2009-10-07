@@ -76,6 +76,8 @@ A player logs on using his HTC Magic Android Phone. He selects 'Play' and from a
 ==More User stories==
 More user stories will be added here later.
 
+==Reminders, things that could be done better==
+  * Regarding login.php , do something to avoid SQL injection.
 
 =Questions for Klaus=
   * Should the test code be in another folder within the trunk folder ?
