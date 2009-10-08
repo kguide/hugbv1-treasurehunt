@@ -31,6 +31,7 @@ The following are suggestions regarding our projects coding conventions.
       for(i=0;i<200;i++) {
           code block
       }
+  * Short methods ! A method should typically not be longer then 10 lines (excluding whitespace, try/catch, comments and such). If your method is 20 lines long, try to split it up.
 
 =Architecture=
 The following are classes/interfaces that we expect will be implemented.
