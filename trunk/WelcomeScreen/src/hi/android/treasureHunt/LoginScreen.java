@@ -27,7 +27,7 @@ public class LoginScreen extends Activity {
 				String username = usernameET.getText().toString();
 				String password = passwordET.getText().toString();
 				
-				if(controller.player.logIn(username, password))
+				if(controller.logIn(username, password))
 				{
 					Intent startWelcomeScreen = new Intent(LoginScreen.this,WelcomeScreen.class);
 					startActivity(startWelcomeScreen);

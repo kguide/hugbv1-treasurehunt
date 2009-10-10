@@ -7,27 +7,34 @@ public class Controller {
 
 	public Player player;
 	
-	public Controller(){
-		player = new Player();
-	}
-	
 	/**
 	 * This class handles everything a player in our game needs
 	 * to do. 
 	 */
 	public class Player{
+				
+		public int userID;
+		public String username;
+		public int score;
+		public int ranking;
 		
-		DAL dal = new DAL();
-		
-		/**
-		 * This method allows users to log in and become players.
-		 * 
-		 * @param username : String representing the users username
-		 * @param password : String representing the users password
-		 * @return : Boolean tells if the logIn was successful.
-		 */
-		public boolean logIn(String username, String password){
-			return dal.verifyUser(username, password);
-			}
+		public Player(int userID, String username, int score, int ranking){
+			this.userID = userID;
+			this.username = username;
+			this.score = score;
+			this.ranking = ranking;
+		}
 	}
+	
+	/**
+	 * This method allows users to log in and become players.
+	 * 
+	 * @param username : String representing the users username
+	 * @param password : String representing the users password
+	 * @return : Boolean tells if the logIn was successful.
+	 */
+	public boolean logIn(String username, String password){
+		return DAL.verifyUser(username, password);
+		}
+	
 }

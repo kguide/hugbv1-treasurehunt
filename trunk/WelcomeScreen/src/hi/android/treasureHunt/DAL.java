@@ -22,7 +22,7 @@ public class DAL {
 	 * @param password : String representing the users password
 	 * @return  : Boolean tells if the username and password match one of the players.
 	 */
-	public boolean verifyUser(String username, String password){
+	public static boolean verifyUser(String username, String password){
 		try {
 			
 			URL url = new URL("http://hgphoto.net/treasure/index2.php?username=" + username + "&password=" + password);		//Location of server-script.
