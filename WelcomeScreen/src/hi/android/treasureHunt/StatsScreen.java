@@ -1,4 +1,4 @@
-package hi.android.treasureHunt;
+	package hi.android.treasureHunt;
 
 import android.app.Activity;
 import android.os.Bundle;
