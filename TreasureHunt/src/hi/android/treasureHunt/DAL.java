@@ -45,4 +45,24 @@ public class DAL {
 			return false;
 		}
 	}
+	public static boolean createNewUser(String username,String password){
+		try{
+		String connectionString = "http://hgphoto.net/treasure/controller.php?method=createuser&request=eitthvad&username="+username+"&password="+password; 
+		//Log.d("DAL",connectionString);
+		URL url = new URL(connectionString);		//Location of server-script.
+		URLConnection connection = url.openConnection();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		String replyString = reader.readLine();
+		
+		return replyString.equals("true") ? true : false;  		//Java ternary operator (condition) ? 'return if true' : 'return if false' 
+				
+		} catch (MalformedURLException e) {
+			Log.e("User Verification", e.getMessage());
+			return false;
+		} catch (IOException e) {
+			Log.e("User Verification", e.getMessage());
+			return false;
+		}
+	}
 }
+

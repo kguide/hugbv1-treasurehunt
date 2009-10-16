@@ -19,6 +19,8 @@ public class LoginScreen extends Activity {
 		final EditText usernameET = (EditText) findViewById(R.id.EditTextLoginScreenUsername);
 		final EditText passwordET = (EditText) findViewById(R.id.EditTextLoginScreenPassword);
 		
+	
+		
 		Button loginButton = (Button) findViewById(R.id.ButtonLogInScreenLogIn);
 		loginButton.setOnClickListener(new Button.OnClickListener() {												
 			@Override
@@ -39,5 +41,17 @@ public class LoginScreen extends Activity {
 				}
 			}
 		});	
+	
+	Button createNewUserButton = (Button) findViewById(R.id.ButtonLogInScreenNewUser);
+	createNewUserButton.setOnClickListener(new Button.OnClickListener() {												
+		@Override
+		public void onClick(View v) {
+		
+			Intent startCreateNewUserScreen = new Intent(LoginScreen.this,CreateNewUser.class);
+			startActivity(startCreateNewUserScreen);
+			
+			
+		}
+	});
 	}
 }

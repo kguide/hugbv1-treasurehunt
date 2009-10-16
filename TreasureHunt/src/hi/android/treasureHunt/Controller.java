@@ -36,5 +36,7 @@ public class Controller {
 	public boolean logIn(String username, String password){
 		return DAL.verifyUser(username, password);
 		}
-	
+	public boolean createNewUser(String username, String password){
+		return DAL.createNewUser(username,password);
+		}
 }
