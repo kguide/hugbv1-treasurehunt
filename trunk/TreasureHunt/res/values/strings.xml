@@ -26,4 +26,10 @@
 <string name="seeDetails">See Details</string>
 <string name="delete">Delete</string>
 
+<string name="createUsername">Enter an email address.</string>
+<string name="createPassword">Create a password </string>
+
+<string name="submitNewUser">Submit.</string>
+<string name="createUserHead">Welcome glory hunters</string>
+<string name="loginNewUser">Create user</string>
 </resources>

@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:paddingTop="20px"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/plainbackground"
     >
+    <TextView
+	    	android:text="@string/createUserHead"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"	 
+	    	android:textColor="#FFF"
+	    	android:textSize="22px"	 
+	    	android:gravity="center_horizontal"
+	    	>   
+	    	 </TextView>
     
     <LinearLayout
     	android:orientation="vertical"
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
     	android:gravity="center_vertical"
-    	android:layout_marginLeft="40px">
+    	android:layout_marginLeft="40px"
+    	>
     	    	
   	    <TextView
-	    	android:text="@string/username"
+	    	android:text="@string/createUsername"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"	 
 	    	android:textColor="#FFF"
@@ -22,7 +33,7 @@
 	    >    </TextView>
 
 	    <EditText
-	    	android:id="@+id/EditTextLoginScreenUsername"
+	    	android:id="@+id/EditTextCreateUserUsername"
 	    	android:layout_width="235px"
 	    	android:layout_height="wrap_content"
 	    	android:maxLines="1"
@@ -31,7 +42,7 @@
 	
 	
 	    <TextView
-	    	android:text="@string/password"
+	    	android:text="@string/createPassword"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:textColor="#FFF"
@@ -39,29 +50,22 @@
 	    >     </TextView>
 	    
 	    <EditText
-	    	android:id="@+id/EditTextLoginScreenPassword"
-	    	android:layout_width="235px"
+	    	android:id="@+id/EditTextCreateUserPassword"
+	    	android:layout_width="150px"
 	    	android:layout_height="wrap_content"
 	    	android:maxLines="1"
-	    	android:maxLength="35"
+	    	android:maxLength="25"
 	    	android:inputType="textPassword"
 	    >    </EditText>
-	    
-	    
-	    <Button 
-	    	android:id="@+id/ButtonLogInScreenLogIn"
+	   
+	
+	<Button 
+	    	android:id="@+id/ButtonCraeteUserSubmit"
 	    	android:layout_width="100px"
 	    	android:layout_height="wrap_content"
-	    	android:text="@string/login"
-	    	android:textColorHighlight="#d6dd0f"
-	    >	</Button>
-	    
-	    <Button 
-	    	android:id="@+id/ButtonLogInScreenNewUser"
-	    	android:layout_width="100px"
-	    	android:layout_height="wrap_content"
-	    	android:text="@string/loginNewUser"
-	    	android:textColorHighlight="#d6dd0f"
-	    >	</Button>
-	</LinearLayout>
+	    	android:text="@string/submitNewUser"
+	    	android:textColorHighlight="#d6dd0f" android:editable="true" 
+	    	android:enabled="true"
+	    	>	</Button>
+</LinearLayout>
  </LinearLayout>
