@@ -12,7 +12,8 @@ public class ToolBox {
 	 * Calculates md5 hash from a String array, the returned md5 
 	 * hash is used for getting/sending data from web server.
 	 * 
-	 * @param input : String array, representing parameters for connection with web
+	 * @param input : String array, parameters MUST be sorted 
+	 * alphabetically to sync with server side script.
 	 * @return md5 hash string
 	 */
 	public static String getWebHash(String input[]){
