@@ -25,8 +25,8 @@ public class DAL {
 	public static boolean verifyUser(String username, String password){
 		try {
 			String arr[] = new String[2]; // Construct array of parameters for the md5 hash method
-			arr[0] = username;
-			arr[1] = password;
+			arr[0] = password;
+			arr[1] = username;
 			String md5Hash = ToolBox.getWebHash(arr);
 			String connectionString = "http://hgphoto.net/treasure/controller.php?method=login&username=" + username + "&password=" + password + "&request=" + md5Hash; 
 			Log.d("DAL",connectionString);
