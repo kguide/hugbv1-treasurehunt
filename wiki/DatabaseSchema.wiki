@@ -1,0 +1,78 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+This is the database schema for the android project.
+If you wish to change anything contact the Hord!
+
+
+= Database schema =
+
+Username: hgphoto_treasur<br>
+Database: hgphoto_treasureHunt<br>
+Password: MegaMan1983<br>
+
+drop table if exists users;
+CREATE TABLE users (<br>
+	uId INT PRIMARY KEY AUTO_INCREMENT, <br>
+	username VARCHAR(100) NOT NULL UNIQUE,<br>
+	password CHAR(32) NOT NULL,<br>
+	lastLogin DATE NOT NULL,<br>
+	registerDate DATE NOT NULL,<br>
+	registered BOOL<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+drop table if exists games;<br>
+CREATE TABLE games (<br>
+	gId INT PRIMARY KEY AUTO_INCREMENT,<br>
+	gname VARCHAR(20) NOT NULL UNIQUE,<br>
+	expires DATE NOT NULL,<br>
+	created DATE NOT NULL<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+drop table if exists gameCoordinates;<br>
+CREATE TABLE gameCoordinates (<br>
+	pId INT PRIMARY KEY AUTO_INCREMENT,<br>
+	gId INT NOT NULL,<br>
+	lattitude FLOAT NOT NULL,<br>
+	longitude FLOAT NOT NULL,<br>
+	pointNumber int NOT NULL,<br>
+	FOREIGN KEY (gId) REFERENCES games(gId)<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+drop table if exists  gameMembers;<br>
+CREATE TABLE gameMembers (<br>
+	gId INT NOT NULL,<br>
+	uId INT NOT NULL,<br>
+	joined DATE,<br>
+	FOREIGN KEY (gId) REFERENCES games(gId),<br>
+	FOREIGN KEY (uId) REFERENCES users(uId)<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+drop table if exists gameNotes;<br>
+CREATE TABLE gameNotes (<br>
+	nId INT PRIMARY KEY AUTO_INCREMENT,<br>
+	pId INT NOT NULL,<br>
+	note TEXT,<br>
+	FOREIGN KEY(pId) REFERENCES gameCoordinates(pId)<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+drop table if exists gameScores;<br>
+CREATE TABLE gameScores (<br>
+	gId INT NOT NULL,<br>
+	score INT DEFAULT '0',<br>
+	FOREIGN KEY(gId) REFERENCES games(gId)<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+drop table if exists userScores;<br>
+CREATE TABLE userScores (<br>
+	uId INT NOT NULL,<br>
+	score INT DEFAULT '0',<br>
+	FOREIGN KEY(uId) REFERENCES users(uId)<br>
+) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
+
+
+
+= Sample Insert Data =
+INSERT INTO users (username,password,lastLogin,registerDate)VALUES ('test1','hvalur','2009-10-15','2009-10-15');<br>
+INSERT INTO users (username,password,lastLogin,registerDate)VALUES ('test2','fuglinn','2009-10-15','2009-10-15');<br>
