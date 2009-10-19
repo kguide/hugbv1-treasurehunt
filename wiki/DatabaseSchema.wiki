@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Database schema in SQL format.
 
 = Introduction =
 
@@ -34,7 +34,7 @@ drop table if exists gameCoordinates;<br>
 CREATE TABLE gameCoordinates (<br>
 	pId INT PRIMARY KEY AUTO_INCREMENT,<br>
 	gId INT NOT NULL,<br>
-	lattitude FLOAT NOT NULL,<br>
+	latitude FLOAT NOT NULL,<br>
 	longitude FLOAT NOT NULL,<br>
 	pointNumber int NOT NULL,<br>
 	FOREIGN KEY (gId) REFERENCES games(gId)<br>
