@@ -13,7 +13,7 @@ Database: hgphoto_treasureHunt<br>
 Password: MegaMan1983<br>
 
 drop table if exists users;
-CREATE TABLE users (<br>
+CREATE TABLE users (
 	uId INT PRIMARY KEY AUTO_INCREMENT, <br>
 	username VARCHAR(100) NOT NULL UNIQUE,<br>
 	password CHAR(32) NOT NULL,<br>
@@ -23,7 +23,7 @@ CREATE TABLE users (<br>
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
 
 drop table if exists games;<br>
-CREATE TABLE games (<br>
+CREATE TABLE games (
 	gId INT PRIMARY KEY AUTO_INCREMENT,<br>
 	gname VARCHAR(20) NOT NULL UNIQUE,<br>
 	expires DATE NOT NULL,<br>
@@ -31,7 +31,7 @@ CREATE TABLE games (<br>
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
 
 drop table if exists gameCoordinates;<br>
-CREATE TABLE gameCoordinates (<br>
+CREATE TABLE gameCoordinates (
 	pId INT PRIMARY KEY AUTO_INCREMENT,<br>
 	gId INT NOT NULL,<br>
 	latitude FLOAT NOT NULL,<br>
@@ -41,7 +41,7 @@ CREATE TABLE gameCoordinates (<br>
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
 
 drop table if exists  gameMembers;<br>
-CREATE TABLE gameMembers (<br>
+CREATE TABLE gameMembers (
 	gId INT NOT NULL,<br>
 	uId INT NOT NULL,<br>
 	joined DATE,<br>
@@ -50,7 +50,7 @@ CREATE TABLE gameMembers (<br>
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
 
 drop table if exists gameNotes;<br>
-CREATE TABLE gameNotes (<br>
+CREATE TABLE gameNotes (
 	nId INT PRIMARY KEY AUTO_INCREMENT,<br>
 	pId INT NOT NULL,<br>
 	note TEXT,<br>
@@ -58,14 +58,14 @@ CREATE TABLE gameNotes (<br>
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
 
 drop table if exists gameScores;<br>
-CREATE TABLE gameScores (<br>
+CREATE TABLE gameScores (
 	gId INT NOT NULL,<br>
 	score INT DEFAULT '0',<br>
 	FOREIGN KEY(gId) REFERENCES games(gId)<br>
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;<br>
 
 drop table if exists userScores;<br>
-CREATE TABLE userScores (<br>
+CREATE TABLE userScores (
 	uId INT NOT NULL,<br>
 	score INT DEFAULT '0',<br>
 	FOREIGN KEY(uId) REFERENCES users(uId)<br>
