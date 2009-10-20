@@ -63,3 +63,9 @@ More user stories will be added here later.
 
 =Reminders, things that could be done better=
   * Regarding login.php , do something to avoid SQL injection.
+
+==Test accounts server side==
+  * user: test@test.is
+  * pass: test
+  * hash: 80db696227da17a6f90ead4d3be98149
+  * connection string: http://www.hgphoto.net/treasure/controller.php?method=login&username=test@test.is&password=test&request=80db696227da17a6f90ead4d3be98149
