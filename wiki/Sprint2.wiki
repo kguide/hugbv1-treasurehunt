@@ -11,3 +11,4 @@ We need to log all time we spend on this course. This is a must. So we are all g
 This is a log of team members time spent on the project.
   * Mannsi - 13 hours
   * Hörður - 8 hours 
+  * Ragnar - 3.5 hours
