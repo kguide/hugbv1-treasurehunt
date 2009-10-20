@@ -65,6 +65,9 @@ More user stories will be added here later.
   * Regarding login.php , do something to avoid SQL injection.
 
 =Test accounts server side=
+
+This account is available for testing.
+
   * user: test@test.is
   * pass: test
   * hash: 80db696227da17a6f90ead4d3be98149
