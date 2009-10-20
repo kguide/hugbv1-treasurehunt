@@ -12,3 +12,4 @@ This is a log of team members time spent on the project.
   * Mannsi - 13 hours
   * Hörður - 8 hours 
   * Ragnar - 3.5 hours
+  * Agnar - 15 hours
