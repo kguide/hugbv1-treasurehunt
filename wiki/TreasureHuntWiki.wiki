@@ -64,7 +64,7 @@ More user stories will be added here later.
 =Reminders, things that could be done better=
   * Regarding login.php , do something to avoid SQL injection.
 
-==Test accounts server side==
+=Test accounts server side=
   * user: test@test.is
   * pass: test
   * hash: 80db696227da17a6f90ead4d3be98149
