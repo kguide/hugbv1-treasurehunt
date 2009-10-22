@@ -13,6 +13,15 @@
     	android:gravity="center_vertical"
     	android:layout_marginLeft="40px">
     	    	
+    	<TextView
+	    	android:id="@+id/TextViewLoginScreenError"
+	    	android:text="@string/requiresNetwork"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"	 
+	    	android:textColor="#F00"
+	    	android:textSize="18px"	   
+	    >    </TextView>    	
+    	    	
   	    <TextView
 	    	android:text="@string/username"
 	    	android:layout_width="wrap_content"
