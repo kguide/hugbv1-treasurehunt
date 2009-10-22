@@ -32,4 +32,5 @@
 <string name="submitNewUser">Submit.</string>
 <string name="createUserHead">Welcome glory hunters</string>
 <string name="loginNewUser">Create user</string>
+<string name="requiresNetwork">Logging in might require network connection</string>
 </resources>

@@ -1,4 +1,4 @@
-package hi.android.treasureHunt;
+package hi.android.treasureHunt.GUI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +23,10 @@ public class WelcomeScreen extends Activity {
         playButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				Intent startPlayScreen = new Intent(WelcomeScreen.this,PlayScreen.class);
 				startActivity(startPlayScreen);
-			}
+			}		
 		});  
         
         Button statsButton = (Button) findViewById(R.id.ButtonWelcomeScreenStatistics);

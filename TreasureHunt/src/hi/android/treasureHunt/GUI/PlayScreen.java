@@ -1,4 +1,4 @@
-package hi.android.treasureHunt;
+package hi.android.treasureHunt.GUI;
 
 import android.app.Activity;
 import android.content.Intent;

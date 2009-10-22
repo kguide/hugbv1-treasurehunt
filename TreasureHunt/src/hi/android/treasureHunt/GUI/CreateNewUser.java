@@ -1,5 +1,6 @@
-package hi.android.treasureHunt;
+package hi.android.treasureHunt.GUI;
 
+import hi.android.treasureHunt.Control.Controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class CreateNewUser extends Activity {
 				String username = usernameET.getText().toString();
 				String password = passwordET.getText().toString();
 				
-				if(controller.createNewUser(username, password))
+				if(controller.createUserOnline(username, password))
 				{
 					Intent startWelcomeScreen = new Intent(CreateNewUser.this,WelcomeScreen.class);
 					startActivity(startWelcomeScreen);

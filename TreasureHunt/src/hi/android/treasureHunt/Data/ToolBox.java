@@ -1,4 +1,4 @@
-package hi.android.treasureHunt;
+package hi.android.treasureHunt.Data;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
