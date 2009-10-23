@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class CreateNewUser extends Activity {
 	
-	Controller controller = new Controller();
+	Controller controller = Controller.getInstance();
 
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
