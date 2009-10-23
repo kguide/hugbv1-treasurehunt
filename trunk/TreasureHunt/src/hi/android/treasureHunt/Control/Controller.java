@@ -79,9 +79,21 @@ public class Controller {
 	 */
 	public String getCurrentHint(){
 		return "!";
-		}
+	}
 	
-	
+	/**
+	 * Check if gps coordinates are within certain radius of another gps coords.
+	 * 
+	 * @param la1 : latitude point 1
+	 * @param lo1 : longitude point 1
+	 * @param la2 : latitude point 2	 
+	 * @param lo2 : longitude point 2
+	 * @param radius : radius in meters
+	 * @return : true if point 2 is within radius of point 1 else false
+	 */
+	public boolean checkGPSRadius(double la1, double lo1, double la2, double lo2, double radius) {
+		return (radius>getDistance( la1,  lo1,  la2,  lo2));
+	}
 	
 }
 
