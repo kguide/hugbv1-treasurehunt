@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class LoginScreen extends Activity {
 	
-	Controller controller = new Controller();
+	Controller controller = Controller.getInstance();
 
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
