@@ -12,7 +12,7 @@ public class GpsTool {
 	 * @param lo2 : longitude point 2
 	 * @return distance between those (la1,lo1) and (la2,lo2)
 	 */
-	public double getDistance(double la1, double lo1, double la2, double lo2) {
+	public static double getDistance(double la1, double lo1, double la2, double lo2) {
 		  double latAbsolute = Math.sin(deg2rad(la1)) * Math.sin(deg2rad(la2));
 		  double theta = Math.cos(deg2rad(lo1 - lo2));
 		  double distance = Math.acos(latAbsolute +  Math.cos(deg2rad(la1)) * Math.cos(deg2rad(la2)) * theta);
@@ -30,7 +30,7 @@ public class GpsTool {
 	 * @param radians
 	 * @return degrees for radians
 	 */
-	public double rad2deg(double rad) {
+	public static double rad2deg(double rad) {
 		  return (rad * 180.0 / Math.PI);
 		}
 	/**
@@ -39,7 +39,7 @@ public class GpsTool {
 	 * @param degrees
 	 * @return  radians for degrees
 	 */
-	public double deg2rad(double deg) {
+	public static double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
 	}
 

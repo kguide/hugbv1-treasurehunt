@@ -1,6 +1,7 @@
 package hi.android.treasureHunt.Control;
 
 import hi.android.treasureHunt.Data.DAL;
+import hi.android.treasureHunt.Data.GpsTool;
 import android.content.Context;
 
 
@@ -92,7 +93,7 @@ public class Controller {
 	 * @return : true if point 2 is within radius of point 1 else false
 	 */
 	public boolean checkGPSRadius(double la1, double lo1, double la2, double lo2, double radius) {
-		return (radius>getDistance( la1,  lo1,  la2,  lo2));
+		return (radius>GpsTool.getDistance(la1, lo1, la2, lo2));
 	}
 	
 }
