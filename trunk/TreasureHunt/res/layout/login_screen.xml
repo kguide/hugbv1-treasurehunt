@@ -35,7 +35,8 @@
 	    	android:layout_width="235px"
 	    	android:layout_height="wrap_content"
 	    	android:maxLines="1"
-	    	android:maxLength="45"     
+	    	android:maxLength="45"
+	    	android:text="test@test.is"     
 	    >    </EditText>
 	
 	
@@ -54,6 +55,7 @@
 	    	android:maxLines="1"
 	    	android:maxLength="35"
 	    	android:inputType="textPassword"
+	    	android:text="test"
 	    >    </EditText>
 	    
 	    
