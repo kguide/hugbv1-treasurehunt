@@ -24,7 +24,7 @@ public class LoginScreen extends Activity {
 		final TextView errorTV = (TextView) findViewById(R.id.TextViewLoginScreenError);
 		final Context context = this;
 		Button loginButton = (Button) findViewById(R.id.ButtonLogInScreenLogIn);
-		loginButton.setOnClickListener(new Button.OnClickListener() {												
+		loginButton.setOnClickListener(new Button.OnClickListener() {	
 			@Override
 			public void onClick(View v) {
 				String username = usernameET.getText().toString();
@@ -38,7 +38,7 @@ public class LoginScreen extends Activity {
 				}
 		}
 	});	
-	
+
 	Button createNewUserButton = (Button) findViewById(R.id.ButtonLogInScreenNewUser);
 	createNewUserButton.setOnClickListener(new Button.OnClickListener() {												
 		@Override
