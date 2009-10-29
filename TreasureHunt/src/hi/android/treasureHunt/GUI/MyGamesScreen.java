@@ -3,6 +3,7 @@ package hi.android.treasureHunt.GUI;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -68,6 +69,8 @@ public class MyGamesScreen extends Activity {
          /* Switch on the ID of the item, to get what the user selected. */
          switch (aItem.getItemId()) {
               case PLAY_GAME_ID:
+            Intent startGoogleMapsScreen = new Intent(MyGamesScreen.this,GoogleMapScreen.class);
+  			startActivity(startGoogleMapsScreen);
             	  
                    /* Get the selected item out of the Adapter by its position. */
                    //Game selectedGame = (Game) listView.getAdapter().getItem(menuInfo.position);
@@ -76,7 +79,7 @@ public class MyGamesScreen extends Activity {
             	  /* Reload the ListView once the selected item has been removed.*/
                    //loadGamesFromArrayToView();
             	  //Here we need to call the first digital mock-up screen.
-                   return true; /* true means: "we handled the event". */
+                  /* true means: "we handled the event". */
          }
          return false;
     } 
