@@ -2,6 +2,9 @@ package hi.android.treasureHunt.Control;
 
 import hi.android.treasureHunt.Data.DAL;
 import hi.android.treasureHunt.Data.GpsTool;
+
+import java.util.ArrayList;
+
 import android.content.Context;
 
 
@@ -15,7 +18,7 @@ public class Controller {
 	public Game game;
 	
 	//Singleton creation of control
-	protected Controller() {}  // private so other classes cant instatiate this singleton.
+	protected Controller() {}  // private so other classes can't instantiate this singleton.
     static private Controller INSTANCE = null;
 	   
 	   /**
@@ -96,6 +99,28 @@ public class Controller {
 		return (radius>GpsTool.getDistance(la1, lo1, la2, lo2));
 	}
 	
+	/**
+	 * Loads a game with the selected gameId to the local variable game. 
+	 * @param gameId : The gameId of the game we are getting.
+	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
+	 * @return : Boolean indicating whether a game with the selected gameId was found.
+	 */
+	public boolean getGame(int gameId, Context context){
+		this.game = DAL.getGame(gameId,context);
+		return game != null ? true:false;	//The java ternary operator. (condition) ? returnValueIfTrue : returnValueIfFalse; 
+	}
+	
+	public ArrayList<Game> getUsersGamesOnAndroid(Context context){
+		return DAL.getPlayersGamesOnAndroid(context);
+	}
+
+	public ArrayList<Game> getUsersGamesOnServer(Context context) {
+		// This comes in handy when we are bypassing the logInScreen. Then we don't get an active player.
+		player = new Player();
+		player.setId(1);
+		ArrayList<Game> arrayOfGames = DAL.getPlayersGamesOnServer(this.player.getId(), context);
+		return arrayOfGames;
+	}
 }
 
 

@@ -1,5 +1,6 @@
 package hi.android.treasureHunt.Data;
 
+import hi.android.treasureHunt.Control.Game;
 import hi.android.treasureHunt.Control.Player;
 
 import java.io.BufferedReader;
@@ -8,7 +9,9 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,6 +25,7 @@ import android.util.Log;
 public class DAL {
 	
 	private static DBHelperPlayer playerDB;
+	private static DBHelperGame gameDB;
 	private static String domainString = "http://hgphoto.net/treasure/";
 	/**
 	 * Handles calling the server given a connection string.
@@ -33,7 +37,6 @@ public class DAL {
 		URL url;
 		try {
 			url = new URL(connectionString);
-			Log.d("DAL",connectionString);
 			URLConnection connection = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String replyString = reader.readLine();
@@ -129,7 +132,6 @@ public class DAL {
 	 * @return : Boolean indicating whether the operation was successful or not.
 	 */
 	public static boolean createUserOnline(String username,String password){
-		// TODO Add md5Hash to the connection string once server side can accept it
 		//String md5Hash = md5HashFunction(username, password);
 		String connectionString = domainString +  "controller.php?method=createuser&request=eitthvad&username="+username+"&password="+password; 
 		String replyString = serverReply(connectionString);		
@@ -155,7 +157,6 @@ public class DAL {
 		player = playerDB.get(username);
 		return player;
 	}
-	
 	
 	/**
      * Returns a player object from the online server with the selected username and password
@@ -184,10 +185,141 @@ public class DAL {
 			return null;
 		}
 	}
-	
-	
-	
 
+	public static Game getGame(int gameId, Context context) {
+		Game game = null;
+		if(verifyGameExistsOnAndroid(gameId, context)){
+			game = getGameOnAndroid(gameId,context);
+		}
+		else{
+			game = getGameOnServer(gameId);
+			game.save(context);
+		}
+		return game;
+	}
 
+	/**
+	 * Returns a game object from the online server corresponding to the selected gameId.
+	 * 
+	 * @param gameId : The returned games gameId.
+	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
+	 * @return : A game object corresponding to the selected gameId. Note that if a game was not found that corresponded to the 
+	 * selected gameId then this returned object will be null.
+	 */
+	private static Game getGameOnServer(int gameId) {
+
+		String connectionString = domainString + "controller.php?method=getGameInfo&gameId=" + gameId;
+		String JSONReplyString = serverReply(connectionString);		
+		
+		try {
+			Game game = new Game();
+			
+			JSONObject jsonObject = new JSONObject(JSONReplyString);
+			
+			game.setGameName(jsonObject.getString("gameName"));
+			game.setGameId(gameId);
+			
+			JSONArray coordinatesArray = jsonObject.getJSONArray("coordinate");
+			
+			for (int i = 0; i < coordinatesArray.length(); i++) {
+				JSONObject currentCoordinate = coordinatesArray.getJSONObject(i);
+				int currentCoordinateId = Integer.parseInt(currentCoordinate.getString("coordinateId"));
+				float currentLatitude = Float.valueOf(currentCoordinate.getString("latitude")).floatValue();
+				float currentLongitude = Float.valueOf(currentCoordinate.getString("longitude")).floatValue();
+				game.addCoordinate(gameId,currentCoordinateId,currentLatitude,currentLongitude);
+			}
+			
+			JSONArray hintsArray = jsonObject.getJSONArray("hint");
+			
+			for (int i = 0; i < hintsArray.length(); i++) {
+				JSONObject currentHint = hintsArray.getJSONObject(i);
+				int currentCoordinateId = Integer.parseInt(currentHint.getString("coordinateId"));
+				int currentHintId = Integer.parseInt(currentHint.getString("hintId"));
+				String currentHintText = currentHint.getString("hintText");
+				game.addHint(gameId, currentCoordinateId, currentHintId, currentHintText);
+			}
+			return game;
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	
+	/**
+	 * Returns a game object from the Android database corresponding to the selected gameId.
+	 * 
+	 * @param gameId : The returned games gameId.
+	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
+	 * @return : A game object corresponding to the selected gameId. Note that if a game was not found that corresponded to the 
+	 * selected gameId then this returned object will be null.
+	 */
+	private static Game getGameOnAndroid(int gameId, Context context) {
+		gameDB = new DBHelperGame(context);
+		return gameDB.getGame(gameId);
+	}
+
+	/**
+	 * Checks to see if a game with the selected gameId exists on the Android database.
+	 * @param gameId : The games gameId that we are checking if exists.
+	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
+	 * @return : Boolean indicating whether a game with the selected gameId exists on the Android database.
+	 */
+	private static boolean verifyGameExistsOnAndroid(int gameId, Context context) {
+		gameDB = new DBHelperGame(context);
+		return gameDB.exists(gameId);
+	}
+ 
+	/**
+	 * Saves a game object on the Android database.
+	 * @param game : The game to be saved.
+	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
+	 */
+	public static void saveGame(Game game, Context context){
+		gameDB = new DBHelperGame(context);
+		if(verifyGameExistsOnAndroid(game.getGameId(), context)){
+			gameDB.updateGame(game);
+		}
+		else{
+			gameDB.insertGame(game);
+		}
+		
+	}
+
+	public static ArrayList<Game> getPlayersGamesOnAndroid(Context context){
+		DBHelperGame gameDB = new DBHelperGame(context);
+		return gameDB.getUsersGames();
+	}
+
+	public static ArrayList<Game> getPlayersGamesOnServer(int playerId, Context contex){
+		
+		//This connection string outputs gameId and gameName for each game that the player with the selected playerId is signed in.
+		String connectionString = domainString + "controller.php?method=getMyGames&userId=" + playerId;
+		String JSONReplyString = serverReply(connectionString);	
+		
+		ArrayList<Game> arrayOfGames = new ArrayList<Game>();
+		Game game;
+		
+		try {
+			JSONObject jsonObject = new JSONObject(JSONReplyString);
+			JSONArray myGamesInfo = jsonObject.getJSONArray("games");
+			
+			for (int i = 0; i < myGamesInfo.length(); i++) {
+				JSONObject currentGame = myGamesInfo.getJSONObject(i);
+				int currentGameId = Integer.parseInt(currentGame.getString("gameId"));
+				
+				game = getGameOnServer(currentGameId);
+				game.save(contex);
+				arrayOfGames.add(game);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return arrayOfGames;
+	}
+	
+	
+	
 }
 

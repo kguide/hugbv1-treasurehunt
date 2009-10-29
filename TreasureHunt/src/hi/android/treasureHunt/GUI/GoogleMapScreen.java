@@ -1,23 +1,28 @@
 package hi.android.treasureHunt.GUI;
 
+import hi.android.treasureHunt.Control.Controller;
+import hi.android.treasureHunt.Control.Game.Coordinate;
+
 import java.util.List;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.os.Bundle;
-import com.google.android.maps.MapView.LayoutParams;  
-import android.view.View;
-import android.widget.LinearLayout;
+import com.google.android.maps.MapView.LayoutParams;
  
 public class GoogleMapScreen extends MapActivity 
 {    
+	Controller controller = Controller.getInstance();
     MapView mapView; 
     MapController mc;
     GeoPoint p;
@@ -63,13 +68,14 @@ public class GoogleMapScreen extends MapActivity
         
      
             mc = mapView.getController();
-            String coordinates[] = {"64.139889", "-21.915321"};
-            double lat = Double.parseDouble(coordinates[0]);
-            double lng = Double.parseDouble(coordinates[1]);
-     
+
+            Coordinate coordinate = controller.game.getCurrentCoordinate();
+            float latitude = coordinate.getLatitude();
+            float longitude = coordinate.getLongitude();
+            
             p = new GeoPoint(
-                (int) (lat * 1E6), 
-                (int) (lng * 1E6));
+                (int) (latitude * 1E6), 
+                (int) (longitude * 1E6));
      
             mc.animateTo(p);
             mc.setZoom(16); 

@@ -25,6 +25,7 @@
 <string name="ranking">Ranking</string>
 <string name="seeDetails">See Details</string>
 <string name="delete">Delete</string>
+<string name="updateMyGames">Update Games Online</string>
 
 <string name="createUsername">Enter an email address.</string>
 <string name="createPassword">Create a password </string>
