@@ -6,10 +6,3 @@ Our sprint goal is to be able to create and play a simple game. It's very import
 =Time Management=
 
 We need to log all time we spend on this course. This is a must. So we are all going to have to log the time spent and I (Mannsi) will collect this accumulated logged time during each sprint meeting. 
-
-=Time per member=
-This is a log of team members time spent on the project.
-  * Mannsi - 13 hours
-  * Hörður - 8 hours 
-  * Ragnar - 3.5 hours
-  * Agnar - 15 hours
