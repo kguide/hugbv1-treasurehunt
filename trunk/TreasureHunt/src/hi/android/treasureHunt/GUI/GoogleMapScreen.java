@@ -5,10 +5,15 @@ import hi.android.treasureHunt.Control.Game.Coordinate;
 
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -23,6 +28,10 @@ import com.google.android.maps.MapView.LayoutParams;
 public class GoogleMapScreen extends MapActivity 
 {    
 	Controller controller = Controller.getInstance();
+	
+	private LocationManager locationManager=null;
+	private LocationListener locationListener=null;
+
     MapView mapView; 
     MapController mc;
     GeoPoint p;
@@ -54,6 +63,7 @@ public class GoogleMapScreen extends MapActivity
     {
         super.onCreate(savedInstanceState);
         
+//Begin Display Map        
         setContentView(R.layout.google_maps);
         
         mapView = (MapView) findViewById(R.id.googleMapsMapview);
@@ -87,11 +97,52 @@ public class GoogleMapScreen extends MapActivity
             listOfOverlays.add(mapOverlay);        
      
             mapView.invalidate();
+            
+ //End Display Map           
 
+    		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+    		locationListener = new MyLocationListener();
+
+    		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+    				locationListener);
+            
+            
     }
- 
+	private class MyLocationListener implements LocationListener {
+		public void onLocationChanged(Location location) {
+				if(checkIfWithinLocation(location)){
+					Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
+					startActivity(startHintScreen);
+				}
+		}
+
+		public void onProviderDisabled(String provider) {
+		}
+
+		public void onProviderEnabled(String provider) {
+		}
+
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+		}
+
+	}
+            
     @Override
     protected boolean isRouteDisplayed() {
         return false;
     }
+    
+	 private boolean checkIfWithinLocation(Location location) {
+			double newLocationLatitude = location.getLatitude();
+			double newLocationLongitude = location.getLongitude();
+			double targetLocationLatitude = (double) controller.game.getCurrentCoordinate().getLatitude();
+			double targetLocationLongitude = (double) controller.game.getCurrentCoordinate().getLongitude();
+			boolean withinRadius = controller.checkGPSRadius(newLocationLatitude, newLocationLongitude, targetLocationLatitude, targetLocationLongitude, 250);
+			
+			if(withinRadius){
+				return true;
+			}
+			return false;
+	 }
 }

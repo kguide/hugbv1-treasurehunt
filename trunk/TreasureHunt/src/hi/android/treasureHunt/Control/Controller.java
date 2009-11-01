@@ -16,9 +16,10 @@ public class Controller {
 	
 	public Player player;
 	public Game game;
+	public String gameNameToSearchFor;
 	
 	//Singleton creation of control
-	protected Controller() {}  // private so other classes can't instantiate this singleton.
+	protected Controller() {}  // private so other classes can't instantiate 
     static private Controller INSTANCE = null;
 	   
 	   /**
@@ -82,7 +83,8 @@ public class Controller {
 	 * @return : string that contains the hint
 	 */
 	public String getCurrentHint(){
-		return "!";
+		String currentHintText = this.game.getCurrentHintText();
+		return currentHintText;
 	}
 	
 	/**
@@ -109,7 +111,7 @@ public class Controller {
 		this.game = DAL.getGame(gameId,context);
 		return game != null ? true:false;	//The java ternary operator. (condition) ? returnValueIfTrue : returnValueIfFalse; 
 	}
-	
+		
 	public ArrayList<Game> getUsersGamesOnAndroid(Context context){
 		return DAL.getPlayersGamesOnAndroid(context);
 	}
@@ -120,6 +122,11 @@ public class Controller {
 		player.setId(1);
 		ArrayList<Game> arrayOfGames = DAL.getPlayersGamesOnServer(this.player.getId(), context);
 		return arrayOfGames;
+	}
+
+	public ArrayList<Game> getGamesOnServerByName(String name,Context context) {
+		ArrayList<Game> listOfGames = DAL.getGamesOnServerByName(name,context);
+		return listOfGames;
 	}
 }
 

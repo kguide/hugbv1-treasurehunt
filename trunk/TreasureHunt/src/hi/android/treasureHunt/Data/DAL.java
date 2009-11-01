@@ -318,7 +318,35 @@ public class DAL {
 		
 		return arrayOfGames;
 	}
-	
+
+	public static ArrayList<Game> getGamesOnServerByName(String name, Context context) {
+		String connectionString = domainString + "controller.php?method=searchByName&search=" + name;
+		String JSONReplyString = serverReply(connectionString);
+		
+		ArrayList<Game> resultingGamesInformation = new ArrayList<Game>();
+		Game game;
+		
+		try {
+			JSONObject jsonObject = new JSONObject(JSONReplyString);
+			JSONArray jsonArrayOfGames = jsonObject.getJSONArray("games");
+			
+			for (int i = 0; i < jsonArrayOfGames.length(); i++) {
+				game = new Game();
+				JSONObject currentGame = jsonArrayOfGames.getJSONObject(i);
+				int currentGameId = Integer.parseInt(currentGame.getString("gameId"));
+				String currentGameName = currentGame.getString("gameName");
+				
+				game.setGameId(currentGameId);
+				game.setGameName(currentGameName);
+				
+				resultingGamesInformation.add(game);
+		}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return resultingGamesInformation;
+		
+	}
 	
 	
 }
