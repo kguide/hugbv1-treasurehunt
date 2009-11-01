@@ -29,6 +29,8 @@
 
 <string name="createUsername">Enter an email address.</string>
 <string name="createPassword">Create a password </string>
+<string name="noMyGames">You currently have no active games</string>
+<string name="noGamesFound">Your search didn't match any games.</string>
 
 <string name="submitNewUser">Submit.</string>
 <string name="createUserHead">Welcome glory hunters</string>

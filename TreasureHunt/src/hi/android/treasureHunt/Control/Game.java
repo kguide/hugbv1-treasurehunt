@@ -15,6 +15,8 @@ public class Game {
 	public ArrayList<Hint> hints = new ArrayList<Hint>();
 	public ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private int currentCoordinateId;
+	private int numberOfCoordinates;
+//	private int currentHintId;
 	
 	/**
 	 * Represents a hint in the Treasure Hunt game.
@@ -23,7 +25,6 @@ public class Game {
 		private int gameId;
 		private int coordinateId;
 		private int hintId; 		
-//		private int subClueId;		
 		private String hintText;
 		
 		public Hint(int gameId, int coordinateId, int hintId, String hintText){
@@ -68,9 +69,9 @@ public class Game {
 		private float latitude;
 		private float longitude ;
 		
-		public Coordinate(int gameId, int coordinate, float latitude, float longitude){
+		public Coordinate(int gameId, int coordinateId, float latitude, float longitude){
 			this.gameId = gameId;
-			this.coordinateId = coordinate;
+			this.coordinateId = coordinateId;
 			this.latitude = latitude;
 			this.longitude = longitude;
 		}
@@ -108,6 +109,7 @@ public class Game {
 	public void addCoordinate(int gameId, int coordinateId, float latitude, float longitude){
 		Coordinate coordinate = new Coordinate(gameId, coordinateId, latitude, longitude);
 		coordinates.add(coordinate);
+		this.numberOfCoordinates = coordinateId; 
 	}
 	
 	public void addHint(int gameId, int coordinateId, int hintId, String hintText){
@@ -138,6 +140,10 @@ public class Game {
 	public Coordinate getCurrentCoordinate() {
 		return this.coordinates.get(currentCoordinateId);
 	}
+	
+	public Coordinate getNextCoordinate() {
+		return this.coordinates.get(currentCoordinateId + 1);
+	}
 
 	public String toString(){
 		return gameName;
@@ -145,5 +151,24 @@ public class Game {
 
 	public int getCurrentCoordinateId() {
 		return currentCoordinateId;
+	}
+
+	public void incrementCoordinate(){
+		if(currentCoordinateId == numberOfCoordinates){
+			// There are no more coordinates, do nothing
+		}
+		else{
+			currentCoordinateId++;
+		}
+	}
+
+	
+	public String getCurrentHintText() {
+		return hints.get(currentCoordinateId).getHintText();
+		
+	}
+
+	public boolean isLastCoordinate(){
+		return currentCoordinateId == numberOfCoordinates ? true:false;
 	}
 }

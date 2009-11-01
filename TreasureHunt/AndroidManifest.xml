@@ -7,13 +7,12 @@
 	
 	<uses-library android:name="com.google.android.maps" />
 	
-	
 	<activity	android:name="SplashScreen"
 				android:label="@string/app_name">
 		<intent-filter>
 			<action android:name="android.intent.action.MAIN" />
 			<category android:name="android.intent.category.LAUNCHER" />
-		</intent-filter>					
+		</intent-filter>				
 	</activity>			
 
 
@@ -24,8 +23,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
--->
+        </activity>-->
+
 		<activity android:name=".CreateNewUser"
 				  android:label="@string/app_name">
 		</activity>
@@ -48,13 +47,16 @@
         <activity android:name=".MyGamesScreen"
         		android:label="@string/app_name">
         </activity>
-        <activity android:name=".ShowHint" android:label="@string/app_name">
+        <activity android:name=".HintScreen" android:label="@string/app_name">
         </activity>
         <activity android:name=".GoogleMapScreen" android:label="@string/app_name">
+        </activity>
+        <activity android:name=".SearchResultGamesScreen" android:label="@string/app_name">
         </activity>
     
 </application>
     
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-sdk android:minSdkVersion="3" />
 </manifest> 
