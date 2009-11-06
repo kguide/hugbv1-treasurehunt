@@ -287,7 +287,7 @@ public class DAL {
 	}
 
 	public static ArrayList<Game> getPlayersGamesOnAndroid(Context context){
-		DBHelperGame gameDB = new DBHelperGame(context);
+		 gameDB = new DBHelperGame(context);
 		return gameDB.getUsersGames();
 	}
 
@@ -346,6 +346,17 @@ public class DAL {
 		}
 		return resultingGamesInformation;
 		
+	}
+
+	public static void deleteGameFromAndroid(int gameId,Context context) {
+		DBHelperGame gameDB = new DBHelperGame(context);
+		gameDB.deleteGame(gameId);
+	}
+
+	public static void removeUserFromSelectedGame(int gameId, int playerId) {
+		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&playerId="+playerId;
+		String replyString = serverReply(connectionString);	
+		//replystring is not being used.
 	}
 	
 	

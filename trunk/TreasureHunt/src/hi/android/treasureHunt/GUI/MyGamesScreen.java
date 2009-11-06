@@ -90,8 +90,15 @@ public class MyGamesScreen extends ListActivity {
                    
                    startActivity(startGoogleMapScreen);
 
-
-                   return true; /* true means: "we handled the event". */
+              case DELETE_GAME_ID:
+            	  
+            	  /*Delete a selected game from androidDB.*/
+                  Game selectedGameToDelete = (Game) listView.getAdapter().getItem(menuInfo.position);
+                  controller.deleteGameFromAndroid(selectedGameToDelete.getGameId(),context);
+                  arrayOfGames = controller.getUsersGamesOnAndroid(context);
+  				  initListView();
+  				  controller.removeUserFromSelectedGame(selectedGameToDelete.getGameId(),context);
+                  return true; /* true means: "we handled the event". */
          }
          return false;
     } 
