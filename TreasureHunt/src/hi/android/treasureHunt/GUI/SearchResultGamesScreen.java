@@ -36,13 +36,7 @@ public class SearchResultGamesScreen extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try{
-        	setContentView(R.layout.search_result_games_screen);
-        }
-        catch(Exception e){
-        	e.getMessage();
-        }
-         
+    	setContentView(R.layout.search_result_games_screen);
         
         //Add games information to ArrayList
         String searchCriteria = controller.gameNameToSearchFor;
