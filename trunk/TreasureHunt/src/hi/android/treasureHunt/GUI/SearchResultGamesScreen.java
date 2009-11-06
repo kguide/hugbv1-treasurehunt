@@ -5,7 +5,7 @@ import hi.android.treasureHunt.Control.Game;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class SearchResultGamesScreen extends Activity {
+public class SearchResultGamesScreen extends ListActivity {
     
 	Controller controller = Controller.getInstance();
 	Context context = this;
@@ -36,13 +36,18 @@ public class SearchResultGamesScreen extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_result_games_screen);
-        
+        try{
+        	setContentView(R.layout.search_result_games_screen);
+        }
+        catch(Exception e){
+        	e.getMessage();
+        }
+         
         
         //Add games information to ArrayList
         String searchCriteria = controller.gameNameToSearchFor;
         arrayOfGames = controller.getGamesOnServerByName(searchCriteria, context);
-        this.listView = (ListView) findViewById(R.id.listViewMyGames);
+        this.listView = getListView();
         
         //Load items from arrayList to listView and sets context listeners
         initListView();
@@ -90,8 +95,9 @@ public class SearchResultGamesScreen extends Activity {
     } 
     
     private void loadGamesFromArrayToView() {
-        listView.setAdapter(new ArrayAdapter<Game>(this,
-                  android.R.layout.simple_list_item_1, arrayOfGames));
+    	setListAdapter(new ArrayAdapter<Game>(this,
+    	          android.R.layout.simple_list_item_1, arrayOfGames));
+
    }  
     
     @Override 
