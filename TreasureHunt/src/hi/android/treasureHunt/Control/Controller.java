@@ -128,6 +128,13 @@ public class Controller {
 		ArrayList<Game> listOfGames = DAL.getGamesOnServerByName(name,context);
 		return listOfGames;
 	}
+	public void removeUserFromSelectedGame(int gameId, Context context){
+		DAL.removeUserFromSelectedGame(gameId,player.getId());
+}
+	public void deleteGameFromAndroid(int gameId,Context context) {
+		
+		DAL.deleteGameFromAndroid( gameId,context);
+	}
 }
 
 
