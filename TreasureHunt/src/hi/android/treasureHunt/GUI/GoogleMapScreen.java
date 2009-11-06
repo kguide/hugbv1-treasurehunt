@@ -28,6 +28,7 @@ import com.google.android.maps.MapView.LayoutParams;
 public class GoogleMapScreen extends MapActivity 
 {    
 	Controller controller = Controller.getInstance();
+	Context context = this;
 	
 	private LocationManager locationManager=null;
 	private LocationListener locationListener=null;
@@ -112,6 +113,9 @@ public class GoogleMapScreen extends MapActivity
 	private class MyLocationListener implements LocationListener {
 		public void onLocationChanged(Location location) {
 				if(checkIfWithinLocation(location)){
+					controller.game.incrementCoordinate();
+					controller.game.save(context);
+					
 					Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
 					startActivity(startHintScreen);
 				}
