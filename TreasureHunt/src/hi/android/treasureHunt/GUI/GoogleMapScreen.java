@@ -138,7 +138,7 @@ public class GoogleMapScreen extends MapActivity
 			double newLocationLongitude = location.getLongitude();
 			double targetLocationLatitude = (double) controller.game.getCurrentCoordinate().getLatitude();
 			double targetLocationLongitude = (double) controller.game.getCurrentCoordinate().getLongitude();
-			boolean withinRadius = controller.checkGPSRadius(newLocationLatitude, newLocationLongitude, targetLocationLatitude, targetLocationLongitude, 250);
+			boolean withinRadius = controller.checkGPSRadius(newLocationLatitude, newLocationLongitude, targetLocationLatitude, targetLocationLongitude, 500);
 			
 			if(withinRadius){
 				return true;

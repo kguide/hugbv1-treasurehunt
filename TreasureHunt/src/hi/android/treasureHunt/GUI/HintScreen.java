@@ -38,7 +38,7 @@ public class HintScreen extends Activity {
 		double newLocationLongitude = location.getLongitude();
 		double targetLocationLatitude = (double) controller.game.getNextCoordinate().getLatitude();
 		double targetLocationLongitude = (double) controller.game.getNextCoordinate().getLongitude();
-		boolean withinRadius = controller.checkGPSRadius(newLocationLatitude, newLocationLongitude, targetLocationLatitude, targetLocationLongitude, 250);
+		boolean withinRadius = controller.checkGPSRadius(newLocationLatitude, newLocationLongitude, targetLocationLatitude, targetLocationLongitude, 500);
 		
 		if(withinRadius){
 				controller.game.incrementCoordinate();

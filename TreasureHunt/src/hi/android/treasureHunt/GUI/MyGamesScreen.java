@@ -5,7 +5,7 @@ import hi.android.treasureHunt.Control.Game;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class MyGamesScreen extends Activity {
+public class MyGamesScreen extends ListActivity {
     
 	Controller controller = Controller.getInstance();
 	Context context = this;
@@ -43,7 +43,7 @@ public class MyGamesScreen extends Activity {
         
         //Add games to ArrayList
         arrayOfGames = controller.getUsersGamesOnAndroid(context);
-        this.listView = (ListView) findViewById(R.id.listViewMyGames);
+        this.listView = getListView();
         
         //Load items from arrayList to listView and sets context listeners
         initListView();
