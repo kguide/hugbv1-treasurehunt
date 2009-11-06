@@ -10,6 +10,7 @@ import android.content.Context;
 public class Game {
 	private int gameId;
 	private String gameName;
+	private boolean gameFinished;
 //	private Player gameCreator;
 //	public ArrayList<Player> players;
 	public ArrayList<Hint> hints = new ArrayList<Hint>();
@@ -103,6 +104,8 @@ public class Game {
 	}
 
 	public void save(Context context) {
+		//Before saving game, we check to see if the current coordinate is the last one. If yes, the game is finished.
+		gameFinished = isLastCoordinate();
 		DAL.saveGame(this, context);
 	}
 
@@ -146,7 +149,12 @@ public class Game {
 	}
 
 	public String toString(){
-		return gameName;
+		if (gameFinished) {
+			return gameName + " - DONE";
+		}else{
+			return gameName + " - ACTIVE";
+		}
+		
 	}
 
 	public int getCurrentCoordinateId() {
@@ -162,13 +170,20 @@ public class Game {
 		}
 	}
 
-	
 	public String getCurrentHintText() {
-		return hints.get(currentCoordinateId).getHintText();
+		return hints.get(currentCoordinateId - 1).getHintText();
 		
 	}
 
 	public boolean isLastCoordinate(){
 		return currentCoordinateId == numberOfCoordinates ? true:false;
+	}
+
+	public void setGameFinished(boolean gameFinished) {
+		this.gameFinished = gameFinished;
+	}
+
+	public boolean isGameFinished() {
+		return gameFinished;
 	}
 }

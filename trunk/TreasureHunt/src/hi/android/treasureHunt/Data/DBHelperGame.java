@@ -14,14 +14,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelperGame {
 
-    public static final String DEVICE_ALERT_ENABLED_ZIP = "DAEZ99";
-    public static final String DB_NAME = "treasureHuntDB2";
+    public static final String DB_NAME = "treasureHuntDataBase";
     public static final String DB_TABLE_GAME = "game";
     public static final String DB_TABLE_COORDINATE = "coordinate";
     public static final String DB_TABLE_HINT = "hint";
     public static final int DB_VERSION = 3;
 
-    private static final String[] GAME_COLS = new String[] { "gameId", "gameName", "currentCoordinate"};
+    private static final String[] GAME_COLS = new String[] { "gameId", "gameName", "currentCoordinate" , "gameFinished"};
     private static final String[] COORDINATE_COLS = new String[] { "gameId", "coordinateId", "latitude","longitude"};
     private static final String[] HINT_COLS = new String[] { "gameId", "coordinateId", "hintId", "hintText"};
     
@@ -32,7 +31,7 @@ public class DBHelperGame {
 
         private static final String DB_CREATE_GAME = "CREATE TABLE "
             + DBHelperGame.DB_TABLE_GAME
-            + " (gameId INTEGER PRIMARY KEY, gameName TEXT UNIQUE NOT NULL, currentCoordinate INTEGER);";
+            + " (gameId INTEGER PRIMARY KEY, gameName TEXT UNIQUE NOT NULL, currentCoordinate INTEGER, gameFinished INTEGER);";
 
         private static final String DB_CREATE_COORDINATE = "CREATE TABLE "
             + DBHelperGame.DB_TABLE_COORDINATE
@@ -105,6 +104,7 @@ public class DBHelperGame {
         values.put("gameId", game.getGameId());
         values.put("gameName", game.getGameName());
         values.put("currentCoordinate", game.getCurrentCoordinateId());
+        values.put("gameFinished", 0);
         this.db.insert(DBHelperGame.DB_TABLE_GAME, null, values);
     }
     
@@ -136,9 +136,12 @@ public class DBHelperGame {
     		updateHint(hint);
     	}
     	
+    	int gameFinished = game.isGameFinished()? 1 : 0;
+    	
         ContentValues values = new ContentValues();
         values.put("gameName", game.getGameName());
         values.put("currentCoordinate", game.getCurrentCoordinateId());
+        values.put("gameFinished", gameFinished);
         try{
         	this.db.update(DBHelperGame.DB_TABLE_GAME, values, "gameId=" + game.getGameId(), null);
         }catch (SQLException e) {
