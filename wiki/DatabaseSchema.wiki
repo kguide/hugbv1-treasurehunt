@@ -7,7 +7,7 @@ If you wish to change anything contact the Hord!
 
 
 = Database schema =
-
+<pre>
 drop table if exists users;
 CREATE TABLE users (
 	userId INT PRIMARY KEY AUTO_INCREMENT,
@@ -70,8 +70,7 @@ CREATE TABLE userScores (
 	locations  INT DEFAULT '0',
 	FOREIGN KEY(userId) REFERENCES users(userId)
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;
-
-
+</pre>
 
 
 = Sample Insert Data =
