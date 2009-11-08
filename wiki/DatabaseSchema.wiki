@@ -25,6 +25,7 @@ CREATE TABLE games (
 	ownerId INT NOT NULL,
 	created DATE NOT NULL,
 	expires DATE DEFAULT NULL,
+	active BOOL DEFAULT FALSE,
 	FOREIGN KEY (ownerId) REFERENCES users(userId)
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;
 
