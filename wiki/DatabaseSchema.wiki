@@ -21,7 +21,7 @@ CREATE TABLE users (
 drop table if exists games;
 CREATE TABLE games (
 	gameId INT PRIMARY KEY AUTO_INCREMENT,
-	gameName VARCHAR(20) NOT NULL UNIQUE,
+	gameName VARCHAR(20) NOT NULL,
 	ownerId INT NOT NULL,
 	created DATE NOT NULL,
 	expires DATE DEFAULT NULL,
