@@ -42,8 +42,8 @@ drop table if exists  gameMembers;
 CREATE TABLE gameMembers (
 	gameId INT NOT NULL,
 	userId INT NOT NULL,
-	joined DATE,
-	finished BOOL DEFAULT FALSE,
+	joined DATE NOT NULL,
+	finished BOOL DEFAULT FALSE NOT NULL,
 	FOREIGN KEY (gameId) REFERENCES games(gameId),
 	FOREIGN KEY (userId) REFERENCES users(userId)
 ) TYPE=MyISAM COLLATE=utf8_icelandic_ci;
