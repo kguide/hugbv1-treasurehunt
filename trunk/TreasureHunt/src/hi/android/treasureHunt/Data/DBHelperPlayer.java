@@ -9,9 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelperPlayer {
 
-    public static final String DEVICE_ALERT_ENABLED_ZIP = "DAEZ99";
-    public static final String DB_NAME = "treasureHuntDB";
-    public static final String DB_TABLE = "players";
+    public static final String DB_NAME = "treasureHunterDataBase";
+    public static final String DB_TABLE = "playerTable";
     public static final int DB_VERSION = 3;
 
     private static final String[] COLS = new String[] { "playerId", "playerName", "playerPassword", "playerScore", "playerRank"};

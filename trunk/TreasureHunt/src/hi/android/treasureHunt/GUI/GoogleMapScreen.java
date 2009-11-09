@@ -114,7 +114,7 @@ public class GoogleMapScreen extends MapActivity
 		public void onLocationChanged(Location location) {
 				if(checkIfWithinLocation(location)){
 					controller.game.incrementCoordinate();
-					controller.game.save(context);
+					controller.game.save(controller.player.getId(),context);
 					
 					Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
 					startActivity(startHintScreen);

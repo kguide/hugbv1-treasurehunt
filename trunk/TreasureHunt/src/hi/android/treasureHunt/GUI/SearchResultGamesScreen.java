@@ -76,7 +76,7 @@ public class SearchResultGamesScreen extends ListActivity {
                    controller.getGame(selectedGame.getGameId(), context);
                    
                    // TODO This is not something that a GUI object should do. Needs to be fixed !
-                   controller.game.save(context);
+                   controller.game.save(controller.player.getId(),context);
                    
                    Intent startGoogleMapScreen = new Intent(SearchResultGamesScreen.this,GoogleMapScreen.class);
                    

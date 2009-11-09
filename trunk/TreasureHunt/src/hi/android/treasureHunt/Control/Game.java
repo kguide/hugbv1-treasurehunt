@@ -103,10 +103,10 @@ public class Game {
 		}
 	}
 
-	public void save(Context context) {
+	public void save(int playerId, Context context) {
 		//Before saving game, we check to see if the current coordinate is the last one. If yes, the game is finished.
 		gameFinished = isLastCoordinate();
-		DAL.saveGame(this, context);
+		DAL.saveGame(this, playerId,  context);
 	}
 
 	public void addCoordinate(int gameId, int coordinateId, float latitude, float longitude){
