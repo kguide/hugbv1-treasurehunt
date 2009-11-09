@@ -86,4 +86,5 @@ INSERT INTO gameScores(gameId,score) VALUES (1,2000);
 INSERT INTO gameMembers(gameId,userId,joined) VALUES (1,1,'2009-10-16');
 INSERT INTO gameHints(hintId,gameId,coordinateId,hintText) VALUES (1,1,1,'Bygging kennd vid ljodskald');
 INSERT INTO gameHints(hintId,gameId,coordinateId,hintText) VALUES (1,1,2,'Til hamingju!');
+INSERT INTO gameMembers(gameId,userId,joined,finished) VALUES (1,1,'2009-10-15',1);
 </pre>
