@@ -48,6 +48,7 @@ public class MyGamesScreen extends ListActivity {
         //Load items from arrayList to listView and sets context listeners
         initListView();
         
+        //Set up buttons and listeners
         Button updateGamesButton = (Button) findViewById(R.id.ButtonMyGamesScreenUpdateMyGames);
         updateGamesButton.setOnClickListener(new Button.OnClickListener() {												
 			@Override
@@ -56,6 +57,13 @@ public class MyGamesScreen extends ListActivity {
 				initListView();
 		}
 	});	
+        Button sendGamesButton = (Button) findViewById(R.id.ButtonMyGamesScreenSendGames);
+        sendGamesButton.setOnClickListener(new Button.OnClickListener() {												
+			@Override
+			public void onClick(View v) {
+				controller.sendFinishedGamesOnline(context);
+		}
+	});
     }
     
     private void initListView() {

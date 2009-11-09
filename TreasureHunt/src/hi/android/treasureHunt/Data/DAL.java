@@ -186,14 +186,14 @@ public class DAL {
 		}
 	}
 
-	public static Game getGame(int gameId, Context context) {
+	public static Game getGame(int gameId, int playerId, Context context) {
 		Game game = null;
 		if(verifyGameExistsOnAndroid(gameId, context)){
 			game = getGameOnAndroid(gameId,context);
 		}
 		else{
 			game = getGameOnServer(gameId);
-			game.save(context);
+			game.save(playerId, context);
 		}
 		return game;
 	}
@@ -275,20 +275,20 @@ public class DAL {
 	 * @param game : The game to be saved.
 	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
 	 */
-	public static void saveGame(Game game, Context context){
+	public static void saveGame(Game game, int playerId, Context context){
 		gameDB = new DBHelperGame(context);
 		if(verifyGameExistsOnAndroid(game.getGameId(), context)){
-			gameDB.updateGame(game);
+			gameDB.updateGame(game, playerId);
 		}
 		else{
-			gameDB.insertGame(game);
+			gameDB.insertGame(game, playerId);
 		}
 		
 	}
 
-	public static ArrayList<Game> getPlayersGamesOnAndroid(Context context){
+	public static ArrayList<Game> getPlayersGamesOnAndroid(int playerId, Context context){
 		 gameDB = new DBHelperGame(context);
-		return gameDB.getUsersGames();
+		return gameDB.getUsersGames(playerId);
 	}
 
 	public static ArrayList<Game> getPlayersGamesOnServer(int playerId, Context contex){
@@ -309,7 +309,7 @@ public class DAL {
 				int currentGameId = Integer.parseInt(currentGame.getString("gameId"));
 				
 				game = getGameOnServer(currentGameId);
-				game.save(contex);
+				game.save(playerId, contex);
 				arrayOfGames.add(game);
 			}
 		} catch (JSONException e) {
@@ -353,10 +353,28 @@ public class DAL {
 		gameDB.deleteGame(gameId);
 	}
 
-	public static void removeUserFromSelectedGame(int gameId, int playerId) {
+	public static void removeUserFromSelectedGameOnline(int gameId, int playerId) {
 		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&playerId="+playerId;
+		@SuppressWarnings("unused")
 		String replyString = serverReply(connectionString);	
 		//replystring is not being used.
+	}
+
+	public static void sendFinishedGamesOnline(int playerId, Context context) {
+		gameDB = new DBHelperGame(context);
+		ArrayList<Game> finishedGames = gameDB.getFinishedGames(playerId);
+		
+		for (Game game : finishedGames) {
+			sendFinishedGameToServer(game.getGameId(), playerId);
+		}
+	}
+
+	private static void sendFinishedGameToServer(int gameId, int playerId) {
+		
+		String connectionString = domainString + "controller.php?method=finishedGame&userId=" + playerId + "&gameId=" + gameId;
+		@SuppressWarnings("unused")
+		String JSONReplyString = serverReply(connectionString);	
+		// Server reply is not used right now.
 	}
 	
 	

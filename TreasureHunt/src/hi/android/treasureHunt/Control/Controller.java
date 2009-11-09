@@ -65,7 +65,7 @@ public class Controller {
 			}
 		}
 		}
-	
+   	
 	/**
 	 * Creates a new user on the online server.
 	 * 
@@ -108,18 +108,15 @@ public class Controller {
 	 * @return : Boolean indicating whether a game with the selected gameId was found.
 	 */
 	public boolean getGame(int gameId, Context context){
-		this.game = DAL.getGame(gameId,context);
+		this.game = DAL.getGame(gameId, this.player.getId(),context);
 		return game != null ? true:false;	//The java ternary operator. (condition) ? returnValueIfTrue : returnValueIfFalse; 
 	}
 		
 	public ArrayList<Game> getUsersGamesOnAndroid(Context context){
-		return DAL.getPlayersGamesOnAndroid(context);
+		return DAL.getPlayersGamesOnAndroid(this.player.getId(),context);
 	}
 
 	public ArrayList<Game> getUsersGamesOnServer(Context context) {
-		// This comes in handy when we are bypassing the logInScreen. Then we don't get an active player.
-		player = new Player();
-		player.setId(1);
 		ArrayList<Game> arrayOfGames = DAL.getPlayersGamesOnServer(this.player.getId(), context);
 		return arrayOfGames;
 	}
@@ -129,11 +126,15 @@ public class Controller {
 		return listOfGames;
 	}
 	public void removeUserFromSelectedGame(int gameId, Context context){
-		DAL.removeUserFromSelectedGame(gameId,player.getId());
+		DAL.removeUserFromSelectedGameOnline(gameId,player.getId());
 }
 	public void deleteGameFromAndroid(int gameId,Context context) {
 		
 		DAL.deleteGameFromAndroid( gameId,context);
+	}
+
+	public void sendFinishedGamesOnline(Context context) {
+		DAL.sendFinishedGamesOnline(player.getId(),context);
 	}
 }
 
