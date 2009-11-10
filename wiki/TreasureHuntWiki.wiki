@@ -80,3 +80,6 @@ This account is available for testing.
 
   * createUser
      http://hgphoto.net/treasure/controller.php?method=createUser&username=test@test.is&password=test
+  
+  * getGameInfo
+     http://hgphoto.net/treasure/controller.php?method=getGameInfo&gameId=1
