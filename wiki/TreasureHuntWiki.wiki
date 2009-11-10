@@ -66,11 +66,11 @@ More user stories will be added here later.
   * Use SQL transactions for the more complicated SQL functions
   
 
-=Test accounts server side=
+=Server side test strings=
 
 This account is available for testing.
-
-  * user: test@test.is
-  * pass: test
-  * hash: 80db696227da17a6f90ead4d3be98149
-  * connection string: http://www.hgphoto.net/treasure/controller.php?method=login&username=test@test.is&password=test&request=80db696227da17a6f90ead4d3be98149
+  * Login
+  ** user: test@test.is
+  ** pass: test
+  ** hash: 80db696227da17a6f90ead4d3be98149
+  ** connection string: http://www.hgphoto.net/treasure/controller.php?method=login&username=test@test.is&password=test&request=80db696227da17a6f90ead4d3be98149
