@@ -62,7 +62,9 @@ A player logs on using his HTC Magic Android Phone. He selects 'Play' and from a
 More user stories will be added here later.
 
 =Reminders, things that could be done better=
-  * Currently SS method usernameExists does not return json string like the other methods
+  * Currently SS method usernameExists & createUser does not return json string like the other methods
+  * Use SQL transactions for the more complicated SQL functions
+  
 
 =Test accounts server side=
 
