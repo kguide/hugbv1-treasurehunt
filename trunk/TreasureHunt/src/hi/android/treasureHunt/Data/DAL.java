@@ -353,8 +353,8 @@ public class DAL {
 		gameDB.deleteGame(gameId);
 	}
 
-	public static void removeUserFromSelectedGameOnline(int gameId, int playerId) {
-		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&playerId="+playerId;
+	public static void removeUserFromSelectedGameOnline(int gameId, int userId) {
+		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&userId="+userId;
 		@SuppressWarnings("unused")
 		String replyString = serverReply(connectionString);	
 		//replystring is not being used.
