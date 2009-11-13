@@ -78,7 +78,7 @@ CREATE TABLE userScores (
 = Sample Insert Data =
 <pre>
 INSERT INTO users (username,password,lastLogin,registerDate)VALUES ('test@test.is','098f6bcd4621d373cade4e832627b4f6','2009-10-15','2009-10-15');
-INSERT INTO userScores(userId,score,locations) VALUES (1,2000,5);
+INSERT INTO userScores(userId,score,locations) VALUES (1,0,0);
 INSERT INTO games (gameName,ownerId,created,expires) VALUES ('Test Game',1,'2009-10-15','2010-10-15');
 INSERT INTO gameCoordinates (coordinateId,gameId,latitude,longitude) VALUES (1,1,64.138252,-21.926658);
 INSERT INTO gameCoordinates (coordinateId,gameId,latitude,longitude) VALUES (2,1,64.142052,-21.927243);
