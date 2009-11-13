@@ -2,7 +2,6 @@ package hi.android.treasureHunt.Data;
 
 import hi.android.treasureHunt.Control.Game;
 import hi.android.treasureHunt.Control.Player;
-import hi.android.treasureHunt.Control.Game.Coordinate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,8 +17,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
-
-import com.google.gson.Gson;
 
 /**
  * Handles all data access. 
