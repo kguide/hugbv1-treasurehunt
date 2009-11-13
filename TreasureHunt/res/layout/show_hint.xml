@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<ScrollView
-		android:id="@+id/scrollGluggi"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		xmlns:android="http://schemas.android.com/apk/res/android"
-	>
-	<TextView
-		android:id="@+id/hintTexti"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:padding="5px"
-		android:layout_marginTop="5px"
-		android:layout_marginBottom="5px"
-		android:layout_marginLeft="5px"
-		android:layout_marginRight="5px"
-	>
-	</TextView>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:visibility="invisible">
+<Button
+android:id="@+id/nextHint"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="  Next hint  "
+android:layout_alignParentBottom="true"
+android:layout_alignParentRight="true"
+>
+</Button>
+<ScrollView
+android:id="@+id/scrollGluggi"
+android:layout_width="320px"
+android:layout_height="340px"
+android:padding="10px"
+android:layout_marginTop="10px"
+android:layout_marginBottom="10px"
+android:layout_marginLeft="10px"
+android:layout_marginRight="10px"
+android:scrollbars="vertical"
+android:layout_alignParentTop="true"
+android:layout_alignParentLeft="true"
+android:visibility="invisible">
+<TextView
+android:id="@+id/hintTexti"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:padding="10px"
+android:layout_marginTop="10px"
+android:layout_marginBottom="10px"
+android:layout_marginLeft="10px"
+android:layout_marginRight="10px"
+android:typeface="monospace"
+android:textColor="#EEE" android:background="#00E">
+</TextView>
 </ScrollView>
+<Button
+android:id="@+id/backHint"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="  Previous hint  "
+android:layout_alignParentBottom="true"
+android:layout_alignParentLeft="true"
+>
+</Button>
+</RelativeLayout>
