@@ -97,7 +97,7 @@ public class MyGamesScreen extends ListActivity {
                    Intent startGoogleMapScreen = new Intent(MyGamesScreen.this,GoogleMapScreen.class);
                    
                    startActivity(startGoogleMapScreen);
-
+                   return true;
               case DELETE_GAME_ID:
             	  
             	  /*Delete a selected game from androidDB.*/

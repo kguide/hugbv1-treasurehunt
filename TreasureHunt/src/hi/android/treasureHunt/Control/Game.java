@@ -28,6 +28,7 @@ public class Game {
 		private int hintId; 		
 		private String hintText;
 		
+		
 		public Hint(int gameId, int coordinateId, int hintId, String hintText){
 			this.gameId = gameId;
 			this.coordinateId = coordinateId;
@@ -70,6 +71,7 @@ public class Game {
 		private float latitude;
 		private float longitude ;
 		
+
 		public Coordinate(int gameId, int coordinateId, float latitude, float longitude){
 			this.gameId = gameId;
 			this.coordinateId = coordinateId;

@@ -12,10 +12,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/noMyGames"/> 
-    <Button 
-	    	android:id="@+id/ButtonMyGamesScreenUpdateMyGames"
-	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content"
-	    	android:text="@string/updateMyGames"
-	    >	</Button>
+        
+   	<LinearLayout 
+    	android:orientation="horizontal"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    >
+	    <Button 
+		    	android:id="@+id/ButtonMyGamesScreenUpdateMyGames"
+		    	android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:text="@string/updateMyGames"
+		    >	</Button>
+	    <Button 
+		    	android:id="@+id/ButtonMyGamesScreenSendGames"
+		    	android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:text="@string/sendFinishedGames"
+		    >	</Button>
+    </LinearLayout>
 </LinearLayout>
