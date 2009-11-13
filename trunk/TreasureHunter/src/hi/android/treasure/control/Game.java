@@ -1,6 +1,6 @@
 package hi.android.treasure.control;
 
-import hi.android.treasure.data.DAL;
+import hi.android.treasure.data.DataAccess;
 
 import java.util.ArrayList;
 
@@ -108,7 +108,7 @@ public class Game {
 	public void save(int playerId, Context context) {
 		//Before saving game, we check to see if the current coordinate is the last one. If yes, the game is finished.
 		gameFinished = isLastCoordinate();
-		DAL.saveGame(this, playerId,  context);
+		DataAccess.saveGameOnAndroid(this, playerId,  context);
 	}
 
 	public void addCoordinate(int gameId, int coordinateId, float latitude, float longitude){

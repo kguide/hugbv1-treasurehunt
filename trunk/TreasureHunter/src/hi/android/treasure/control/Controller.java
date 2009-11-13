@@ -1,6 +1,6 @@
 package hi.android.treasure.control;
 
-import hi.android.treasure.data.DAL;
+import hi.android.treasure.data.DataAccess;
 import hi.android.treasure.data.GpsTool;
 
 import java.util.ArrayList;
@@ -43,10 +43,10 @@ public class Controller {
 	 */
 	public boolean logIn(String username, String password, Context context){
 
-		boolean playerExistsLocal = DAL.verifyUserExistsOnAndroid(username, context);
+		boolean playerExistsLocal = DataAccess.verifyUserExistsOnAndroid(username, context);
 		if(playerExistsLocal){
-			if(DAL.verifyUserOnAndroid(username, password, context)){
-				player = DAL.getPlayerOnAndroid(username, context);
+			if(DataAccess.verifyUserOnAndroid(username, password, context)){
+				player = DataAccess.getPlayerOnAndroid(username, context);
 				return true;
 			}
 			else{
@@ -54,8 +54,8 @@ public class Controller {
 			}
 		}
 		else{
-			if(DAL.verifyUserOnline(username, password)){
-				player = DAL.getPlayerOnServer(username, password);
+			if(DataAccess.verifyUserOnline(username, password)){
+				player = DataAccess.getPlayerOnServer(username, password);
 				player.setPassword(password);
 				player.save(context);
 				return true;
@@ -74,7 +74,7 @@ public class Controller {
 	 * @return
 	 */
 	public boolean createUserOnline(String username, String password){
-		return DAL.createUserOnline(username, password);
+		return DataAccess.createUserOnline(username, password);
 		}
 	
 	/**
@@ -108,33 +108,33 @@ public class Controller {
 	 * @return : Boolean indicating whether a game with the selected gameId was found.
 	 */
 	public boolean getGame(int gameId, Context context){
-		this.game = DAL.getGame(gameId, this.player.getId(),context);
+		this.game = DataAccess.getGame(gameId, this.player.getId(),context);
 		return game != null ? true:false;	//The java ternary operator. (condition) ? returnValueIfTrue : returnValueIfFalse; 
 	}
 		
 	public ArrayList<Game> getUsersGamesOnAndroid(Context context){
-		return DAL.getPlayersGamesOnAndroid(this.player.getId(),context);
+		return DataAccess.getPlayersGamesOnAndroid(this.player.getId(),context);
 	}
 
 	public ArrayList<Game> getUsersGamesOnServer(Context context) {
-		ArrayList<Game> arrayOfGames = DAL.getPlayersGamesOnServer(this.player.getId(), context);
+		ArrayList<Game> arrayOfGames = DataAccess.getPlayersGamesOnServer(this.player.getId(), context);
 		return arrayOfGames;
 	}
 
 	public ArrayList<Game> getGamesOnServerByName(String name,Context context) {
-		ArrayList<Game> listOfGames = DAL.getGamesOnServerByName(name,context);
+		ArrayList<Game> listOfGames = DataAccess.getGamesOnServerByName(name,context);
 		return listOfGames;
 	}
 	public void removeUserFromSelectedGame(int gameId, Context context){
-		DAL.removeUserFromSelectedGameOnline(gameId,player.getId());
+		DataAccess.removeUserFromSelectedGameOnline(gameId,player.getId());
 }
 	public void deleteGameFromAndroid(int gameId,Context context) {
 		
-		DAL.deleteGameFromAndroid( gameId,context);
+		DataAccess.deleteGameFromAndroid( gameId,context);
 	}
 
 	public void sendFinishedGamesOnline(Context context) {
-		DAL.sendFinishedGamesOnline(player.getId(),context);
+		DataAccess.sendFinishedGamesOnline(player.getId(),context);
 	}
 }
 
