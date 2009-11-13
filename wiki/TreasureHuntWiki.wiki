@@ -86,3 +86,10 @@ This account is available for testing.
 
   * myGames
      http://hgphoto.net/treasure/controller.php?method=getMyGames&userId=1
+
+
+  * finishedGame
+     http://hgphoto.net/treasure/controller.php?method=finishedGame&userId=1&gameId=1
+
+  * removeUserFromGame
+     http://hgphoto.net/treasure/controller.php?method=removeUserFromGame&userId=1&gameId=1
