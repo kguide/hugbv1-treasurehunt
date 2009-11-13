@@ -24,8 +24,8 @@ import android.util.Log;
 
 public class DataAccess {
 	
-	private static DBHelperPlayer playerDB;
-	private static DBHelperGame gameDB;
+	private static PlayerDB playerDB;
+	private static GameDB gameDB;
 	
 	/**
 	 * Verifies that the username and password match one of the players in the server database.
@@ -45,7 +45,7 @@ public class DataAccess {
 	 * @return boolean : tells if a user with the selected username exists on the Android database
 	 */
 	public static boolean verifyUserExistsOnAndroid(String username, Context context){ 
-		playerDB = new DBHelperPlayer(context);
+		playerDB = new PlayerDB(context);
 		if(playerDB.exists(username)){
 			return true;
 		}
@@ -61,7 +61,7 @@ public class DataAccess {
 	 * @return boolean : tells if the user with the selected username has the selected password.
 	 */
 	public static boolean verifyUserOnAndroid(String username, String password, Context context){
-		playerDB = new DBHelperPlayer(context);
+		playerDB = new PlayerDB(context);
 		Player player = playerDB.get(username);
 		if(player.getName().compareTo(username) == 0 && player.getPassword().compareTo(password) == 0){
 			return true;	
@@ -94,7 +94,7 @@ public class DataAccess {
 			return player;
 		}
 		
-		playerDB = new DBHelperPlayer(context);
+		playerDB = new PlayerDB(context);
 		player = playerDB.get(username);
 		return player;
 	}
@@ -132,7 +132,7 @@ public class DataAccess {
 	 * selected gameId then this returned object will be null.
 	 */
 	private static Game getGameOnAndroid(int gameId, Context context) {
-		gameDB = new DBHelperGame(context);
+		gameDB = new GameDB(context);
 		return gameDB.getGame(gameId);
 	}
 
@@ -143,7 +143,7 @@ public class DataAccess {
 	 * @return : Boolean indicating whether a game with the selected gameId exists on the Android database.
 	 */
 	private static boolean verifyGameExistsOnAndroid(int gameId, Context context) {
-		gameDB = new DBHelperGame(context);
+		gameDB = new GameDB(context);
 		return gameDB.exists(gameId);
 	}
  
@@ -153,7 +153,7 @@ public class DataAccess {
 	 * @param context : The context from the GUI who called. This should not be necessary but we have been unable to work around it.
 	 */
 	public static void saveGameOnAndroid(Game game, int playerId, Context context){
-		gameDB = new DBHelperGame(context);
+		gameDB = new GameDB(context);
 		if(verifyGameExistsOnAndroid(game.getGameId(), context)){
 			gameDB.updateGame(game, playerId);
 		}
@@ -164,7 +164,7 @@ public class DataAccess {
 	}
 
 	public static ArrayList<Game> getPlayersGamesOnAndroid(int playerId, Context context){
-		 gameDB = new DBHelperGame(context);
+		 gameDB = new GameDB(context);
 		return gameDB.getUsersGames(playerId);
 	}
 
@@ -179,7 +179,7 @@ public class DataAccess {
 	}
 
 	public static void deleteGameFromAndroid(int gameId,Context context) {
-		DBHelperGame gameDB = new DBHelperGame(context);
+		GameDB gameDB = new GameDB(context);
 		gameDB.deleteGame(gameId);
 	}
 
@@ -188,7 +188,7 @@ public class DataAccess {
 	}
 
 	public static void sendFinishedGamesOnline(int playerId, Context context) {
-		gameDB = new DBHelperGame(context);
+		gameDB = new GameDB(context);
 		ArrayList<Game> finishedGames = gameDB.getFinishedGames(playerId);
 		
 		for (Game game : finishedGames) {

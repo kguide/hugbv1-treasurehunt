@@ -7,7 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHelperPlayer {
+public class PlayerDB {
 
     public static final String DB_NAME = "treasureHunterDataBase";
     public static final String DB_TABLE = "playerTable";
@@ -21,11 +21,11 @@ public class DBHelperPlayer {
     private static class DBOpenHelper extends SQLiteOpenHelper {
 
         private static final String DB_CREATE = "CREATE TABLE "
-            + DBHelperPlayer.DB_TABLE
+            + PlayerDB.DB_TABLE
             + " (playerId INTEGER PRIMARY KEY, playerName TEXT UNIQUE NOT NULL, playerPassword TEXT NOT NULL, playerScore INTEGER, playerRank INTEGER);";
 
         public DBOpenHelper(final Context context) {
-            super(context, DBHelperPlayer.DB_NAME, null, DBHelperPlayer.DB_VERSION);
+            super(context, PlayerDB.DB_NAME, null, PlayerDB.DB_VERSION);
         }
 
         @Override
@@ -44,13 +44,13 @@ public class DBHelperPlayer {
 
         @Override
         public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + DBHelperPlayer.DB_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + PlayerDB.DB_TABLE);
             onCreate(db);
         }
     }
 
 
-    public DBHelperPlayer(final Context context) {
+    public PlayerDB(final Context context) {
         this.dbOpenHelper = new DBOpenHelper(context);
         establishDb();
     }
@@ -75,7 +75,7 @@ public class DBHelperPlayer {
         values.put("playerPassword", player.getPassword());
         values.put("playerRank", player.getRank());
         values.put("playerScore", player.getScore());
-        this.db.insert(DBHelperPlayer.DB_TABLE, null, values);
+        this.db.insert(PlayerDB.DB_TABLE, null, values);
     }
 
     public void update(final Player player) {
@@ -84,18 +84,18 @@ public class DBHelperPlayer {
         values.put("playerPassword", player.getPassword());
         values.put("playerRank", player.getRank());
         values.put("playerScore", player.getScore());
-        this.db.update(DBHelperPlayer.DB_TABLE, values, "playerId=" + player.getId(), null);
+        this.db.update(PlayerDB.DB_TABLE, values, "playerId=" + player.getId(), null);
     }
 
     public void delete(final int id) {
-        this.db.delete(DBHelperPlayer.DB_TABLE, "playerId=" + id, null);
+        this.db.delete(PlayerDB.DB_TABLE, "playerId=" + id, null);
     }
 
     public Player get(final int playerId) {
         Cursor c = null;
         Player player = null;
         try {
-            c = this.db.query(true, DBHelperPlayer.DB_TABLE, DBHelperPlayer.COLS, "playerId = '" + playerId + "'", null, null, null, null,
+            c = this.db.query(true, PlayerDB.DB_TABLE, PlayerDB.COLS, "playerId = '" + playerId + "'", null, null, null, null,
                 null);
             if (c.getCount() > 0) {
                 c.moveToFirst();
@@ -120,7 +120,7 @@ public class DBHelperPlayer {
         Cursor c = null;
         Player player = null;
         try {
-            c = this.db.query(true, DBHelperPlayer.DB_TABLE, DBHelperPlayer.COLS, "playerName = '" + playerName + "'", null, null, null, null,
+            c = this.db.query(true, PlayerDB.DB_TABLE, PlayerDB.COLS, "playerName = '" + playerName + "'", null, null, null, null,
                 null);
             if (c.getCount() > 0) {
                 c.moveToFirst();
@@ -144,7 +144,7 @@ public class DBHelperPlayer {
     public boolean exists(final String playerName) {
         Cursor c = null;
         try {
-            c = this.db.query(true, DBHelperPlayer.DB_TABLE, DBHelperPlayer.COLS, "playerName = '" + playerName + "'", null, null, null, null,
+            c = this.db.query(true, PlayerDB.DB_TABLE, PlayerDB.COLS, "playerName = '" + playerName + "'", null, null, null, null,
                 null);
             if (c.getCount() > 0) {
             	return true;
