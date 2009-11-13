@@ -2,6 +2,7 @@ package hi.android.treasureHunt.Data;
 
 import hi.android.treasureHunt.Control.Game;
 import hi.android.treasureHunt.Control.Player;
+import hi.android.treasureHunt.Control.Game.Coordinate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 /**
  * Handles all data access. 
@@ -209,8 +212,9 @@ public class DAL {
 	private static Game getGameOnServer(int gameId) {
 
 		String connectionString = domainString + "controller.php?method=getGameInfo&gameId=" + gameId;
-		String JSONReplyString = serverReply(connectionString);		
+		String JSONReplyString = serverReply(connectionString);	
 		
+
 		try {
 			Game game = new Game();
 			
@@ -353,6 +357,7 @@ public class DAL {
 		gameDB.deleteGame(gameId);
 	}
 
+
 	public static void removeUserFromSelectedGameOnline(int gameId, int userId) {
 		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&userId="+userId;
 		@SuppressWarnings("unused")
@@ -376,7 +381,6 @@ public class DAL {
 		String JSONReplyString = serverReply(connectionString);	
 		// Server reply is not used right now.
 	}
-	
 	
 }
 
