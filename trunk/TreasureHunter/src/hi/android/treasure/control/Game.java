@@ -17,7 +17,15 @@ public class Game {
 	public ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 	private int currentCoordinateId;
 	private int numberOfCoordinates;
+	private int lastHintSolved;  // used to keep track of the last solved index, so we can control how we traverse the hints.
+	private int currentView;  //used for traversing back and forth through hints and coords in the gui.
 //	private int currentHintId;
+	
+	
+	public Game() {
+		this.currentView = 0;
+		this.lastHintSolved = 0;
+	}
 	
 	/**
 	 * Represents a hint in the Treasure Hunt game.
@@ -156,7 +164,6 @@ public class Game {
 		}else{
 			return gameName + " - ACTIVE";
 		}
-		
 	}
 
 	public int getCurrentCoordinateId() {
@@ -169,9 +176,10 @@ public class Game {
 		}
 		else{
 			currentCoordinateId++;
+			lastHintSolved = currentCoordinateId;
 		}
 	}
-
+	
 	public String getCurrentHintText() {
 		return hints.get(currentCoordinateId - 1).getHintText();
 		
@@ -187,5 +195,51 @@ public class Game {
 
 	public boolean isGameFinished() {
 		return gameFinished;
+	}
+	
+	
+	/*
+	 * functions for the view prev/next in hintScreen, 
+	 */
+	
+	
+	/**
+	 * sets the index for next solved hint, if available.
+	 * @return : Boolean indicating whether a next solved hint is available.
+	 */
+	public boolean setNextHintView() {
+		if (currentView == lastHintSolved - 1 ) {
+			return false;
+			}
+		currentView++;
+		return true;
+	}
+	
+	/**
+	 * sets the index for previous solved hint, if available.
+	 * @return : Boolean indicating whether a previous solved hint is available.
+	 */
+	public boolean setPrevHintView() {
+		if (currentView == 1) {
+			return false;
+			}
+		currentView--;
+		return true;
+	}
+	
+	/**
+	 * returns the current view hint String
+	 * @return : String the current view hint
+	 */
+	public String getCurrentHintView() {
+		return hints.get(currentView - 1).getHintText();
+	}
+	
+	/**
+	 * returns the current view hint Coordinate 
+	 * @return : Coordinate object for the current Coordinate
+	 */
+	public Coordinate getCurrentCoordinateView() {
+		return this.coordinates.get(currentView);
 	}
 }
