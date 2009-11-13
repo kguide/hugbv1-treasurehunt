@@ -30,12 +30,14 @@ public class GoogleMapScreen extends MapActivity
 	Controller controller = Controller.getInstance();
 	Context context = this;
 	
+	private static final double TRIGGER_RADIUS = 500.0; // in meters.
+	
 	private LocationManager locationManager=null;
 	private LocationListener locationListener=null;
 
-    MapView mapView; 
-    MapController mc;
-    GeoPoint p;
+	private MapView mapView; 
+	private MapController mc;
+	private GeoPoint p;
  
     class MapOverlay extends com.google.android.maps.Overlay
     {
@@ -110,16 +112,20 @@ public class GoogleMapScreen extends MapActivity
             
             
     }
-	private class MyLocationListener implements LocationListener {
-		public void onLocationChanged(Location location) {
-				if(checkIfWithinLocation(location)){
-					controller.game.incrementCoordinate();
-					controller.game.save(controller.player.getId(),context);
-					
-					Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
-					startActivity(startHintScreen);
-				}
-		}
+    private class MyLocationListener implements LocationListener {
+    	public void onLocationChanged(Location location) {
+    		if(controller.checkGPSRadius(  //check if we are within the radius.
+    				location.getLatitude(),location.getLongitude(),
+					controller.game.getCurrentCoordinate().getLatitude(),
+					controller.game.getCurrentCoordinate().getLongitude(), 
+					TRIGGER_RADIUS)) {			    
+				controller.game.incrementCoordinate();
+				controller.game.save(controller.player.getId(),context);
+				
+				Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
+				startActivity(startHintScreen);
+			}
+	}
 
 		public void onProviderDisabled(String provider) {
 		}
@@ -137,16 +143,4 @@ public class GoogleMapScreen extends MapActivity
         return false;
     }
     
-	 private boolean checkIfWithinLocation(Location location) {
-			double newLocationLatitude = location.getLatitude();
-			double newLocationLongitude = location.getLongitude();
-			double targetLocationLatitude = (double) controller.game.getCurrentCoordinate().getLatitude();
-			double targetLocationLongitude = (double) controller.game.getCurrentCoordinate().getLongitude();
-			boolean withinRadius = controller.checkGPSRadius(newLocationLatitude, newLocationLongitude, targetLocationLatitude, targetLocationLongitude, 500);
-			
-			if(withinRadius){
-				return true;
-			}
-			return false;
-	 }
 }
