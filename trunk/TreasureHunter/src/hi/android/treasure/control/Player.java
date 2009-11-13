@@ -1,6 +1,6 @@
 package hi.android.treasure.control;
 
-import hi.android.treasure.data.DBHelperPlayer;
+import hi.android.treasure.data.PlayerDB;
 import android.content.Context;
 /**
  * This class handles everything a player in our game needs
@@ -65,7 +65,7 @@ public class Player {
 	}
 
 	public void save(Context context){
-		DBHelperPlayer playerDB = new DBHelperPlayer(context);
+		PlayerDB playerDB = new PlayerDB(context);
 		if(playerDB.exists(this.name)){
 			playerDB.update(this);
 		}
@@ -75,7 +75,7 @@ public class Player {
 	}
 
 	public void delete(Context context){
-		DBHelperPlayer playerDB = new DBHelperPlayer(context);
+		PlayerDB playerDB = new PlayerDB(context);
 		playerDB.delete(this.id);
 	}
 }

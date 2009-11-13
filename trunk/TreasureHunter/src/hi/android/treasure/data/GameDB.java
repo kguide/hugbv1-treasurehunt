@@ -12,7 +12,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHelperGame {
+public class GameDB {
 
     public static final String DB_NAME = "treasureHunterDB";
     public static final String DB_TABLE_GAME = "gameTable";
@@ -33,23 +33,23 @@ public class DBHelperGame {
     private static class DBOpenHelper extends SQLiteOpenHelper {
 
         private static final String DB_CREATE_GAME = "CREATE TABLE "
-            + DBHelperGame.DB_TABLE_GAME
+            + GameDB.DB_TABLE_GAME
             + " (gameId INTEGER PRIMARY KEY, gameName TEXT UNIQUE NOT NULL, currentCoordinate INTEGER, gameFinished INTEGER);";
 
         private static final String DB_CREATE_COORDINATE = "CREATE TABLE "
-            + DBHelperGame.DB_TABLE_COORDINATE
+            + GameDB.DB_TABLE_COORDINATE
             + " (gameId INTEGER NOT NULL, coordinateId INTEGER NOT NULL, latitude FLOAT NOT NULL, longitude FLOAT NOT NULL);";
 
         private static final String DB_CREATE_HINT = "CREATE TABLE "
-            + DBHelperGame.DB_TABLE_HINT
+            + GameDB.DB_TABLE_HINT
             + " (gameId INTEGER NOT NULL, coordinateId INTEGER NOT NULL, hintId INTEGER NOT NULL, hintText TEXT NOT NULL);";
 
         private static final String DB_CREATE_PLAYERSGAMES = "CREATE TABLE "
-            + DBHelperGame.DB_TABLE_PLAYERSGAMES
+            + GameDB.DB_TABLE_PLAYERSGAMES
             + " (gameId INTEGER NOT NULL, playerId INTEGER NOT NULL);";
         
         public DBOpenHelper(final Context context) {
-            super(context, DBHelperGame.DB_NAME, null, DBHelperGame.DB_VERSION);
+            super(context, GameDB.DB_NAME, null, GameDB.DB_VERSION);
         }
 
         @Override
@@ -71,16 +71,16 @@ public class DBHelperGame {
 
         @Override
         public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + DBHelperGame.DB_TABLE_GAME);
-            db.execSQL("DROP TABLE IF EXISTS " + DBHelperGame.DB_TABLE_COORDINATE);
-            db.execSQL("DROP TABLE IF EXISTS " + DBHelperGame.DB_TABLE_HINT);
-            db.execSQL("DROP TABLE IF EXISTS " + DBHelperGame.DB_TABLE_PLAYERSGAMES);
+            db.execSQL("DROP TABLE IF EXISTS " + GameDB.DB_TABLE_GAME);
+            db.execSQL("DROP TABLE IF EXISTS " + GameDB.DB_TABLE_COORDINATE);
+            db.execSQL("DROP TABLE IF EXISTS " + GameDB.DB_TABLE_HINT);
+            db.execSQL("DROP TABLE IF EXISTS " + GameDB.DB_TABLE_PLAYERSGAMES);
             onCreate(db);
         }
     }
 
 
-    public DBHelperGame(final Context context) {
+    public GameDB(final Context context) {
         this.dbOpenHelper = new DBOpenHelper(context);
         establishDb();
     }
@@ -114,7 +114,7 @@ public class DBHelperGame {
         values.put("gameName", game.getGameName());
         values.put("currentCoordinate", game.getCurrentCoordinateId());
         values.put("gameFinished", 0);
-        this.db.insert(DBHelperGame.DB_TABLE_GAME, null, values);
+        this.db.insert(GameDB.DB_TABLE_GAME, null, values);
     }
     
     private void insertCoordinate(final Game.Coordinate coordinate) {
@@ -123,7 +123,7 @@ public class DBHelperGame {
         values.put("coordinateId", coordinate.getCoordinateId());
         values.put("latitude", coordinate.getLatitude());
         values.put("longitude", coordinate.getLongitude());
-        this.db.insert(DBHelperGame.DB_TABLE_COORDINATE, null, values);
+        this.db.insert(GameDB.DB_TABLE_COORDINATE, null, values);
     }
     
     private void insertHint(final Game.Hint hint) {
@@ -132,7 +132,7 @@ public class DBHelperGame {
         values.put("coordinateId", hint.getCoordinateId());
         values.put("hintId", hint.getHintId());
         values.put("hintText", hint.getHintText());
-        this.db.insert(DBHelperGame.DB_TABLE_HINT, null, values);
+        this.db.insert(GameDB.DB_TABLE_HINT, null, values);
     }
 
     public void updateGame(final Game game, final int playerId) {
@@ -154,7 +154,7 @@ public class DBHelperGame {
         values.put("currentCoordinate", game.getCurrentCoordinateId());
         values.put("gameFinished", gameFinished);
         try{
-        	this.db.update(DBHelperGame.DB_TABLE_GAME, values, "gameId=" + game.getGameId(), null);
+        	this.db.update(GameDB.DB_TABLE_GAME, values, "gameId=" + game.getGameId(), null);
         }catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -169,7 +169,7 @@ public class DBHelperGame {
         
         // If the player is already signed up for the selected game, we do nothing
     	if(!playerIsInGame(gameId, playerId)){
-            this.db.insert(DBHelperGame.DB_TABLE_PLAYERSGAMES, null, values);
+            this.db.insert(GameDB.DB_TABLE_PLAYERSGAMES, null, values);
     	}
 	}
 
@@ -177,7 +177,7 @@ public class DBHelperGame {
     	Cursor cPlayersGames = null;
         //Gets all the rows from the Game table.
     	try{
-            cPlayersGames = this.db.query(true, DBHelperGame.DB_TABLE_PLAYERSGAMES, null, "gameId ='" + gameId + "' and playerId='" + playerId + "'",
+            cPlayersGames = this.db.query(true, GameDB.DB_TABLE_PLAYERSGAMES, null, "gameId ='" + gameId + "' and playerId='" + playerId + "'",
             		null, null, null, null,null);
     	}
     	catch(Exception e){
@@ -196,7 +196,7 @@ public class DBHelperGame {
         values.put("latitude", coordinate.getLatitude());
         values.put("longitude", coordinate.getLongitude());
     	try{
-            this.db.update(DBHelperGame.DB_TABLE_COORDINATE, values, "gameId=" + coordinate.getGameId() + " AND coordinateId=" + coordinate.getCoordinateId(), null);
+            this.db.update(GameDB.DB_TABLE_COORDINATE, values, "gameId=" + coordinate.getGameId() + " AND coordinateId=" + coordinate.getCoordinateId(), null);
     	}catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -210,7 +210,7 @@ public class DBHelperGame {
         values.put("hintId", hint.getHintId());
         values.put("hintText", hint.getHintText());
     	try{
-    		this.db.update(DBHelperGame.DB_TABLE_HINT, values, "gameId=" + hint.getGameId() +  " AND coordinateId=" + hint.getCoordinateId() + 
+    		this.db.update(GameDB.DB_TABLE_HINT, values, "gameId=" + hint.getGameId() +  " AND coordinateId=" + hint.getCoordinateId() + 
         			   " AND hintId=" + hint.getHintId(), null);
     	} catch (SQLException e) {
     		e.printStackTrace();
@@ -219,9 +219,9 @@ public class DBHelperGame {
 
     public void deleteGame(final int gameId) {
     	try{
-    		this.db.delete(DBHelperGame.DB_TABLE_COORDINATE, "gameId=" + gameId, null);
-        	this.db.delete(DBHelperGame.DB_TABLE_HINT, "gameId=" + gameId, null);
-            this.db.delete(DBHelperGame.DB_TABLE_GAME, "gameId=" + gameId, null);
+    		this.db.delete(GameDB.DB_TABLE_COORDINATE, "gameId=" + gameId, null);
+        	this.db.delete(GameDB.DB_TABLE_HINT, "gameId=" + gameId, null);
+            this.db.delete(GameDB.DB_TABLE_GAME, "gameId=" + gameId, null);
     	}catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -233,7 +233,7 @@ public class DBHelperGame {
         Cursor cHint = null;
         Game game = new Game();
         try {
-            cGame = this.db.query(true, DBHelperGame.DB_TABLE_GAME, DBHelperGame.GAME_COLS, "gameId = '" + gameId + "'", null, null, null, null,
+            cGame = this.db.query(true, GameDB.DB_TABLE_GAME, GameDB.GAME_COLS, "gameId = '" + gameId + "'", null, null, null, null,
                 null);
             if (cGame.getCount() > 0) {
                 cGame.moveToFirst();
@@ -242,7 +242,7 @@ public class DBHelperGame {
                 game.setCurrentCoordinateId(cGame.getInt(2));
             }
             
-            cCoordinate = this.db.query(true, DBHelperGame.DB_TABLE_COORDINATE, DBHelperGame.COORDINATE_COLS, "gameId = '" + gameId + "'", null, null, null, null,
+            cCoordinate = this.db.query(true, GameDB.DB_TABLE_COORDINATE, GameDB.COORDINATE_COLS, "gameId = '" + gameId + "'", null, null, null, null,
                     null);
             int numRows = cCoordinate.getCount();
             cCoordinate.moveToFirst();
@@ -254,7 +254,7 @@ public class DBHelperGame {
                 cCoordinate.moveToNext();
             }     
             
-            cHint = this.db.query(true, DBHelperGame.DB_TABLE_HINT, DBHelperGame.HINT_COLS, "gameId = '" + gameId + "'", null, null, null, null,
+            cHint = this.db.query(true, GameDB.DB_TABLE_HINT, GameDB.HINT_COLS, "gameId = '" + gameId + "'", null, null, null, null,
                     null);
             int numRows2 = cHint.getCount();
             cHint.moveToFirst();
@@ -289,7 +289,7 @@ public class DBHelperGame {
         Game game;
         try {
         	//Gets all the rows from the Game table.
-            cPlayersGames = this.db.query(true, DBHelperGame.DB_TABLE_PLAYERSGAMES, null, "playerId='" + playerId + "'", null, null, null, null,
+            cPlayersGames = this.db.query(true, GameDB.DB_TABLE_PLAYERSGAMES, null, "playerId='" + playerId + "'", null, null, null, null,
                 null);
             if (cPlayersGames.getCount() > 0) {
                 cPlayersGames.moveToFirst();
@@ -314,7 +314,7 @@ public class DBHelperGame {
     public boolean exists(final int gameId) {
         Cursor c = null;
         try {
-            c = this.db.query(true, DBHelperGame.DB_TABLE_GAME, DBHelperGame.GAME_COLS, "gameId = '" + gameId + "'", null, null, null, null,
+            c = this.db.query(true, GameDB.DB_TABLE_GAME, GameDB.GAME_COLS, "gameId = '" + gameId + "'", null, null, null, null,
                 null);
             if (c.getCount() > 0) {
             	return true;
