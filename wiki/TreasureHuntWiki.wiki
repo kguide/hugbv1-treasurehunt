@@ -83,3 +83,6 @@ This account is available for testing.
   
   * getGameInfo
      http://hgphoto.net/treasure/controller.php?method=getGameInfo&gameId=1
+
+  * myGames
+     http://hgphoto.net/treasure/controller.php?method=getMyGames&userId=1
