@@ -46,4 +46,15 @@ android:layout_alignParentBottom="true"
 android:layout_alignParentLeft="true"
 >
 </Button>
+<TextView
+android:id="@+id/hintNr"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:background="#ff0000cc"
+android:textStyle="bold"
+android:gravity="center"
+android:layout_alignParentTop="true"
+android:layout_alignParentLeft="true"
+>
+</TextView>
 </RelativeLayout>
