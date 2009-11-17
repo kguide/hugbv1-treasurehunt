@@ -63,7 +63,7 @@ public class HintScreen extends Activity {
 
 	TextView myTextBox = (TextView) findViewById(R.id.hintTexti);
 	myTextBox.setText(controller.getCurrentHint());
-	controller.game.setToLast();
+	//controller.game.setToLast();
     }
  
     @Override 
