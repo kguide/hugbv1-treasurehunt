@@ -27,14 +27,14 @@
 <string name="delete">Delete</string>
 <string name="updateMyGames">Update Games Online</string>
 <string name="sendFinishedGames">Send Finished Games</string>
-
 <string name="createUsername">Enter an email address.</string>
 <string name="createPassword">Create a password </string>
 <string name="noMyGames">You currently have no active games</string>
 <string name="noGamesFound">Your search didn't match any games.</string>
-
 <string name="submitNewUser">Submit.</string>
 <string name="createUserHead">Welcome glory hunters</string>
 <string name="loginNewUser">Create user</string>
 <string name="requiresNetwork">Logging in might require network connection</string>
+<string name="showHintOnMap">Show on map</string>
+<string name="showCurrentHint">Show current hint</string>
 </resources>
