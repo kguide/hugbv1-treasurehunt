@@ -93,6 +93,3 @@ This account is available for testing.
 
   * removeUserFromGame
      http://hgphoto.net/treasure/controller.php?method=removeUserFromGame&userId=1&gameId=1
-
- * finishedGame
-   http://hgphoto.net/treasure/start.php?method=finishedGame&userId=1&gameId=1
