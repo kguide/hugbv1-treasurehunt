@@ -210,50 +210,58 @@ public class Game {
 
 
     /**
-	 * sets the view to current hint
-	 */
-	public void setViewToCurrent() {
-	    currentView = lastHintSolved;
-	}	
+     * sets the view to current hint
+     */
+    public void setViewToCurrent() {
+	currentView = lastHintSolved;
+    }	
+    
+    
+    /**
+     * sets the index for next solved hint, if available.
+     * @return : Boolean indicating whether a next solved hint is available.
+     */
+    public boolean setNextHintView() {
+	if (currentView == lastHintSolved ) {
+	    return false;
+	}
+	currentView++;
+	return true;
+    }
+    
+    /**
+     * sets the index for previous solved hint, if available.
+     * @return : Boolean indicating whether a previous solved hint is available.
+     */
+    public boolean setPrevHintView() {
+	if (currentView == 0) {
+	    return false;
+	}
+	currentView--;
+	return true;
+    }
+    
+    /**
+     * returns the current view number 
+     * @return : int, number of hint being viewed
+     */
+    public int getCurrentHintViewNr() {
+	return currentView;
+    }
 
-
-	/**
-	 * sets the index for next solved hint, if available.
-	 * @return : Boolean indicating whether a next solved hint is available.
-	 */
-	public boolean setNextHintView() {
-		if (currentView == lastHintSolved ) {
-			return false;
-			}
-		currentView++;
-		return true;
-	}
-	
-	/**
-	 * sets the index for previous solved hint, if available.
-	 * @return : Boolean indicating whether a previous solved hint is available.
-	 */
-	public boolean setPrevHintView() {
-		if (currentView == 0) {
-			return false;
-			}
-		currentView--;
-		return true;
-	}
-	
-	/**
-	 * returns the current view hint String
-	 * @return : String the current view hint
-	 */
-	public String getCurrentHintView() {
-		return hints.get(currentView).getHintText();
-	}
-	
-	/**
-	 * returns the current view hint Coordinate 
-	 * @return : Coordinate object for the current Coordinate
-	 */
-	public Coordinate getCurrentCoordinateView() {
-		return this.coordinates.get(currentView);
-	}
+    /**
+     * returns the current view hint String
+     * @return : String the current view hint
+     */
+    public String getCurrentHintView() {
+	return hints.get(currentView).getHintText();
+    }
+    
+    /**
+     * returns the current view hint Coordinate 
+     * @return : Coordinate object for the current Coordinate
+     */
+    public Coordinate getCurrentCoordinateView() {
+	return this.coordinates.get(currentView);
+    }
 }
