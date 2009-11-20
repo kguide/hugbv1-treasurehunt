@@ -82,7 +82,7 @@ public class Controller {
 	 * 
 	 * @return : string that contains the hint
 	 */
-	public String getCurrentHint(){
+	public String getCurrentHintText(){
 		String currentHintText = this.game.getCurrentHintView();
 		return currentHintText;
 	}
