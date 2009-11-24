@@ -4,10 +4,12 @@ import hi.android.treasure.control.Controller;
 import hi.android.treasure.control.Game.Coordinate;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
@@ -19,11 +21,17 @@ import android.location.LocationManager;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.maps.ItemizedOverlay; 
+import com.google.android.maps.OverlayItem; 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 import com.google.android.maps.MapView.LayoutParams;
  
 public class GoogleMapScreen extends MapActivity 
@@ -39,7 +47,49 @@ public class GoogleMapScreen extends MapActivity
     private MapView mapView; 
     private MapController mc;
     private GeoPoint p;
- 
+
+    private class OurOverlay extends ItemizedOverlay {
+	
+	private List<OverlayItem> items;
+	private Drawable marker;
+	
+	public OurOverlay(Drawable myMarker) {
+	    super(myMarker);
+	    items = new ArrayList();
+	    marker = myMarker;
+	}
+	
+	@Override
+	    protected OverlayItem createItem(int i) {
+	    return(items.get(i));
+	}
+	
+	@Override
+	    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+	    super.draw(canvas, mapView, shadow);
+	    boundCenterBottom(marker);
+	}
+	
+
+    @Override
+	protected boolean onTap(int pIndex) {
+	Toast.makeText(context,items.get(pIndex).getSnippet(), Toast.LENGTH_SHORT).show();
+	return true;
+    }
+    
+	@Override
+	    public int size() {
+	    return(items.size());
+	}
+
+	public void addItem(OverlayItem item) {
+		items.add(item);
+		populate();
+	}
+    }
+    
+
+
     class MapOverlay extends com.google.android.maps.Overlay
     {
         @Override
@@ -113,13 +163,23 @@ public class GoogleMapScreen extends MapActivity
 	
 	mc.animateTo(p);
 	mc.setZoom(16); 
-	mapView.invalidate();
+
+	// initialize icon
+	Drawable icon = getResources().getDrawable(R.drawable.pin2);
+	icon.setBounds(0, 0, 1,1);
+	//icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
 	
-	MapOverlay mapOverlay = new MapOverlay();
+
+	OurOverlay rlay = new OurOverlay(icon);
+	rlay.addItem(new OverlayItem(p,"hint1",controller.game.getCurrentHintView()));
+	
 	List<Overlay> listOfOverlays = mapView.getOverlays();
 	listOfOverlays.clear();
-	listOfOverlays.add(mapOverlay);        
-	
+	listOfOverlays.add(rlay);     
+ 
+
+
+
 	mapView.invalidate();
         
 	//End Display Map           
@@ -130,9 +190,21 @@ public class GoogleMapScreen extends MapActivity
 	
 	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
 					       locationListener);
-	
-        
+
+
+
+	    TextView  firstHelp= new TextView(this);
+	    firstHelp.setText("Press the marker location to get hints or info where to go next.");
+	    Toast toast = new Toast(this);
+	    toast.setView(firstHelp);
+	    toast.setDuration(Toast.LENGTH_LONG);
+	    toast.show();
+
     }
+
+
+
+
     private class MyLocationListener implements LocationListener {
     	public void onLocationChanged(Location location) {
 	    if(
@@ -157,6 +229,8 @@ public class GoogleMapScreen extends MapActivity
 	
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
+
+
 	
     }
     
