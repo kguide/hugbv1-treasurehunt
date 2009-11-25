@@ -1,6 +1,8 @@
 package hi.android.treasure.gui;
 
+import hi.android.treasure.data.DataAccess;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +14,8 @@ public class WelcomeScreen extends Activity {
 	private static final int ADVANCED_ID = Menu.FIRST;
 	private static final int HELP_ID = Menu.FIRST + 1;
 	private static final int SETTINGS_ID = Menu.FIRST + 2;
+	
+	Context context = this;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -33,8 +37,11 @@ public class WelcomeScreen extends Activity {
         statsButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent startStatsScreen = new Intent(WelcomeScreen.this,StatsScreen.class);
-				startActivity(startStatsScreen);
+				DataAccess.deleteGameFromAndroid(1, context);
+				DataAccess.deleteGameFromAndroid(3, context);
+				DataAccess.deleteGameFromAndroid(5, context);
+//				Intent startStatsScreen = new Intent(WelcomeScreen.this,StatsScreen.class);
+//				startActivity(startStatsScreen);
 			}
 		}); 
         

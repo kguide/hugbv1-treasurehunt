@@ -165,7 +165,7 @@ public class GoogleMapScreen extends MapActivity
 	mc.setZoom(16); 
 
 	// initialize icon
-	Drawable icon = getResources().getDrawable(R.drawable.pin2);
+	Drawable icon = getResources().getDrawable(R.drawable.pin);
 	icon.setBounds(0, 0, 1,1);
 	//icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
 	

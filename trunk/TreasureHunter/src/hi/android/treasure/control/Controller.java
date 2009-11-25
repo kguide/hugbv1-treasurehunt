@@ -136,6 +136,10 @@ public class Controller {
 	public void sendFinishedGamesOnline(Context context) {
 		DataAccess.sendFinishedGamesOnline(player.getId(),context);
 	}
+
+	public void signPlayerInGameOnline() {
+		DataAccess.signPlayerInGameOnline(this.game.getGameId(), this.player.getId());
+	}
 }
 
 

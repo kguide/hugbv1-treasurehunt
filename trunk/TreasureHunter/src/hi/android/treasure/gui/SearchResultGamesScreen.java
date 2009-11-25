@@ -75,13 +75,14 @@ public class SearchResultGamesScreen extends ListActivity {
                    Game selectedGame = (Game) listView.getAdapter().getItem(menuInfo.position);
                    controller.getGame(selectedGame.getGameId(), context);
                    
+                   controller.signPlayerInGameOnline();
+                   
                    // TODO This is not something that a GUI object should do. Needs to be fixed !
                    controller.game.save(controller.player.getId(),context);
                    
                    Intent startGoogleMapScreen = new Intent(SearchResultGamesScreen.this,GoogleMapScreen.class);
                    
                    startActivity(startGoogleMapScreen);
-
 
                    return true; /* true means: "we handled the event". */
          }

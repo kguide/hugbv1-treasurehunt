@@ -222,6 +222,7 @@ public class GameDB {
     		this.db.delete(GameDB.DB_TABLE_COORDINATE, "gameId=" + gameId, null);
         	this.db.delete(GameDB.DB_TABLE_HINT, "gameId=" + gameId, null);
             this.db.delete(GameDB.DB_TABLE_GAME, "gameId=" + gameId, null);
+            this.db.delete(GameDB.DB_TABLE_PLAYERSGAMES, "gameId=" + gameId, null);
     	}catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -298,7 +299,7 @@ public class GameDB {
                 	game = getGame(currentGameId);
                 	arrayOfGames.add(game);
                 	cPlayersGames.moveToNext();
-				} while (cPlayersGames.isLast());
+				} while (!cPlayersGames.isAfterLast());
 
             }
         } catch (SQLException e) {

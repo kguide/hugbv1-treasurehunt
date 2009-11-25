@@ -196,5 +196,9 @@ public class DataAccess {
 		}
 	}
 
+	public static void signPlayerInGameOnline(int gameId, int playerId) {
+		ServerConnection.signPlayerOnline(gameId, playerId);
+	}
+
 }
 
