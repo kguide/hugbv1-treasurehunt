@@ -124,5 +124,20 @@ public class MyGamesScreen extends ListActivity {
     	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
     	return true;
     }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+    	switch(item.getItemId()){
+    	case HELP_ID:
+    		Intent startHelpScreen = new Intent(MyGamesScreen.this,HintScreen.class);
+//    		
+    		startHelpScreen.putExtra("helpStringId", R.string.allPlayers);
+    		startActivity(startHelpScreen);
+    		
+    	}
+    	
+    	
+    	return true;
+    }
 
 }

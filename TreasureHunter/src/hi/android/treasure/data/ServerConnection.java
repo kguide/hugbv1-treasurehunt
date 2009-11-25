@@ -235,8 +235,8 @@ public class ServerConnection {
 		
 	}
 
-	public static void removeUserFromSelectedGameOnline(int gameId, int userId) {
-		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&userId="+userId;
+	public static void removeUserFromSelectedGameOnline(int gameId, int playerId) {
+		String connectionString = domainString + "controller.php?method=removeUserFromGame&gameId=" + gameId+"&userId="+playerId;
 		@SuppressWarnings("unused")
 		String replyString = serverReply(connectionString);	
 		//replystring is not being used.
@@ -248,6 +248,11 @@ public class ServerConnection {
 		@SuppressWarnings("unused")
 		String JSONReplyString = serverReply(connectionString);	
 		// Server reply is not used right now.
+	}
+
+	public static void signPlayerOnline(int gameId, int playerId) {
+		String connectionString = domainString + "controller.php?method=addUserToGame&gameId=" + gameId+"&userId="+playerId;
+		String replyString = serverReply(connectionString);	
 	}
 	
 }

@@ -64,7 +64,7 @@ public class HintScreen extends Activity {
     public void updateView() {
 
 	TextView myTextBox = (TextView) findViewById(R.id.hintTexti);
-	myTextBox.setText(controller.getCurrentHint());
+	myTextBox.setText(controller.getCurrentHintText());
 	hintNr = (TextView) findViewById(R.id.hintNr);
 	hintNr.setText("Hint Nr: " +  ((String)Integer.toString(controller.game.getCurrentHintViewNr()+1)));
 	//controller.game.setToLast();
