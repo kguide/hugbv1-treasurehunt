@@ -179,7 +179,7 @@ public class GoogleMapScreen extends MapActivity
 		// Set up the location listener to listen for new GPS locations
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locationListener = new MyLocationListener();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 100,
 						       locationListener);
 		
 		// Display the Welcome text.
@@ -193,7 +193,6 @@ public class GoogleMapScreen extends MapActivity
 		       });
 		AlertDialog alert = builder.create();
 		alert.show();
-
     }
 
     
@@ -208,9 +207,6 @@ public class GoogleMapScreen extends MapActivity
 						 latitude,
 						 longitude, 
 						 100)) {			    
-			//controller.game.save(controller.player.getId(),context);
-			
-			// Create icon and add to list. Refresh map
 			
 			p = new GeoPoint(
 					(int) (controller.game.getNextCoordinate().getLatitude() * 1E6), 
@@ -220,12 +216,10 @@ public class GoogleMapScreen extends MapActivity
 			icon.setBounds(0, 0, 1,1);
 			
 			controller.game.incrementCoordinate();
+//			controller.game.save(controller.player.getId(),context);
 			
 			ourOverlay.addItem(new OverlayItem(p,"hint1",controller.game.getNextHintText()));
 			
-//			List<Overlay> listOfOverlays = mapView.getOverlays();
-//			listOfOverlays.clear();
-//			listOfOverlays.add(ourOverlay);    
 		    }
     	}
 	
