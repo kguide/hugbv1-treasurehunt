@@ -3,36 +3,30 @@ package hi.android.treasure.gui;
 import hi.android.treasure.control.Controller;
 import hi.android.treasure.control.Game.Coordinate;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import android.os.Bundle;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Paint;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.view.View;
-import android.widget.LinearLayout;
-
-import android.widget.TextView;
+import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.android.maps.ItemizedOverlay; 
-import com.google.android.maps.OverlayItem; 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
-import com.google.android.maps.MapView.LayoutParams;
  
 public class GoogleMapScreen extends MapActivity 
 {    
@@ -65,12 +59,11 @@ public class GoogleMapScreen extends MapActivity
 	}
 	
 	@Override
-	    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
 	    super.draw(canvas, mapView, shadow);
 	    boundCenterBottom(marker);
 	}
 	
-
     @Override
 	protected boolean onTap(int pIndex) {
     	Toast.makeText(context,items.get(pIndex).getSnippet(), Toast.LENGTH_SHORT).show();
@@ -179,36 +172,44 @@ public class GoogleMapScreen extends MapActivity
 		locationListener = new MyLocationListener();
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
 						       locationListener);
-	
-		// 
-	    String helpText = "You now see a pin for the first location you need to go to. Once you get there you will be able to click it and get your first hint. See the Help in the Menu for more information.";
-	    Toast.makeText(getBaseContext(),helpText , 
-                Toast.LENGTH_LONG).show();
+		
+		// Display the Welcome text.
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Welcome to Treasure Hunter ! Please go to Help in the Menu if are new to the game.")
+		       .setCancelable(false)
+		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   dialog.cancel();
+		           }
+		       });
+		AlertDialog alert = builder.create();
+		alert.show();
+
     }
 
+    
     private class MyLocationListener implements LocationListener {
     	public void onLocationChanged(Location location) {
-	    if(
-	       controller.checkGPSRadius(  //check if we are within the radius.
-					 location.getLatitude(),location.getLongitude(),
-					 controller.game.getCurrentCoordinate().getLatitude(),
-					 controller.game.getCurrentCoordinate().getLongitude(), 
-					 TRIGGER_RADIUS)) {			    
-		controller.game.incrementCoordinate();
-		controller.game.save(controller.player.getId(),context);
-		
-		Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
-		startActivity(startHintScreen);
-	    }
-	}
+    		
+    		//check if we are within the radius.
+		    if(controller.checkGPSRadius(  
+						 location.getLatitude(),location.getLongitude(),
+						 controller.game.getCurrentCoordinate().getLatitude(),
+						 controller.game.getCurrentCoordinate().getLongitude(), 
+						 TRIGGER_RADIUS)) {			    
+			controller.game.incrementCoordinate();
+			controller.game.save(controller.player.getId(),context);
+			
+			Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
+			startActivity(startHintScreen);
+		    }
+    	}
 	
-	public void onProviderDisabled(String provider) {
+    	public void onProviderDisabled(String provider) {
+	}	
+    	public void onProviderEnabled(String provider) {
 	}
-	
-	public void onProviderEnabled(String provider) {
-	}
-	
-	public void onStatusChanged(String provider, int status, Bundle extras) {
+    	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
 
