@@ -45,7 +45,7 @@ public class GoogleMapScreen extends MapActivity
     private LocationListener locationListener=null;
 
     private MapView mapView; 
-    private MapController mc;
+    private MapController mapController;
     private GeoPoint p;
 
     private class OurOverlay extends ItemizedOverlay {
@@ -88,8 +88,6 @@ public class GoogleMapScreen extends MapActivity
 	}
 }
     
-
-
     class MapOverlay extends com.google.android.maps.Overlay
     {
         @Override
@@ -123,79 +121,70 @@ public class GoogleMapScreen extends MapActivity
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-	double params[] = null;
+        double params[] = null;
 	
-	Bundle bundle = this.getIntent().getExtras();
-	if (bundle != null ) {
-	    params = bundle.getDoubleArray("myLocation");
-	}
+		Bundle bundle = this.getIntent().getExtras();
+		if (bundle != null ) {
+		    params = bundle.getDoubleArray("myLocation");
+		}
 	
-	//Begin Display Map        
-    setContentView(R.layout.google_maps);
+		// Begin Display Map  
+		//----------------------------------------------------------------------------------------------------------
+	    setContentView(R.layout.google_maps);
+	
+	    mapView = (MapView) findViewById(R.id.googleMapsMapview);
+	    mapView.setBuiltInZoomControls(true);   	
+        mapController = mapView.getController();
+	
+	        // Get the first coordinate and move the map to it.
+        	//******************************************************************************************************
+	        Coordinate coordinate = controller.game.getCurrentCoordinate();
+	        double latitude = coordinate.getLatitude();
+	        double longitude = coordinate.getLongitude();
+		
+			if (params != null) {
+			    latitude = params[0];
+			    longitude = params[1];
+			}
+		
+			p = new GeoPoint(
+					(int) (latitude * 1E6), 
+					(int) (longitude * 1E6));
+		
+			mapController.animateTo(p);
+			mapController.setZoom(16);
+			//******************************************************************************************************
+		//----------------------------------------------------------------------------------------------------------
+		
+			
+		// Add icon for first coordinate location 
+		//----------------------------------------------------------------------------------------------------------
+		Drawable icon = getResources().getDrawable(R.drawable.pin);
+		icon.setBounds(0, 0, 1,1);
+	
+		OurOverlay rlay = new OurOverlay(icon);
+		rlay.addItem(new OverlayItem(p,"hint1",controller.game.getCurrentHintView()));
+		
+		List<Overlay> listOfOverlays = mapView.getOverlays();
+		listOfOverlays.clear();
+		listOfOverlays.add(rlay);     
+		//----------------------------------------------------------------------------------------------------------
 
-    mapView = (MapView) findViewById(R.id.googleMapsMapview);
-    mapView.setBuiltInZoomControls(true);
+		mapView.invalidate();
         
-     	
-	mc = mapView.getController();
-	
-	
-	Coordinate coordinate = controller.game.getCurrentCoordinate();
-	double latitude = coordinate.getLatitude();
-	double longitude = coordinate.getLongitude();
-	
-	if (params != null) {
-	    latitude = params[0];
-	    longitude = params[1];
-	}
-	
-	p = new GeoPoint(
-			 (int) (latitude * 1E6), 
-			 (int) (longitude * 1E6));
-	
-	mc.animateTo(p);
-	mc.setZoom(16); 
+		//End Display Map           
 
-	// initialize icon
-	Drawable icon = getResources().getDrawable(R.drawable.pin);
-	icon.setBounds(0, 0, 1,1);
-	//icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+		// Set up the location listener to listen for new GPS locations
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationListener = new MyLocationListener();
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+						       locationListener);
 	
-
-	OurOverlay rlay = new OurOverlay(icon);
-	rlay.addItem(new OverlayItem(p,"hint1",controller.game.getCurrentHintView()));
-	
-	List<Overlay> listOfOverlays = mapView.getOverlays();
-	listOfOverlays.clear();
-	listOfOverlays.add(rlay);     
- 
-
-
-
-	mapView.invalidate();
-        
-	//End Display Map           
-	
-	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-	
-	locationListener = new MyLocationListener();
-	
-	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
-					       locationListener);
-
-
-
-    TextView  firstHelp= new TextView(this);
-    firstHelp.setText("Press the marker location to get hints or info where to go next.");
-    Toast toast = new Toast(this);
-    toast.setView(firstHelp);
-    toast.setDuration(Toast.LENGTH_LONG);
-    toast.show();
-
+		// 
+	    String helpText = "You now see a pin for the first location you need to go to. Once you get there you will be able to click it and get your first hint. See the Help in the Menu for more information.";
+	    Toast.makeText(getBaseContext(),helpText , 
+                Toast.LENGTH_LONG).show();
     }
-
-
-
 
     private class MyLocationListener implements LocationListener {
     	public void onLocationChanged(Location location) {
