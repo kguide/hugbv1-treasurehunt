@@ -32,8 +32,9 @@ public class GoogleMapScreen extends MapActivity
     Context context = this;
 	
     private OurOverlay ourOverlay;
+    private OurOverlay oldHint;
     
-    private static final double TRIGGER_RADIUS = 500.0; // in meters.
+    private static final double TRIGGER_RADIUS = 40.0; // in meters.
 	
     private LocationManager locationManager=null;
     private LocationListener locationListener=null;
@@ -54,189 +55,177 @@ public class GoogleMapScreen extends MapActivity
 	}
 	
 	@Override
-    protected OverlayItem createItem(int i) {
+	    protected OverlayItem createItem(int i) {
 	    return(items.get(i));
 	}
 	
 	@Override
-	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+	    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
 	    super.draw(canvas, mapView, shadow);
 	    boundCenterBottom(marker);
 	}
 	
-    @Override
-	protected boolean onTap(int pIndex) {    	
-    	AlertDialog.Builder markerHintDialog = new AlertDialog.Builder(context);
-    	markerHintDialog.setMessage(items.get(pIndex).getSnippet())
-    	       .setCancelable(false)
-    	       .setPositiveButton("Close", new DialogInterface.OnClickListener() {
-    	           public void onClick(DialogInterface dialog, int id) {
-   	                dialog.cancel();
-    	           }
-    	       });
-    	markerHintDialog.show();    	
-    return true;
-    }
+	@Override
+	    protected boolean onTap(int pIndex) {    	
+	    AlertDialog.Builder markerHintDialog = new AlertDialog.Builder(context);
+	    markerHintDialog.setMessage(items.get(pIndex).getSnippet())
+		.setCancelable(false)
+		.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+			    dialog.cancel();
+			}
+		    });
+	    markerHintDialog.show();    	
+	    return true;
+	}
     
 	@Override
-    public int size() {
+	    public int size() {
 	    return(items.size());
 	}
 
 	public void addItem(OverlayItem item) {
-		items.clear();
-		items.add(item);
-		populate();
+	    items.clear();
+	    items.add(item);
+	    populate();
 	}
-}
-    
-    class MapOverlay extends com.google.android.maps.Overlay
-    {
-        @Override
-	    public boolean draw(Canvas canvas, MapView mapView, 
-				boolean shadow, long when) 
-        {
-	    
-            super.draw(canvas, mapView, shadow);
-            
-	    Paint paint = new Paint();
-	    
-            //---translate the GeoPoint to screen pixels---
-            Point screenPts = new Point();
-            mapView.getProjection().toPixels(p, screenPts);
-	    
-	    //---add the marker---
-	    //Bitmap bmp = BitmapFactory.decodeResource(
-	    //    getResources(), R.drawable.icon); 
-	    //canvas.drawBitmap(bmp, screenPts.x, screenPts.y-50, null); 
-	    paint.setStrokeWidth(1);
-	    paint.setARGB(255, 255, 0, 0);
-	    paint.setStyle(Paint.Style.STROKE);
-	    canvas.drawText("X", screenPts.x, screenPts.y, paint);
-	    //canvas.drawBitmap(bmp, myScreenCoords.x, myScreenCoords.y, paint);
-            return true;
-        }
-    } 
+
+	public OverlayItem getCurrent() {
+	    return items.get(0);
+	}
+    }
     
     /** Called when the activity is first created. */
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        double params[] = null;
+	/* obsolete, used to pass parameters from hintscreen
+	   double params[] = null;
+	   Bundle bundle = this.getIntent().getExtras();
+	   if (bundle != null ) {
+	   params = bundle.getDoubleArray("myLocation");
+	   }
+	*/
 	
-		Bundle bundle = this.getIntent().getExtras();
-		if (bundle != null ) {
-		    params = bundle.getDoubleArray("myLocation");
-		}
+	// Begin Display Map  
+	//----------------------------------------------------------------------------------------------------------
+	setContentView(R.layout.google_maps);
 	
-		// Begin Display Map  
-		//----------------------------------------------------------------------------------------------------------
-	    setContentView(R.layout.google_maps);
-	
-	    mapView = (MapView) findViewById(R.id.googleMapsMapview);
-	    mapView.setBuiltInZoomControls(true);   	
+	mapView = (MapView) findViewById(R.id.googleMapsMapview);
+	mapView.setBuiltInZoomControls(true);   	
         mapController = mapView.getController();
 	
-	        // Get the first coordinate and move the map to it.
-        	//******************************************************************************************************
-	        Coordinate coordinate = controller.game.getCurrentCoordinate();
-	        double latitude = coordinate.getLatitude();
-	        double longitude = coordinate.getLongitude();
-		
-			if (params != null) {
-			    latitude = params[0];
-			    longitude = params[1];
-			}
-		
-			p = new GeoPoint(
-					(int) (latitude * 1E6), 
-					(int) (longitude * 1E6));
-		
-			mapController.animateTo(p);
-			mapController.setZoom(16);
-			//******************************************************************************************************
-		//----------------------------------------------------------------------------------------------------------
-		
-			
-		// Add icon for first coordinate location 
-		//----------------------------------------------------------------------------------------------------------
-		Drawable icon = getResources().getDrawable(R.drawable.pushpin);
-		icon.setBounds(0, 0, 1,1);
+	// Get the first coordinate and move the map to it.
+	//******************************************************************************************************
+	Coordinate coordinate = controller.game.getCurrentCoordinate();
+	double latitude = coordinate.getLatitude();
+	double longitude = coordinate.getLongitude();
 	
-		ourOverlay = new OurOverlay(icon);
-		ourOverlay.addItem(new OverlayItem(p,"hint1",controller.game.getCurrentHintView()));
-		
-		List<Overlay> listOfOverlays = mapView.getOverlays();
-//		listOfOverlays.clear();
-		listOfOverlays.add(ourOverlay);     
-		//----------------------------------------------------------------------------------------------------------
-
-		mapView.invalidate();
-        
-		//End Display Map           
-
-		// Set up the location listener to listen for new GPS locations
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationListener = new MyLocationListener();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 100,
-						       locationListener);
-		
-		// Display the Welcome text.
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Welcome to Treasure Hunter ! Please go to Help in the Menu if are new to the game.")
-		       .setCancelable(false)
-		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   dialog.cancel();
-		           }
-		       });
-		AlertDialog alert = builder.create();
-		alert.show();
+	/* used to get params from hint screen, obosolete
+	   if (params != null) {
+	   latitude = params[0];
+	   longitude = params[1];
+	   }
+	*/
+	p = new GeoPoint(
+			 (int) (latitude * 1E6), 
+			 (int) (longitude * 1E6));
+	
+	mapController.animateTo(p);
+	mapController.setZoom(16);
+	//******************************************************************************************************
+	//----------------------------------------------------------------------------------------------------------
+	
+	
+	// Add icon for first coordinate location 
+	//----------------------------------------------------------------------------------------------------------
+	Drawable icon = getResources().getDrawable(R.drawable.pushpin);
+	icon.setBounds(0, 0, 1,1);
+	
+	ourOverlay = new OurOverlay(icon);
+	
+	ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getCurrentHintView()));
+	
+	List<Overlay> listOfOverlays = mapView.getOverlays();
+	listOfOverlays.clear();
+	listOfOverlays.add(ourOverlay);     
+	//----------------------------------------------------------------------------------------------------------
+	
+	mapView.invalidate();
+	
+	//End Display Map           
+	
+	// Set up the location listener to listen for new GPS locations
+	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	locationListener = new MyLocationListener();
+	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 100,
+					       locationListener);
+	
+	// Display the Welcome text.
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	builder.setMessage("Welcome to Treasure Hunter ! Please go to Help in the Menu if are new to the game.")
+	    .setCancelable(false)
+	    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int id) {
+			dialog.cancel();
+		    }
+		});
+	AlertDialog alert = builder.create();
+	alert.show();
     }
-
+    
     
     private class MyLocationListener implements LocationListener {
-    	public void onLocationChanged(Location location) {
-    		
-    		double latitude = controller.game.getNextCoordinate().getLatitude();
-    		double longitude = controller.game.getNextCoordinate().getLongitude();
-    		//check if we are within the radius.
-		    if(controller.checkGPSRadius(  
-						 location.getLatitude(),location.getLongitude(),
-						 latitude,
-						 longitude, 
-						 100)) {			    
-			
-			p = new GeoPoint(
-					(int) (controller.game.getNextCoordinate().getLatitude() * 1E6), 
-					(int) (controller.game.getNextCoordinate().getLongitude() * 1E6));
-			
-			Drawable icon = getResources().getDrawable(R.drawable.pushpin);
-			icon.setBounds(0, 0, 1,1);
-			
-			controller.game.incrementCoordinate();
-//			controller.game.save(controller.player.getId(),context);
-			
-			ourOverlay.addItem(new OverlayItem(p,"hint1",controller.game.getNextHintText()));
-			
-		    }
-    	}
+	public void onLocationChanged(Location location) {
+	    
+	    double latitude = controller.game.getNextCoordinate().getLatitude();
+	    double longitude = controller.game.getNextCoordinate().getLongitude();
+	    //check if we are within the radius.
+	    if(controller.checkGPSRadius(  
+					 location.getLatitude(),location.getLongitude(),
+					 latitude,
+					 longitude, 
+					 100)) {			    
+		
+		p = new GeoPoint(
+				 (int) (controller.game.getNextCoordinate().getLatitude() * 1E6), 
+				 (int) (controller.game.getNextCoordinate().getLongitude() * 1E6));
+		
+		
+		
+		Drawable icon = getResources().getDrawable(R.drawable.pushpin);
+		icon.setBounds(0, 0, 1,1);
+		
+		controller.game.incrementCoordinate();
+		//controller.game.save(controller.player.getId(),context);
+		if (oldHint == null) {  // We dont want to create the overlay over and over again.
+		    
+		    oldHint = new OurOverlay( getResources()
+					      .getDrawable(R.drawable.donehint));
+		    OverlayItem tempItem = ourOverlay.getCurrent();
+		    oldHint.addItem(tempItem);
+		}
+		
+		ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getNextHintText()));
+		
+	    }
+	}
 	
-    	public void onProviderDisabled(String provider) {
+	public void onProviderDisabled(String provider) {
 	}	
-    	public void onProviderEnabled(String provider) {
+	public void onProviderEnabled(String provider) {
 	}
-    	public void onStatusChanged(String provider, int status, Bundle extras) {
+	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
-
-
+	
+	
 	
     }
     
     @Override
 	protected boolean isRouteDisplayed() {
-        return false;
+	return false;
     }
     
 }
