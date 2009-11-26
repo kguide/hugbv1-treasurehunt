@@ -60,7 +60,7 @@ public class GoogleMapScreen extends MapActivity
 	}
 	
 	@Override
-	    protected OverlayItem createItem(int i) {
+    protected OverlayItem createItem(int i) {
 	    return(items.get(i));
 	}
 	
@@ -73,12 +73,12 @@ public class GoogleMapScreen extends MapActivity
 
     @Override
 	protected boolean onTap(int pIndex) {
-	Toast.makeText(context,items.get(pIndex).getSnippet(), Toast.LENGTH_SHORT).show();
+    	Toast.makeText(context,items.get(pIndex).getSnippet(), Toast.LENGTH_SHORT).show();
 	return true;
     }
     
 	@Override
-	    public int size() {
+    public int size() {
 	    return(items.size());
 	}
 
@@ -86,7 +86,7 @@ public class GoogleMapScreen extends MapActivity
 		items.add(item);
 		populate();
 	}
-    }
+}
     
 
 
