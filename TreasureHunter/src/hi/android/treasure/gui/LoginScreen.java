@@ -31,7 +31,7 @@ public class LoginScreen extends Activity {
 				String password = passwordET.getText().toString();
 				
 				if(controller.logIn(username, password, context)){
-					openWelcomeScreen();
+					openPlayScreen();
 				}
 				else{
 					errorTV.setText("Wrong username or password");
@@ -49,9 +49,9 @@ public class LoginScreen extends Activity {
 	});
 	}
 
-	public void openWelcomeScreen(){
+	public void openPlayScreen(){
 		// We will have to pass the controller object in the intent as well. Probably using a bundle.
-		Intent startWelcomeScreen = new Intent(LoginScreen.this,WelcomeScreen.class);
-		startActivity(startWelcomeScreen);
+		Intent startPlayScreen = new Intent(LoginScreen.this,PlayScreen.class);
+		startActivity(startPlayScreen);
 	}
 }
