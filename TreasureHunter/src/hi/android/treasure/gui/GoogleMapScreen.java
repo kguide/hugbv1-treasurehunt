@@ -9,7 +9,6 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -32,6 +31,8 @@ public class GoogleMapScreen extends MapActivity
     Controller controller = Controller.getInstance();
     Context context = this;
 	
+    private OurOverlay ourOverlay;
+    
     private static final double TRIGGER_RADIUS = 500.0; // in meters.
 	
     private LocationManager locationManager=null;
@@ -83,6 +84,7 @@ public class GoogleMapScreen extends MapActivity
 	}
 
 	public void addItem(OverlayItem item) {
+		items.clear();
 		items.add(item);
 		populate();
 	}
@@ -162,12 +164,12 @@ public class GoogleMapScreen extends MapActivity
 		Drawable icon = getResources().getDrawable(R.drawable.pushpin);
 		icon.setBounds(0, 0, 1,1);
 	
-		OurOverlay rlay = new OurOverlay(icon);
-		rlay.addItem(new OverlayItem(p,"hint1",controller.game.getCurrentHintView()));
+		ourOverlay = new OurOverlay(icon);
+		ourOverlay.addItem(new OverlayItem(p,"hint1",controller.game.getCurrentHintView()));
 		
 		List<Overlay> listOfOverlays = mapView.getOverlays();
-		listOfOverlays.clear();
-		listOfOverlays.add(rlay);     
+//		listOfOverlays.clear();
+		listOfOverlays.add(ourOverlay);     
 		//----------------------------------------------------------------------------------------------------------
 
 		mapView.invalidate();
@@ -198,17 +200,32 @@ public class GoogleMapScreen extends MapActivity
     private class MyLocationListener implements LocationListener {
     	public void onLocationChanged(Location location) {
     		
+    		double latitude = controller.game.getNextCoordinate().getLatitude();
+    		double longitude = controller.game.getNextCoordinate().getLongitude();
     		//check if we are within the radius.
 		    if(controller.checkGPSRadius(  
 						 location.getLatitude(),location.getLongitude(),
-						 controller.game.getCurrentCoordinate().getLatitude(),
-						 controller.game.getCurrentCoordinate().getLongitude(), 
-						 TRIGGER_RADIUS)) {			    
-			controller.game.incrementCoordinate();
-			controller.game.save(controller.player.getId(),context);
+						 latitude,
+						 longitude, 
+						 100)) {			    
+			//controller.game.save(controller.player.getId(),context);
 			
-			Intent startHintScreen = new Intent(GoogleMapScreen.this,HintScreen.class);
-			startActivity(startHintScreen);
+			// Create icon and add to list. Refresh map
+			
+			p = new GeoPoint(
+					(int) (controller.game.getNextCoordinate().getLatitude() * 1E6), 
+					(int) (controller.game.getNextCoordinate().getLongitude() * 1E6));
+			
+			Drawable icon = getResources().getDrawable(R.drawable.pushpin);
+			icon.setBounds(0, 0, 1,1);
+			
+			controller.game.incrementCoordinate();
+			
+			ourOverlay.addItem(new OverlayItem(p,"hint1",controller.game.getNextHintText()));
+			
+//			List<Overlay> listOfOverlays = mapView.getOverlays();
+//			listOfOverlays.clear();
+//			listOfOverlays.add(ourOverlay);    
 		    }
     	}
 	
