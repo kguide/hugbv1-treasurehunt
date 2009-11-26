@@ -131,20 +131,12 @@ public class GoogleMapScreen extends MapActivity
 	}
 	
 	//Begin Display Map        
-        setContentView(R.layout.google_maps);
-	
-        mapView = (MapView) findViewById(R.id.googleMapsMapview);
-        LinearLayout zoomLayout = (LinearLayout)findViewById(R.id.googleMapsZoom);  
-        View zoomView = mapView.getZoomControls(); 
-	
-        zoomLayout.addView(
-			   zoomView, 
-			   new LinearLayout.LayoutParams(
-							 LayoutParams.WRAP_CONTENT, 
-							 LayoutParams.WRAP_CONTENT)); 
-        mapView.displayZoomControls(true);
+    setContentView(R.layout.google_maps);
+
+    mapView = (MapView) findViewById(R.id.googleMapsMapview);
+    mapView.setBuiltInZoomControls(true);
         
-	
+     	
 	mc = mapView.getController();
 	
 	
@@ -193,12 +185,12 @@ public class GoogleMapScreen extends MapActivity
 
 
 
-	    TextView  firstHelp= new TextView(this);
-	    firstHelp.setText("Press the marker location to get hints or info where to go next.");
-	    Toast toast = new Toast(this);
-	    toast.setView(firstHelp);
-	    toast.setDuration(Toast.LENGTH_LONG);
-	    toast.show();
+    TextView  firstHelp= new TextView(this);
+    firstHelp.setText("Press the marker location to get hints or info where to go next.");
+    Toast toast = new Toast(this);
+    toast.setView(firstHelp);
+    toast.setDuration(Toast.LENGTH_LONG);
+    toast.show();
 
     }
 
