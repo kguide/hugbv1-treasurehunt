@@ -159,7 +159,7 @@ public class GoogleMapScreen extends MapActivity
 			
 		// Add icon for first coordinate location 
 		//----------------------------------------------------------------------------------------------------------
-		Drawable icon = getResources().getDrawable(R.drawable.pin);
+		Drawable icon = getResources().getDrawable(R.drawable.pushpin);
 		icon.setBounds(0, 0, 1,1);
 	
 		OurOverlay rlay = new OurOverlay(icon);
