@@ -1,5 +1,7 @@
 package hi.android.treasure.gui;
 
+import hi.android.treasure.control.Controller;
+import hi.android.treasure.control.Player;
 import hi.android.treasure.data.DataAccess;
 import android.app.Activity;
 import android.content.Context;
@@ -17,11 +19,16 @@ public class WelcomeScreen extends Activity {
 	
 	Context context = this;
 	
+	Controller controller = Controller.getInstance();
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcomescreen);
+        
+        // Hax to initialize the player, should be removed once debugging is complete.
+        controller.logIn("test@test.is", "test", context);
         
         Button playButton = (Button) findViewById(R.id.ButtonWelcomeScreenPlay);
         playButton.setOnClickListener(new Button.OnClickListener() {
