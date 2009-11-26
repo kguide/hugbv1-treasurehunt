@@ -180,8 +180,8 @@ public class Game {
 	}
     }
 
-    public String getCurrentHintText() {
-	return hints.get(currentCoordinateId - 1).getHintText();
+    public String getNextHintText() {
+	return hints.get(currentCoordinateId).getHintText();
 
     }
 
@@ -246,7 +246,7 @@ public class Game {
      * @return : int, number of hint being viewed
      */
     public int getCurrentHintViewNr() {
-	return currentView;
+    	return currentView;
     }
 
     /**
@@ -254,7 +254,7 @@ public class Game {
      * @return : String the current view hint
      */
     public String getCurrentHintView() {
-	return hints.get(currentView).getHintText();
+    	return hints.get(currentView).getHintText();
     }
     
     /**
