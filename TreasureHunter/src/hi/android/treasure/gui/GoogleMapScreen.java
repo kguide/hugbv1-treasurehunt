@@ -18,7 +18,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -65,9 +64,17 @@ public class GoogleMapScreen extends MapActivity
 	}
 	
     @Override
-	protected boolean onTap(int pIndex) {
-    	Toast.makeText(context,items.get(pIndex).getSnippet(), Toast.LENGTH_SHORT).show();
-	return true;
+	protected boolean onTap(int pIndex) {    	
+    	AlertDialog.Builder markerHintDialog = new AlertDialog.Builder(context);
+    	markerHintDialog.setMessage(items.get(pIndex).getSnippet())
+    	       .setCancelable(false)
+    	       .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+   	                dialog.cancel();
+    	           }
+    	       });
+    	markerHintDialog.show();    	
+    return true;
     }
     
 	@Override
