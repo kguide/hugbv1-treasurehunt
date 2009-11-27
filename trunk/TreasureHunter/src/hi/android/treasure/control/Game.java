@@ -186,7 +186,7 @@ public class Game {
     }
 
     public boolean isLastCoordinate(){
-	return currentCoordinateId == numberOfCoordinates ? true:false;
+	return currentCoordinateId == numberOfCoordinates - 1 ? true:false;
     }
 
     public void setGameFinished(boolean gameFinished) {

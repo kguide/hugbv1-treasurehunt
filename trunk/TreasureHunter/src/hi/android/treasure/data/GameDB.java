@@ -241,6 +241,7 @@ public class GameDB {
                 game.setGameId(cGame.getInt(0));
                 game.setGameName(cGame.getString(1));
                 game.setCurrentCoordinateId(cGame.getInt(2));
+                game.setGameFinished(1 == cGame.getInt(3)); // the game is finished if gameFinished == 1
             }
             
             cCoordinate = this.db.query(true, GameDB.DB_TABLE_COORDINATE, GameDB.COORDINATE_COLS, "gameId = '" + gameId + "'", null, null, null, null,
