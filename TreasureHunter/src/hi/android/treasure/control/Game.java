@@ -253,8 +253,8 @@ public class Game {
      * returns the current view hint String
      * @return : String the current view hint
      */
-    public String getCurrentHintView() {
-    	return hints.get(currentView).getHintText();
+    public String getCurrentHintText() {
+    	return hints.get(currentCoordinateId).getHintText();
     }
     
     /**
