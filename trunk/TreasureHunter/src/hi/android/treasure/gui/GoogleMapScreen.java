@@ -163,7 +163,7 @@ public class GoogleMapScreen extends MapActivity
 	
 	oldHint = new OurOverlay(getResources().getDrawable(R.drawable.donehint));
 	
-	ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getCurrentHintView()));
+	ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getCurrentHintText()));
 
 	
 	List<Overlay> listOfOverlays = mapView.getOverlays();
