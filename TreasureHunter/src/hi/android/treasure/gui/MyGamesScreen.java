@@ -61,7 +61,9 @@ public class MyGamesScreen extends ListActivity {
         sendGamesButton.setOnClickListener(new Button.OnClickListener() {												
 			@Override
 			public void onClick(View v) {
-				controller.sendFinishedGamesOnline(context);
+				controller.sendFinishedGamesOnline(context); //This also deletes the games from the phone
+				arrayOfGames = controller.getUsersGamesOnAndroid(context);
+				initListView();
 		}
 	});
     }
