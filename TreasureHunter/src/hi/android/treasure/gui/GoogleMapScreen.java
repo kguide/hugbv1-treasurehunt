@@ -205,7 +205,7 @@ public class GoogleMapScreen extends MapActivity
 					 location.getLatitude(),location.getLongitude(),
 					 latitude,
 					 longitude, 
-					 50)) {			    
+					 TRIGGER_RADIUS)) {			    
 		
 		//Log.d("mapscreenInfo", "inside If");
 		
