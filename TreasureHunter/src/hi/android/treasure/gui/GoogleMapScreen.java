@@ -10,16 +10,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -58,14 +54,14 @@ public class GoogleMapScreen extends MapActivity
     private GeoPoint p;
     private GeoPoint p2;
 
-    private class OurOverlay extends ItemizedOverlay {
+    private class OurOverlay extends ItemizedOverlay<OverlayItem> {
 	
 	private List<OverlayItem> items;
 	private Drawable marker;
 	
 	public OurOverlay(Drawable myMarker) {
 	    super(myMarker);
-	    items = new ArrayList();
+	    items = new ArrayList<OverlayItem>();
 	    marker = myMarker;
 	    populate();
 	}
@@ -115,9 +111,7 @@ public class GoogleMapScreen extends MapActivity
 	    populate();
 	}
 
-	public OverlayItem getCurrent() {
-	    return items.get(0);
-	}
+	
     }
     
     /** Called when the activity is first created. */
