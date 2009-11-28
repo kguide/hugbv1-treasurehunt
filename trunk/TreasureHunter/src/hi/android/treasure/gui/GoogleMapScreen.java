@@ -105,12 +105,13 @@ public class GoogleMapScreen extends MapActivity
 	public void addItem(OverlayItem item) {
 	    items.clear();
 	    items.add(item);
+	    setLastFocusedIndex(-1); 
 	    populate();
 	}
 	
 	public void addItemNotDelete(OverlayItem item) {
-	    items.clear();
 	    items.add(item);
+	    setLastFocusedIndex(-1); 
 	    populate();
 	}
 
