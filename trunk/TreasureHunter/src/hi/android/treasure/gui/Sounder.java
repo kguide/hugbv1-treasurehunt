@@ -14,6 +14,7 @@ public class Sounder {
     private SoundPool soundPool; 
     private HashMap<Integer, Integer> soundPoolMap; 
     private int currentID;
+    private AudioManager mAudioManager;
     private Context mContext;
 
     public Sounder(Context context) { 
@@ -30,8 +31,8 @@ public class Sounder {
     }
     
     public void playSound(int sound) { 
-	AudioManager mgr = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE); 
-	int streamVolume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC); 
+	mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE); 
+	int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); 
 	soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, 0, 1f); 
     } 
 }
