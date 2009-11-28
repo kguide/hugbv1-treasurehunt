@@ -30,12 +30,20 @@ import com.google.android.maps.OverlayItem;
  
 public class GoogleMapScreen extends MapActivity 
 {    
+
+    public static final int PLAYER_POS_ID = Menu.FIRST;
+    public static final int CURRENT_POS_ID = Menu.FIRST+1;
+  
     Controller controller = Controller.getInstance();
     Context context = this;
     Sounder mySoundHandler;
+
+    double currLat;
+    double currLong;
 	
     private OurOverlay ourOverlay;
     private OurOverlay oldHint;
+    private OurOverlay playerPos;
     
     private static final double TRIGGER_RADIUS = 40.0; // in meters.
 	
@@ -56,6 +64,7 @@ public class GoogleMapScreen extends MapActivity
 	    super(myMarker);
 	    items = new ArrayList();
 	    marker = myMarker;
+	    populate();
 	}
 	
 	@Override
@@ -157,11 +166,31 @@ public class GoogleMapScreen extends MapActivity
 	// Add icon for first coordinate location 
 	//----------------------------------------------------------------------------------------------------------
 	Drawable icon = getResources().getDrawable(R.drawable.pushpin);
-	icon.setBounds(0, 0, 1,1);
-	
+	icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
 	ourOverlay = new OurOverlay(icon);
+
+
+	Drawable icon2 = getResources().getDrawable(R.drawable.donehint);
+	icon2.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+
+	oldHint = new OurOverlay(icon2);
+	int numFinished = controller.game.getCurrentCoordinateId();
+
+	while ( numFinished > 1) {
+	    p2 = new GeoPoint((int) (controller.game.coordinates.get(numFinished).getLatitude() * 1E6), 
+			      (int) (controller.game.coordinates.get(numFinished).getLongitude() * 1E6));
+	    
+	    oldHint.addItemNotDelete(new OverlayItem(p2,"old","Already Solved."));	
+	    numFinished--;
+	}
+
+
 	
-	oldHint = new OurOverlay(getResources().getDrawable(R.drawable.donehint));
+
+
+	Drawable icon3 = getResources().getDrawable(R.drawable.player);
+	icon2.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+	playerPos = new OurOverlay(icon3);
 	
 	ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getCurrentHintText()));
 
@@ -170,6 +199,7 @@ public class GoogleMapScreen extends MapActivity
 	listOfOverlays.clear();
 	listOfOverlays.add(ourOverlay);
 	listOfOverlays.add(oldHint);
+	listOfOverlays.add(playerPos);
      
 	//----------------------------------------------------------------------------------------------------------
 	
@@ -199,10 +229,12 @@ public class GoogleMapScreen extends MapActivity
 	public void onLocationChanged(Location location) {
 	    double latitude = controller.game.getNextCoordinate().getLatitude();
 	    double longitude = controller.game.getNextCoordinate().getLongitude();
+	    currLat = location.getLatitude();
+	    currLong = location.getLongitude();
+	       
 	    //Log.d("mapscreenInfo", "lat:"+latitude +",long:" + longitude );
 	    //check if we are within the radius.
-	    if(controller.checkGPSRadius(  
-					 location.getLatitude(),location.getLongitude(),
+	    if(controller.checkGPSRadius(currLat,currLong,
 					 latitude,
 					 longitude, 
 					 TRIGGER_RADIUS)) {			    
@@ -237,7 +269,7 @@ public class GoogleMapScreen extends MapActivity
 		
 		// Display a 'Atta boy, completed a hint' string.
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setMessage("Greate, you just completed a hint !")
+		builder.setMessage("Great, you just completed a hint !")
 		    .setCancelable(false)
 		    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			    public void onClick(DialogInterface dialog, int id) {
@@ -252,6 +284,9 @@ public class GoogleMapScreen extends MapActivity
 		AlertDialog alert = builder.create();
 		alert.show();
 	    }
+
+	    playerPos.addItem(new OverlayItem(new GeoPoint((int) (currLat * 1E6), 
+							   (int) ( currLong * 1E6)),"player","This is you!"));
 	}
 	
 	public void onProviderDisabled(String provider) {
@@ -267,5 +302,36 @@ public class GoogleMapScreen extends MapActivity
 	protected boolean isRouteDisplayed() {
 	return false;
     }
+ @Override 
+	public boolean onCreateOptionsMenu(Menu menu){
+	boolean result = super.onCreateOptionsMenu(menu);
+    	menu.add(0,PLAYER_POS_ID,0,"Show player");
+    	menu.add(0,CURRENT_POS_ID,0,"Show current hint");
+    	return result;
+    }
+
+
     
+   
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	switch (item.getItemId()) {
+	case PLAYER_POS_ID:
+	    mapController.animateTo(new GeoPoint((int) (currLat * 1E6), 
+						 (int) ( currLong * 1E6)));
+	    break;
+	case CURRENT_POS_ID:
+mapController.animateTo(new GeoPoint((int) (controller
+					    .game.getCurrentCoordinate()
+					    .getLatitude() * 1E6), 
+				     (int) (controller
+					    .game.getCurrentCoordinate()
+					    .getLongitude() * 1E6)));
+			break;
+	default : 
+	    return super.onOptionsItemSelected(item);
+	}
+	return true; /* true means: "we handled the event". */
+    } 
+        
 }
