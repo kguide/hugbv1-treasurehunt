@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey=""
+        android:apiKey="0eRJf97K_1wSxFAYbYR8hmNlYbTXF__K4NnI9EA"
     />
 <LinearLayout android:id="@+id/googleMapsZoom" 
         android:layout_width="wrap_content" 
