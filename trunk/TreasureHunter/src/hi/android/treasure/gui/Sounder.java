@@ -13,7 +13,7 @@ public class Sounder {
     
     private SoundPool soundPool; 
     private HashMap<Integer, Integer> soundPoolMap; 
-    private int currentID;
+
     private AudioManager mAudioManager;
     private Context mContext;
 
@@ -21,13 +21,11 @@ public class Sounder {
 	this.mContext = context;
 	soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100); 
 	soundPoolMap = new HashMap<Integer, Integer>(); 
-	currentID = 0;
+
     } 
     
-    public int addSound(int resourceID) {
-	currentID++;
-	soundPoolMap.put(currentID, soundPool.load(mContext, resourceID,1));
-	return currentID;
+    public void addSound(int resourceID) {
+	soundPoolMap.put(resourceID, soundPool.load(mContext, resourceID,1));
     }
     
     public void playSound(int sound) { 

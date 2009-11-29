@@ -140,6 +140,7 @@ public class GoogleMapScreen extends MapActivity
 	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg1));
 	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg2));
 	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg3));
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg3));
 	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg2));
 	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg1));
 	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg4));
@@ -152,10 +153,10 @@ public class GoogleMapScreen extends MapActivity
 	    super.draw(canvas, mapView, shadow);
 	    Point screenPts = new Point();
 	    mapView.getProjection().toPixels(playerPosition, screenPts);
-	    canvas.drawBitmap(items.get(animcounter), screenPts.x-50, screenPts.y-50, null); 
+	    canvas.drawBitmap(items.get(animcounter), screenPts.x-25, screenPts.y-50, null); 
 	    if (deltaTimer > when ) return true;
 	    animcounter++;
-	    animcounter = animcounter % 6;
+	    animcounter = animcounter % 7;
 	    deltaTimer = when + 80;
 	    return true;
         }
@@ -166,10 +167,10 @@ public class GoogleMapScreen extends MapActivity
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	//mySoundHandler = new Sounder(context);
+	//mySoundHandler = new Sounder(this);
 	
-	//mySoundHandler.addSound(R.raw.atta);
-	//mySoundHandler.playSound(1);
+        //mySoundHandler.addSound(R.raw.hint);
+	//mySoundHandler.playSound(R.raw.hint);
 
 	/* obsolete, used to pass parameters from hintscreen
 	   double params[] = null;
@@ -286,8 +287,10 @@ public class GoogleMapScreen extends MapActivity
 					 latitude,
 					 longitude, 
 					 TRIGGER_RADIUS)) {			    
-		
+
 		//Log.d("mapscreenInfo", "inside If");
+	
+		//mySoundHandler.playSound(R.raw.hint);
 		
 		double nextLat = controller.game.getNextCoordinate().getLatitude();
 		double nextLong = controller.game.getNextCoordinate().getLongitude();
