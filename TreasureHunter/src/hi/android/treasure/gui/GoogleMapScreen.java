@@ -167,10 +167,14 @@ public class GoogleMapScreen extends MapActivity
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	//mySoundHandler = new Sounder(this);
+	mySoundHandler = new Sounder(this);
 	
-        //mySoundHandler.addSound(R.raw.hint);
-	//mySoundHandler.playSound(R.raw.hint);
+	mySoundHandler.addSound(R.raw.zoom);
+	mySoundHandler.playSound(R.raw.zoom);
+
+        mySoundHandler.addSound(R.raw.hint);
+	
+	mySoundHandler.playSound(R.raw.hint);
 
 	/* obsolete, used to pass parameters from hintscreen
 	   double params[] = null;
@@ -290,7 +294,7 @@ public class GoogleMapScreen extends MapActivity
 
 		//Log.d("mapscreenInfo", "inside If");
 	
-		//mySoundHandler.playSound(R.raw.hint);
+		mySoundHandler.playSound(R.raw.hint);
 		
 		double nextLat = controller.game.getNextCoordinate().getLatitude();
 		double nextLong = controller.game.getNextCoordinate().getLongitude();
@@ -366,17 +370,20 @@ public class GoogleMapScreen extends MapActivity
 	public boolean onOptionsItemSelected(MenuItem item) {
 	switch (item.getItemId()) {
 	case PLAYER_POS_ID:
+	    mySoundHandler.playSound(R.raw.zoom);
 	    mapController.animateTo(new GeoPoint((int) (currLat * 1E6), 
 						 (int) ( currLong * 1E6)));
+	    
 	    break;
 	case CURRENT_POS_ID:
-mapController.animateTo(new GeoPoint((int) (controller
-					    .game.getCurrentCoordinate()
-					    .getLatitude() * 1E6), 
-				     (int) (controller
-					    .game.getCurrentCoordinate()
-					    .getLongitude() * 1E6)));
-			break;
+	    mySoundHandler.playSound(R.raw.zoom);
+	    mapController.animateTo(new GeoPoint((int) (controller
+							.game.getCurrentCoordinate()
+							.getLatitude() * 1E6), 
+						 (int) (controller
+							.game.getCurrentCoordinate()
+							.getLongitude() * 1E6)));
+	    break;
 	default : 
 	    return super.onOptionsItemSelected(item);
 	}
