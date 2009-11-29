@@ -6,6 +6,7 @@ import hi.android.treasure.control.Game.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Point;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.graphics.Canvas; 
+import android.graphics.Paint; 
+import android.graphics.Bitmap; 
+import android.graphics.BitmapFactory; 
+import android.graphics.Paint.Style; 
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -25,6 +31,7 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.OverlayItem;
  
 public class GoogleMapScreen extends MapActivity 
@@ -42,7 +49,7 @@ public class GoogleMapScreen extends MapActivity
 	
     private OurOverlay ourOverlay;
     private OurOverlay oldHint;
-    private OurOverlay playerPos;
+    private MapOverlay playerPos;
     
     private static final double TRIGGER_RADIUS = 40.0; // in meters.
 	
@@ -53,6 +60,7 @@ public class GoogleMapScreen extends MapActivity
     private MapController mapController;
     private GeoPoint p;
     private GeoPoint p2;
+    private GeoPoint playerPosition;
 
     private class OurOverlay extends ItemizedOverlay<OverlayItem> {
 	
@@ -113,6 +121,46 @@ public class GoogleMapScreen extends MapActivity
 
 	
     }
+
+
+
+
+ class MapOverlay extends com.google.android.maps.Overlay
+    {
+	private List<Bitmap> items;
+       
+	private int animcounter;
+	private long deltaTimer;
+
+
+	public MapOverlay() {
+	    animcounter = 0;
+	    deltaTimer = 0;
+	    items = new ArrayList<Bitmap>();
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg1));
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg2));
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg3));
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg2));
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg1));
+	    items.add(BitmapFactory.decodeResource(getResources(), R.drawable.badg4));
+
+	}
+        @Override
+            public boolean draw(Canvas canvas, MapView mapView, 
+                                boolean shadow, long when) 
+        {
+	    super.draw(canvas, mapView, shadow);
+	    Point screenPts = new Point();
+	    mapView.getProjection().toPixels(playerPosition, screenPts);
+	    canvas.drawBitmap(items.get(animcounter), screenPts.x-50, screenPts.y-50, null); 
+	    if (deltaTimer > when ) return true;
+	    animcounter++;
+	    animcounter = animcounter % 6;
+	    deltaTimer = when + 80;
+	    return true;
+        }
+ }
+
     
     /** Called when the activity is first created. */
     @Override
@@ -166,11 +214,10 @@ public class GoogleMapScreen extends MapActivity
 	Drawable icon = getResources().getDrawable(R.drawable.pushpin);
 	icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
 	ourOverlay = new OurOverlay(icon);
-
-
+	
 	Drawable icon2 = getResources().getDrawable(R.drawable.donehint);
 	icon2.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
-
+	
 	oldHint = new OurOverlay(icon2);
 	int numFinished = controller.game.getCurrentCoordinateId();
 
@@ -181,17 +228,18 @@ public class GoogleMapScreen extends MapActivity
 	    oldHint.addItemNotDelete(new OverlayItem(p2,"old","Already Solved."));	
 	    numFinished--;
 	}
-
-
 	
-
-
-	Drawable icon3 = getResources().getDrawable(R.drawable.player);
-	icon2.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
-	playerPos = new OurOverlay(icon3);
+	
+	
+	
+	
+	//Drawable icon3 = getResources().getDrawable(R.drawable.player);
+	//icon3.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+	playerPos = new MapOverlay();
 	
 	ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getCurrentHintText()));
-
+	playerPosition=new GeoPoint((int) (1 * 1E6), 
+			(int) (1 * 1E6));
 	
 	List<Overlay> listOfOverlays = mapView.getOverlays();
 	listOfOverlays.clear();
@@ -229,7 +277,9 @@ public class GoogleMapScreen extends MapActivity
 	    double longitude = controller.game.getNextCoordinate().getLongitude();
 	    currLat = location.getLatitude();
 	    currLong = location.getLongitude();
-	       
+
+	    playerPosition = new GeoPoint((int) (currLat * 1E6), 
+			    (int) (currLong * 1E6));
 	    //Log.d("mapscreenInfo", "lat:"+latitude +",long:" + longitude );
 	    //check if we are within the radius.
 	    if(controller.checkGPSRadius(currLat,currLong,
@@ -283,8 +333,6 @@ public class GoogleMapScreen extends MapActivity
 		alert.show();
 	    }
 
-	    playerPos.addItem(new OverlayItem(new GeoPoint((int) (currLat * 1E6), 
-							   (int) ( currLong * 1E6)),"player","This is you!"));
 	}
 	
 	public void onProviderDisabled(String provider) {
