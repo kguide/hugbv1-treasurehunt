@@ -31,6 +31,6 @@ public class Sounder {
     public void playSound(int sound) { 
 	mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE); 
 	int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); 
-	soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, 0, 1f); 
+	soundPool.play(soundPoolMap.get(sound), streamVolume,streamVolume, 1, 0, 1f); 
     } 
 }
