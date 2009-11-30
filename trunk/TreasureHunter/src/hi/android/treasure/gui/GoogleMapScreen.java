@@ -38,7 +38,9 @@ public class GoogleMapScreen extends MapActivity
 {    
 
     public static final int PLAYER_POS_ID = Menu.FIRST;
-    public static final int CURRENT_POS_ID = Menu.FIRST+1;
+    public static final int HELP_ID = Menu.FIRST+1;
+    public static final int CURRENT_POS_ID = Menu.FIRST+2;
+    
   
     Controller controller = Controller.getInstance();
     Context context = this;
@@ -292,54 +294,66 @@ public class GoogleMapScreen extends MapActivity
 					 longitude, 
 					 TRIGGER_RADIUS)) {			    
 
-		//Log.d("mapscreenInfo", "inside If");
-	
-		mySoundHandler.playSound(R.raw.hint);
+			//Log.d("mapscreenInfo", "inside If");
 		
-		double nextLat = controller.game.getNextCoordinate().getLatitude();
-		double nextLong = controller.game.getNextCoordinate().getLongitude();
-		
-		Log.d("mapscreenInfo", "nextLat:" + location.getLatitude() + 
-		      ", nextLong:" + location.getLongitude());
-		p = new GeoPoint(
-				 (int) (nextLat * 1E6), 
-				 (int) (nextLong * 1E6));
-		p2 = new GeoPoint(
-				  (int) (controller
-					 .game.getCurrentCoordinate()
-					 .getLatitude() * 1E6), 
-				  (int) (controller
-					 .game.getCurrentCoordinate()
-					 .getLongitude() * 1E6));
-		
-		oldHint.addItemNotDelete(new OverlayItem(p2,"old","Already Solved."));	
-		controller.game.incrementCoordinate();
-		controller.game.save(controller.player.getId(),context);
-		
-		// New marker added to map.
-		ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getNextHintText()));
-		
-		// Update map to show the new location
-		mapController.animateTo(p);
-		
-		// Display a 'Atta boy, completed a hint' string.
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setMessage("Great, you just completed a hint !")
-		    .setCancelable(false)
-		    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			    public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-				// Exit game if this is the last hint
-				boolean gameFinished = controller.game.isGameFinished();
-				if(gameFinished){
-				    finish();
-				}
-			    }
-			});
-		AlertDialog alert = builder.create();
-		alert.show();
+			mySoundHandler.playSound(R.raw.hint);
+			
+			double nextLat = controller.game.getNextCoordinate().getLatitude();
+			double nextLong = controller.game.getNextCoordinate().getLongitude();
+			
+			Log.d("mapscreenInfo", "nextLat:" + location.getLatitude() + 
+			      ", nextLong:" + location.getLongitude());
+			p = new GeoPoint(
+					 (int) (nextLat * 1E6), 
+					 (int) (nextLong * 1E6));
+			p2 = new GeoPoint(
+					  (int) (controller
+						 .game.getCurrentCoordinate()
+						 .getLatitude() * 1E6), 
+					  (int) (controller
+						 .game.getCurrentCoordinate()
+						 .getLongitude() * 1E6));
+			
+			oldHint.addItemNotDelete(new OverlayItem(p2,"old","Already Solved."));	
+			controller.game.incrementCoordinate();
+			controller.game.save(controller.player.getId(),context);
+			
+			// New marker added to map.
+			ourOverlay.addItem(new OverlayItem(p,"hint",controller.game.getNextHintText()));
+			
+			// Update map to show the new location
+			mapController.animateTo(p);
+			
+			boolean isGameFinished = controller.game.isGameFinished();
+			if(!isGameFinished){
+				// Display a 'Atta boy, completed a hint' string.
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setMessage("Great, you just completed a hint !")
+				    .setCancelable(false)
+				    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					    }
+					});
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
+			else{
+				// Display a 'Congratulation, you have finished the game !.
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setMessage("Congratulation, you have finished the game !")
+				    .setCancelable(false)
+				    .setPositiveButton("Exit game", new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+						// Exit game if this is the last hint
+						    finish();
+					    }
+					});
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
 	    }
-
 	}
 	
 	public void onProviderDisabled(String provider) {
@@ -358,7 +372,8 @@ public class GoogleMapScreen extends MapActivity
  @Override 
 	public boolean onCreateOptionsMenu(Menu menu){
 	boolean result = super.onCreateOptionsMenu(menu);
-    	menu.add(0,PLAYER_POS_ID,0,"Show player");
+		menu.add(0,HELP_ID,0,"Help");
+		menu.add(0,PLAYER_POS_ID,0,"Show player");
     	menu.add(0,CURRENT_POS_ID,0,"Show current hint");
     	return result;
     }
@@ -384,6 +399,25 @@ public class GoogleMapScreen extends MapActivity
 							.game.getCurrentCoordinate()
 							.getLongitude() * 1E6)));
 	    break;
+	    
+	case HELP_ID:
+		String helpString = "Playing a game of Treasure Hunter is very easy. When you start you will receive a starting location. ";
+		helpString += "You don't have to go to that location but it should help you realize where the game is intended to be played from. ";
+		helpString += "If you tap on the icon with the first location you should receive a hint that should give you a clue how to get ";
+		helpString += "to the next location. Once you figure out the hint and go to the next location the game will automatically tell you ";
+		helpString += "that you have completed a hint. An icon will then appear on the new location and you can tap on that location to ";
+		helpString += "get the next hint. Rinse and repeat until all locations have been visited. Good luck !";
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setMessage(helpString)
+		       .setCancelable(false)
+		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   dialog.cancel();
+		           }
+		       });
+		AlertDialog alert = builder.create();
+		alert.show();
+		break;
 	default : 
 	    return super.onOptionsItemSelected(item);
 	}

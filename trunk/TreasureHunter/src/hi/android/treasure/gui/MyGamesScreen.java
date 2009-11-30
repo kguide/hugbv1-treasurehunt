@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -25,11 +24,9 @@ public class MyGamesScreen extends ListActivity {
 	Controller controller = Controller.getInstance();
 	Context context = this;
 	
-	private static final int ADVANCED_ID = Menu.FIRST;
-	private static final int HELP_ID = Menu.FIRST + 1;
-	private static final int SETTINGS_ID = Menu.FIRST + 2;
+
 	private static final int PLAY_GAME_ID = 0;
-	private static final int SEE_DETAILS_ID = 1;
+//	private static final int SEE_DETAILS_ID = 1;
 	private static final int DELETE_GAME_ID = 2;
 	
 	private ListView listView;
@@ -79,7 +76,7 @@ public class MyGamesScreen extends ListActivity {
              public void onCreateContextMenu(ContextMenu menu, View v,
                        ContextMenuInfo menuInfo) {
             	    menu.add(0, PLAY_GAME_ID, 0, R.string.play);
-                    menu.add(0, SEE_DETAILS_ID, 0, R.string.seeDetails);
+//                    menu.add(0, SEE_DETAILS_ID, 0, R.string.seeDetails);
                     menu.add(0, DELETE_GAME_ID, 0, R.string.delete);
              }
        }); 
@@ -118,28 +115,6 @@ public class MyGamesScreen extends ListActivity {
                   android.R.layout.simple_list_item_1, arrayOfGames));
    }  
     
-    @Override 
-    public boolean onCreateOptionsMenu(Menu menu){
-    	super.onCreateOptionsMenu(menu);
-    	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
-    	menu.add(0,HELP_ID,0,R.string.menuHelp);
-    	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
-    	return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-    	switch(item.getItemId()){
-    	case HELP_ID:
-    		Intent startHelpScreen = new Intent(MyGamesScreen.this,HintScreen.class);
-//    		
-    		startHelpScreen.putExtra("helpStringId", R.string.allPlayers);
-    		startActivity(startHelpScreen);
-    		
-    	}
-    	
-    	
-    	return true;
-    }
+
 
 }
