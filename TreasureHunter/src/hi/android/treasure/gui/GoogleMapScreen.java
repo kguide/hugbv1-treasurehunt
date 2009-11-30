@@ -90,6 +90,7 @@ public class GoogleMapScreen extends MapActivity
 	@Override
 	    protected boolean onTap(int pIndex) {    
 	    if (items.get(pIndex).getTitle().equals("hint")) {
+		mySoundHandler.addSound(R.raw.cork);
 	    AlertDialog.Builder markerHintDialog = new AlertDialog.Builder(context);
 	    markerHintDialog.setMessage(items.get(pIndex).getSnippet())
 		.setCancelable(false)
@@ -169,22 +170,23 @@ public class GoogleMapScreen extends MapActivity
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+	//******* Load sounds
 	mySoundHandler = new Sounder(this);
 	
-	mySoundHandler.addSound(R.raw.zoom);
-	mySoundHandler.playSound(R.raw.zoom);
+	mySoundHandler.addSound(R.raw.zoom1);
+	mySoundHandler.addSound(R.raw.tada);
+	mySoundHandler.playSound(R.raw.zoom1);
 
-        mySoundHandler.addSound(R.raw.hint);
-	
+        mySoundHandler.addSound(R.raw.cork);
+	mySoundHandler.addSound(R.raw.hint);
+	mySoundHandler.playSound(R.raw.tada);
 	mySoundHandler.playSound(R.raw.hint);
+	mySoundHandler.playSound(R.raw.cork);
 
-	/* obsolete, used to pass parameters from hintscreen
-	   double params[] = null;
-	   Bundle bundle = this.getIntent().getExtras();
-	   if (bundle != null ) {
-	   params = bundle.getDoubleArray("myLocation");
-	   }
-	*/
+	//stop loading sounds
+
 	
 	// Begin Display Map  
 	//----------------------------------------------------------------------------------------------------------
@@ -296,7 +298,7 @@ public class GoogleMapScreen extends MapActivity
 
 			//Log.d("mapscreenInfo", "inside If");
 		
-			mySoundHandler.playSound(R.raw.hint);
+		
 			
 			double nextLat = controller.game.getNextCoordinate().getLatitude();
 			double nextLong = controller.game.getNextCoordinate().getLongitude();
@@ -326,12 +328,14 @@ public class GoogleMapScreen extends MapActivity
 			
 			boolean isGameFinished = controller.game.isGameFinished();
 			if(!isGameFinished){
+			    mySoundHandler.playSound(R.raw.hint);
 				// Display a 'Atta boy, completed a hint' string.
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage("Great, you just completed a hint !")
 				    .setCancelable(false)
 				    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					    public void onClick(DialogInterface dialog, int id) {
+						mySoundHandler.addSound(R.raw.cork);
 						dialog.cancel();
 					    }
 					});
@@ -339,6 +343,7 @@ public class GoogleMapScreen extends MapActivity
 				alert.show();
 			}
 			else{
+			    mySoundHandler.playSound(R.raw.tada);
 				// Display a 'Congratulation, you have finished the game !.
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage("Congratulation, you have finished the game !")
@@ -385,13 +390,13 @@ public class GoogleMapScreen extends MapActivity
 	public boolean onOptionsItemSelected(MenuItem item) {
 	switch (item.getItemId()) {
 	case PLAYER_POS_ID:
-	    mySoundHandler.playSound(R.raw.zoom);
+	    mySoundHandler.playSound(R.raw.zoom1);
 	    mapController.animateTo(new GeoPoint((int) (currLat * 1E6), 
 						 (int) ( currLong * 1E6)));
 	    
 	    break;
 	case CURRENT_POS_ID:
-	    mySoundHandler.playSound(R.raw.zoom);
+	    mySoundHandler.playSound(R.raw.zoom1);
 	    mapController.animateTo(new GeoPoint((int) (controller
 							.game.getCurrentCoordinate()
 							.getLatitude() * 1E6), 
