@@ -30,7 +30,7 @@ public class CreateNewUser extends Activity {
 				
 				if(controller.createUserOnline(username, password))
 				{
-					Intent startWelcomeScreen = new Intent(CreateNewUser.this,WelcomeScreen.class);
+					Intent startWelcomeScreen = new Intent(CreateNewUser.this,PlayScreen.class);
 					startActivity(startWelcomeScreen);
 				}
 				else

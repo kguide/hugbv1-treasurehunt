@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Treasure Hunt</string>
+    <string name="app_name">Treasure Hunter</string>
     <string name="menuSettings">Settings</string>
     <string name="menuHelp">Help</string>
     <string name="menuAdvanced">Advanced</string>
@@ -15,7 +15,7 @@
 <string name="password">Password:</string>
 <string name="select">Select:</string>
 <string name="top10">10 most popular</string>
-<string name="criteria">Search by criteria:</string>
+<string name="criteria">Search by game name:</string>
 <string name="or">Or</string>
 <string name="searchBy">Search By:</string>
 <string name="search">Search</string>

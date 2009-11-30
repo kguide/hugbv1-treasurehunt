@@ -159,11 +159,12 @@ public class Game {
     }
 
     public String toString(){
-	if (gameFinished) {
-	    return gameName + " - DONE";
-	}else{
-	    return gameName + " - ACTIVE";
-	}
+    	return gameName;
+//	if (gameFinished) {
+//	    return gameName + " - DONE";
+//	}else{
+//	    return gameName + " - ACTIVE";
+//	}
     }
 
     public int getCurrentCoordinateId() {

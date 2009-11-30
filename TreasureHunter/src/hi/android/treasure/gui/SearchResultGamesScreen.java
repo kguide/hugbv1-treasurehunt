@@ -24,9 +24,9 @@ public class SearchResultGamesScreen extends ListActivity {
 	Controller controller = Controller.getInstance();
 	Context context = this;
 	
-	private static final int ADVANCED_ID = Menu.FIRST;
-	private static final int HELP_ID = Menu.FIRST + 1;
-	private static final int SETTINGS_ID = Menu.FIRST + 2;
+//	private static final int ADVANCED_ID = Menu.FIRST;
+//	private static final int HELP_ID = Menu.FIRST + 1;
+//	private static final int SETTINGS_ID = Menu.FIRST + 2;
 	private static final int PLAY_GAME_ID = 0;
 	
 	private ListView listView;
@@ -95,13 +95,13 @@ public class SearchResultGamesScreen extends ListActivity {
 
    }  
     
-    @Override 
-    public boolean onCreateOptionsMenu(Menu menu){
-    	super.onCreateOptionsMenu(menu);
-    	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
-    	menu.add(0,HELP_ID,0,R.string.menuHelp);
-    	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
-    	return true;
-    }
+//    @Override 
+//    public boolean onCreateOptionsMenu(Menu menu){
+//    	super.onCreateOptionsMenu(menu);
+//    	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
+//    	menu.add(0,HELP_ID,0,R.string.menuHelp);
+//    	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
+//    	return true;
+//    }
 
 }
