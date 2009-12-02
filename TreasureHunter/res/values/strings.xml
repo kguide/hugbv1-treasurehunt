@@ -35,6 +35,61 @@
 <string name="createUserHead">Welcome glory hunters</string>
 <string name="loginNewUser">Create user</string>
 <string name="requiresNetwork">Logging in might require network connection</string>
+<string name="HelpScreenGameScreen">My Games.
+	Games that you have created are displayed on top of the page.
+	To play a game already created hold down the 
+	selection button for the selected game 
+	for 2 seconds.
+	play- press to play the selected game.
+	See Detail- press to see details of the selected game .
+	Delete- press to delete the selected game.
+	To update your games from server hit the ‘Update Games Online’ button.
+	To send finished games to the server hit the ‘ Send Finished Games’ button.
+</string>
+<string name="HelpScreenCreateUser">Create User. 
+	Type your email address in the ‘Enter an email address.’ textbox.
+	the email will be your Username.
+	Type password (minimum 4 characters) in the ‘Create a password’ textbox
+	Hit the ‘Submit’ button.
+</string>
+
+<string name="HelpscreenFindAGame">Find a Game.
+	To find a game you can either chose from the 10 most popular games
+		Hit the ’10 most popular’ button
+	Or you can search by criteria.
+		Select criteria ( name: a known game.
+				creator: from a known game creator.
+				distance from you:  select a game in your area.)
+		type your selection search string in the text box.
+</string>
+<string name="HelpscreenPlayScreen">Play screen,  here you can select to play a game created 
+									by you or you can search for a game.
+									To play your games hit the 'My Games'button.
+									To search for a game created by other users hit the 'Find a Game'button.
+</string>
+<string name="HelpscreenLogIn">To log in you must have a valid username and a password.
+If- you have a valid username and password.
+	Type your username in the username textbox.
+	Type your password in the password textbox.
+	Hit the ‘Login’ button
+Else-
+	Hit the ‘Create user’ button
+
+</string>
+<string name="HelpscreenWelcome">Welcome 
+	To play a game hit the ‘Play’ button
+	To show player statistics hit the ‘Statistics’ button.
+	To log out of the game hit the ‘Log Out’ button.
+
+</string>
+<string name="HelpscreenStats">Statistics 
+	This screen shows the player name and the score he has earned 
+	and the rank compared to other players.
+	To show score and rank of other players hit the  ‘Show all players’
+
+</string>
+
 <string name="showHintOnMap">Show on map</string>
 <string name="showCurrentHint">Show current hint</string>
+
 </resources>
