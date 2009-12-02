@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +15,10 @@ import android.widget.TextView;
 public class LoginScreen extends Activity {
 	
 	Controller controller = Controller.getInstance();
-
+	private static final int ADVANCED_ID = Menu.FIRST;
+	private static final int HELP_ID = Menu.FIRST + 1;
+	private static final int SETTINGS_ID = Menu.FIRST + 2;
+	
 	@Override	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,10 +53,32 @@ public class LoginScreen extends Activity {
 		}
 	});
 	}
+	 @Override 
+    public boolean onCreateOptionsMenu(Menu menu){
+    	super.onCreateOptionsMenu(menu);
+    	menu.add(0,ADVANCED_ID,0,R.string.menuAdvanced);
+    	menu.add(0,HELP_ID,0,R.string.menuHelp);
+    	menu.add(0,SETTINGS_ID,0,R.string.menuSettings);
+    	return true;
+    }
 
+    
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item){
+	    	switch(item.getItemId()){
+	    	case HELP_ID:
+	    		Intent startHelpScreen = new Intent(LoginScreen.this,HelpScreen.class);
+//	    		
+	    		startHelpScreen.putExtra("helpStringId", R.string.HelpscreenLogIn);
+	    		startActivity(startHelpScreen);
+	    		
+	    	}
+	    	return true;
+	    }
 	public void openPlayScreen(){
 		// We will have to pass the controller object in the intent as well. Probably using a bundle.
 		Intent startPlayScreen = new Intent(LoginScreen.this,PlayScreen.class);
 		startActivity(startPlayScreen);
 	}
+	
 }
