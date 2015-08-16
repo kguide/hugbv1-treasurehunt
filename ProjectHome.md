@@ -1,0 +1,1 @@
+Hugbúnaðarverkefni 2 , a mobile tour guide.
